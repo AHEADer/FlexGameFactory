@@ -109,30 +109,40 @@ def get_pending_directories():
 def main():
     load_env()
     logging.info("Starting Auto Game Builder Worker...")
-    
-    while True:
-        try:
-            # 1. Sync latest from remote
-            sync()
-            
-            # 2. Check for pending directories
-            pending_dirs = get_pending_directories()
-            
-            if pending_dirs:
-                logging.info(f"Found {len(pending_dirs)} pending directories: {', '.join(pending_dirs)}")
-                
-                # 3. Spawn processes to run in parallel using ThreadPoolExecutor
-                with ThreadPoolExecutor(max_workers=min(4, len(pending_dirs))) as executor:
-                    for d in pending_dirs:
-                        executor.submit(process_game_dir, d)
-                
-                logging.info("Finished processing batch.")
-            
-        except Exception as e:
-            logging.error(f"Error in main loop: {e}")
-            
-        # Sleep before next check
-        time.sleep(10)
+
+    try:
+        while True:
+            try:
+                # 1. Sync latest from remote
+                sync()
+
+                # 2. Check for pending directories
+                pending_dirs = get_pending_directories()
+
+                if pending_dirs:
+                    logging.info(f"Found {len(pending_dirs)} pending directories: {', '.join(pending_dirs)}")
+
+                    # 3. Spawn processes to run in parallel using ThreadPoolExecutor
+                    executor = ThreadPoolExecutor(max_workers=min(4, len(pending_dirs)))
+                    try:
+                        for d in pending_dirs:
+                            executor.submit(process_game_dir, d)
+                        executor.shutdown(wait=True)
+                    except KeyboardInterrupt:
+                        executor.shutdown(wait=False, cancel_futures=True)
+                        raise
+
+                    logging.info("Finished processing batch.")
+
+            except KeyboardInterrupt:
+                raise
+            except Exception as e:
+                logging.error(f"Error in main loop: {e}")
+
+            # Sleep before next check
+            time.sleep(10)
+    except KeyboardInterrupt:
+        logging.info("Interrupted by user. Exiting.")
 
 if __name__ == "__main__":
     main()
