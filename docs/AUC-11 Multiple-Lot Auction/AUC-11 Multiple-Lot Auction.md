@@ -1,0 +1,18 @@
+    
+![figure_167_230_901_902](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_6_15_80_167_230_901_902.jpg)
+    
+ AUC-11 Multiple-Lot Auction    
+###  Description
+ An auction in which players simultaneously bid on Multiple Lots in parallel, instead of bidding for one lot at a time serially.    
+##  Discussion
+ Multiple-Lot Auctions are very common in tabletop board games because they compress the amount of time it takes to allocate lots among the players, and because the physical affordances of board games, like tableaus and player- colored tokens, lend themselves to organizing and displaying information needed to run these types of auctions cearly.    
+ Multiple-Lot Auctions ask players to manage two different axes of decision making at the same time: which lots to bid on, and how to divide money between those lots, without knowing which lots they might win or lose. In    
+ a serial auction, a player's valuation of a later lot might change dramatically based on winning or losing a previous lot. In an extreme case, like Fresh Fish, once a player has won a fish market stall, he or she does not bid at all for a second fish market stall. Simultaneous auctions don't have this kind of rebalancing of player valuations.    
+ Another interesting characteristic of Multiple-Lot Auctions is that the lots themselves may be of entirely different types. A classic Gamemaster game, originally called Shogun (and later Samurdi Swords and Ikusd) features a Multiple-Lot Bid in which players secretly allocate money to a mix of auctions and market purchases. Players can assign money to bid for turn order and for the services of the ninja. The rest of their money can be allocated to build fortifications, hire ronin and levy additional units. Upon revealing their secret allocations, the auctions for turn order and ninja are resolved, and players can then use the other allocated funds to purchase their fortifications, ronin and other units. Not only are the benefits of turn order and the ninja quite different from purchasing units or defensive structures, the auctions themselves operate by somewhat different rules. Any players bidding on turn order will receive priority over non-bidders in choosing their preferred ordering--their money grants them some benefit. However, the ninja auction is an all-pay auction, but only one player will receive the services of the ninja. If the top bidders are tied, they will pay, but none of them get to use the ninja!    
+ Multiple-Lot Auctions bear a very close resemblance to another game mechanism: Area Majority (ARC-02). Though area majority games often model military conflicts, as in El Grande, they are mathematically similar to Multiple-Lot Auctions. The troops, or influence cubes, etc. can be abstracted to bidding tokens, and the player with the highest bids wins the lot. Area majority games typically offer rewards to more than only the highest bidder. This is a nested Multiple-Lot Auction. Each different area that players seek to influence houses its own set of lots, worth different amounts of victory points to bidders.    
+ Multiple-Lot Auctions are compatible with many other auction mechanisms like Fixed- Placement Auction (AUC-15), Sealed-Bid Auction(AUC-04), and Dutch Priority Auction (AUC-16). Their resolution can be all-pay, winner-pay, cancellation, and others. In some Multiple-Lot Auctions, players are limited in how many lots or how many types of lots they can win too. This mechanism is among the most common and most flexible in the auction family.    
+##  Sample Games
+El Grande (Kramer and Ulrich, 1995)    
+Fresh Fish (Friese, 2014)    
+Revolution! (duBarry, 2009)    
+Shogun/Samurai Swords/Ikusa (Gray, 1986)    

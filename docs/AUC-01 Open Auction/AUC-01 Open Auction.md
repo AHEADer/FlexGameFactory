@@ -1,0 +1,14 @@
+##  AUC-01 Open Auction
+    
+![figure_229_233_839_751](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_5_42_926_229_233_839_751.jpg)
+    
+##  Description
+ Players shout out bids as they will, with no turn order. While an Open Auction will typically end when a certain amount of time with no increases occurs, or it is clear that no one wishes to raise the current bid, a true Open Auction allows a seller to accept any bid at any time and close the Auction. Though the usual outcome is that the high bidder is the winner, no rule requires this outcome.    
+##  Discussion
+ An Open Auction is quite unusual in that it has no auctioneer, and no rules- not even the rule that the highest price must win. In a sense, an Open Auction is more like an out-loud simultaneous negotiation. The reality is that very few auctions, in the real world or in board games, are truly open. That's because Open Auctions are pretty messy! Muliple bidders often want to bid the same amount, and the bidding increments can be all over the place. Some bidders may not hear all the bids, and confusion is all too common. Without an auctioneer, these auctions can be difficult to govern fairly. In the boardgame context, it's worth pointing out that they also tend to be really noisy and    
+ frenetic. The only game we could find that uses Open Auctions is Monopoly. In perhaps the most-overlooked rule in the game, when a player decides not to buy a property from the bank, the property is sold at an Open Auction to any player (including the one who chose not to buy it from the bank initially) at any price. Given this example, designers should carefully consider whether an Open Auction truly suits their game, or whether a different auction structure might work better.    
+ Despite their weaknesses, Open Auctions do have some important features. First, iterative bidding provides a lot of information as players reveal their preferences and for the goods up for auction. The auction integrates a means for allocating resources with a way for players to trade opinions about how valuable they are.    
+ Another important feature of the Open Auction is that the dominant strategy for any bidder is to stay in the auction until their value for the auctioned goods is reached. This means that, absent external issues like very large disparities in player wealth, the winner will pay a price close to the actual value for theitem--or, to be precise, they will pay one dollar (or other bidding increment) more than the price at which the 2nd-highest bidder valued the item.    
+ In general, Open Auctions are more theoretical than practical. There are many small tweaks to the basic structure that create much more suitable dynamics for use in tabletop games. We include the mechanism of Open Auctions here to act as a basis for comparison.    
+##  Sample Games
+### Monopoly (Darrow and Magie, 1933)

@@ -1,0 +1,9 @@
+## 11 Area Control
+    
+![figure_484_496_583_533](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_8_3_319_484_496_583_533.jpg)
+    
+ Wargaming is a thread that runs through much of boardgame design, and indeed, modeling conflicts through games remains a popular genre. At the center of games of conflict is the notion of controlling an area.    
+ How a game represents this idea is tied to the overall scope of the conflict depicted. Theater-level games that deal with continents and countries tend to be more binary and abstract about control, while individual and squad-level games may not even define it, though the force-projcction capabilities of units will nonetheless enforce control over different parts of the board.    
+ Area control games are more common in the American design school, but over time, European designers have brought indirect confict and rapid resolution concepts into the space.    
+ The term area majority is sometimes used in place of area control, and another term, area influence, is also used. There isn't a reliable definition for any of these terms. But here's one way to think of them: Area Influence is the highest-level category, which would cover all types of relationships between players, their tokens, and the specific areas they inhabit. Area Majority and Area Control would be two sub-branches of Area Influence. In practice, however, Area Majority and Area Control are the dominant mechanical forms we observe in games, and the distinction between the two is often ignored. Thus, we've chosen the name Area Control to stand for all the various mechanisms of control and influence that we'll discuss.    
+ Many of the mechanisms discussed here are a subset of Chapter 10, "Movement." However their use is specialized and common enough to warrant a chapter of their own.    

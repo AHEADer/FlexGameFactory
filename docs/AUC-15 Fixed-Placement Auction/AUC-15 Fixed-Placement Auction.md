@@ -1,0 +1,18 @@
+    
+![figure_227_234_842_1052](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_6_26_619_227_234_842_1052.jpg)
+    
+ AUC-15 Fixed-Placement Auction    
+##  Description
+ Fixed Placement is a meta-mechanism that modifes a multiple-lot auction by creating rules about which lots players may bid on, and representing bids visually on a board or cards. It is often combined with constrained-value bids. A Fixed-Placement auction ends when every player passes and/or no player has the right to bid further. The highest bidder for each lot wins the lot.    
+##  Discussion
+ Multiple-Lot Auctions are a fairly common type of auction in board games. These auctions introduce a new wrinkle into bidding by forcing players to    
+ evaluate several lots at once. Depending on bid timing rules, there may also be strategic elements to sequencing your bids or forcing an auction to close early.    
+ Multiple-Lot Auctions present some challenges to tracking. How should the top bid be represented for each lot? What rules should govern bid order? How can the game prevent multiple-lot bidding from devolving into a series of one-lot auctions, in which players ignore all but one lot up for bid at a time?    
+ Fixed Placement can help solve all these problem. Visually, Fixed- Placement Auctions provide a track on which players can mark the value of their bid using a player pawn. The right to bid can be governed by turn order. In some games, like Amun-Re, turn order is interrupted whenever a player is outbid. That player becomes the active player, who takes the bid marker representing the bid that was just surpassed and makes another walid bid with it. The entire auction ends when each player is the top bidder for some lot. In Cyclades, there are more lots than there are players, but each player has only a single bidding token, so each player will win exactly one auction, and some lots will go unpurchased each turn.    
+ Critically, in both of these games, a player may not immediately rebid on the lot for which they were just outbid. This rule encourages players to bid close to their actual value for a lot, since if they bid lower, they may not have an opportunity to return to rebid on that lot. In theory this should speed these auctions, though in practice, new players may evaluate this dynamic incorrectly, leading to frustration and overlong analysis. Both of these games also feature triangular increases in valid bid increments, which prevents the tit-for-tat, raise-by-one bidding that can grind an auction to a near-halt.    
+ In Vegas Showdown, bids are submitted strictly in turn order. Bidding too low has multiple consequences: not only will a player be outbid, but they will have to wait until the next turn to bid. In the meantime, other players will get to place bids, potentially raising the costs of lots the passed player was interested in purchasing. Vegas Showdown does allow immediately rebidding on the same lot, though the value of the next valid bid increases in a delayed triangular pattern (each interval is repeated three times before increasing).    
+ Perhaps the greatest strength of Fixed Placement is that it offers an opportunity to integrate bidding with other game actions. Since there is a visible record of current bids, a design can invite players to take unrelated actions, instead of restricting bidding to its own phase. While Vegas Showdown takes advantage of this feature, there remains a lot of design space here.    
+ Sample Games    
+Amun-Re (Knizia, 2003)    
+Cyclades (Cathala and Maublanc, 2009)    
+Vegas Showdown (Stern, 2005)    

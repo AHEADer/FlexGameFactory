@@ -1,0 +1,24 @@
+##  RES-08 Prisoner's Dilemma
+    
+![figure_205_236_860_863](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_2_30_575_205_236_860_863.jpg)
+    
+###  Description
+ Each player has a choice between Cooperating or Defecting. Total payoff is maximized if both players Cooperate, but if one Defects and the other Cooperates, the Defector will score more individual points.    
+##  Discussion
+ The Prisoner's Dilemma (PD) is one of the core Resolution mechanisms. Players choose to either cooperate with each other, or defect. A typical payoff chart is shown in the diagram above. Since the payoffts if both defect or both cooperate are equivalent for both players, this system only works if there are more than two players, even if only two are involved in the PD. If there are only two players, neither gains ground if they select the same option, so picking Defect is always the correct strategy.    
+ As indicated by the traditional choice names of Cooperate and Defect, the PD brings elements of trust to the forefront, and strong elements of Yomi    
+(UNC-01). This can lead to emotional investment by the players, or reaction to being betrayed, particularly in longer games where the outcome can have a significant impact on player position.    
+ An example of this is Diplomacy, a 6-8 hour game of conquest in Europe. The players representing Austria and Italy start with two key spaces and armies, Venice and Trieste, adjacent to each other at the start of the game, the only such situation among the seven players. In Diplomacy, players write down orders and reveal them simultaneously (TRN-09, for more on Simultaneous Action Selection). After the initial negotiation phase, Italy and Austria needto decide if they will move away from their common border (Cooperate) or invade (Defect). If both Cooperate, it can set them up for a reasonable start and good long-term relationship. If both Defect, no one loses a home supply center, but it will sow distrust and put them behind the other players as their forces will not have moved. And if one Cooperates and the other Defects, a home supply center will be lost, putting one player at a significant disadvantage.    
+ While Diplomacy frequently creates high emotional moments like this, the Prisoner's Dilemma does not always need to involve such high stakes. For example, in Hoity Toity, players in the Auction House may choose to purchase an item, play a Thief card to steal money, or a Detective card to catch a thief. While this is fundamentally an RPS mechanic (RES-07), if multiple players choose Thief, they cancel out and no thieves gain any benefit. This adds elements of a PD, but in a lighter way as there is no negotiation in Hoity Toity, and for players the stakes are much lower.    
+ Another example of this is Incan Gold, where each turn players need to decide simultaneously if they are continuing to explore an abandoned temple in search of treasure or will return home. Sometimes earlier treasure and artifacts may be left behind players, to be scooped up by players who leave the cave. In particular, artifacts create a PD, as they are only gained if a single player chooses to leave the temple. If multiple players leave the cave on the same turn, none gain the artifacts. This implementation also tends to be light as there are potential benefits for both staying and leaving, and no negotiation prior to selection.    
+ Cosmic Encounter introduces the PD through Negotiation cards. Conflict is resolved by both attacker and defender selecting a Number card from their hand. The player with the highest Number card plus Force strength wins the battle. Players also have the option to play a Negotiate card, if they have one, instead of a Number card. If both players Negotiate, they are allowed to negotiate a deal, which can be mutually beneficial. However, if only one    
+ Negotiates, that player automatically loses, and the player and their allies lose all their involved forces. In an interesting twist, the player who chose a Negotiate card in this situation gains a small compensating benefit, but not Allies. Thus, inviting Allies to join you in a battle where you know you will play a Negotiate is its own form of Defection, building a secondary PD into the core mechanism.    
+ Dead Last has two players dividing up four loot cards, and adds a third option to the cassic PD. In addition to Share and Steal (Cooperate/ Defect), players may also choose Grab One, which guarantees exactly one loot card, possibly leaving three for the opponent.    
+##  Sample Games
+Cosmic Encounter (Eberle, Kittredge, Norton, and Olatka, 1977)    
+Dead Last (Grosso and Patton, 2016)    
+Diplomacy (Calhamer, 1959)    
+Fantasy Busines (Boelinger, 2002)    
+Hoity Toity (Teuber, 1991)    
+Incan Gold (Faidutti and Moon, 2005)    
+Zombie in my Pocket (Lee, 2010)    

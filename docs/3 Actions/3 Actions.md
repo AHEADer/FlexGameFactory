@@ -1,0 +1,9 @@
+## 3 Actions
+    
+![figure_484_496_584_533](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_1_14_77_484_496_584_533.jpg)
+    
+ When watching a movie, or seeing a play, the story progresses independent of the viewer. Games, however, require action by the player to move things forward. These actions may be based purely on luck, rely solely on the player's skill, or lie somewhere in between. But a fundamental differentiator of games from many other activities is that the players must act.    
+ While later chapters will discuss what those specific actions might be, this one describes different ways that the players are permitted by the designer to take actions, and the way that those flow. Thus, the mechanisms discussed here should be viewed in conjunction with the Turn Structures of Chapter 2.    
+ An Action is an atomic step or series of steps that a player chooses to perform. For example, moving a piece, picking up a cube, selling a share of stock, or initiating combat may all be Actions. An Action may also be compound, allowing a player to both pick up a cube and sell a share of stock, depending on the structure and metaphor of the game.    
+ The selection and integration of Actions into the game can give play a specific feel. These Action systems control the complexity of the game, in terms of the number of Actions a player may perform consecutively and how they interrelate, the interaction between players, and other features. Manipulation of the Action system, like in a Rondel (ACT-10, Rondel Games) or Action Queue (ACT-06), can become the focus of the game itself and a key mechanism. Or it can simply provide a framework that fades into the background.    
+ If a game is not interactive enough or is overwhelming players with too many choices, the root of the problem is frequently in the way Actions are made available to the players. Looking closer at that part of the design may pay dividends.    

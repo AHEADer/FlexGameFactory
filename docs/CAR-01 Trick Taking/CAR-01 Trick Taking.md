@@ -1,0 +1,25 @@
+##  CAR-01 Trick Taking
+    
+![figure_170_231_899_647](https://tosv.byted.org/obj/labcv-ocr/Seed_PDF_figures/figure_2024_10_19_17_8_56_791_170_231_899_647.jpg)
+    
+###  Description
+ Players play cards from their hand to the table in a series of rounds, or "tricks" which are each evaluated separately to determine a winner and to apply other potential effects.    
+###  Discussion
+ Trick-Taking games are about 1,000 years old, and as such, there many games, variations and scoring rules. Covering all those possibilities is beyond our scope, and we will instead focus briefly on the core concepts.    
+ Trick-Taking games begin with dealing cards out. In classic games, like Bridge and Spades, all cards are dealt out evenly to the players. Some games have a betting phase in which players declare the number of tricks they intend to take. After this, players play in turn order, starting with the first player, called the lead. Many games require that players "follow the lead" or "follow suit," which means playing a card of the same suit as the lead, if possible. The player playing the highest card of the lead suit wins the trick, and becomes the lead for the next round. Often, one suit is the "trump" suit, and cards of that suit outrank cards of the lead suit, no matter their numerical value. Finally, players score for the number of tricks they've won.    
+ Designers have created variations of all of these core rules. In Diamonds, rather than dealing the entire deck, a subset of the deck is dealt out, which    
+ creates uncertainty and lowers the impact of memory and card counting. In Sticheln, players do not have to follow the lead suit, and unlike most games, where off-suit cards are disregarded when determining the winner of the trick, here, they are considered trump! In The Bottle Imp, trump isn't tied to suit at all. Instead, only a single card may be trump at any given time: the card closest to, but not exceeding, the value of the bottle, which begins at19. As lower numbers are played, the bottle takes on the value of those cards. A related approach is featured in Little Devils, where the second card played to the trick will set the rule for the trick: if the card is lower, all proceeding players must play lower, and if it is higher, they must play higher. The game also features the variation that winning tricks is a negative outcome. Going back to Sticheln, players want to win tricks, but every round all players choose a "pain" suit whose cards will count against them, and try to win tricks while avoiding taking cards from their pain suit.    
+ Betting can also feature variations. In Bridge, for example, the bid for a contract inchudes the right to determine which suit will be trump. Only the team that wins the bidding can score points for making its contract. Trick-Taking games are often played in partnership, and the bidding phase will typically have players taking turns bidding, alternating between the two teams. In some games, like Wizard, the sum total of tricks that players bid cannot equal the number of tricks in the hand. This guarantees that at least one player or partnership will miss their bid. Another common variant is the impact of "over-booking" or "over-tricking," which is collecting more tricks than the contract called for. Whether over-booking is more valuable, equal in value, or less valuable than the tricks contracted for varies from game to game. In "exact bid" games like Sluff Off, over-tricking may even be penalized.    
+ Trick-Taking games share many features and dynamics with both Once- Around Auction (AUC-07) and Sealed-Bid Auction (AUC-04), as unintuitive as that may sound. Readers curious about this should study Trick of the Rails, a card game that models 18xx-style games and uses Trick Taking in place of auctions. A Trick-Taking game is similar to an auction in that players hold a hand of currency, and bid that currency to win the trick. The currency is not consistent in relative value, because the exact same trick might be won by different cards depending on which card was led, and what suit is trump. In addition, the lot up for bid--the cards of the trick--is also what's being used to bid. This kind of dynamic is how a wager usually works; you commit money to the pot, hoping to win the pot, which is composed of all the bids. Trick-Taking games may be described as highly specialized auctions, at least mathematically speaking. From a game-design perspective, however,    
+ Trick-Taking games typically emphasize hand-management and planning skills, rather than valuation skills, and the experiential difference between a series of auctions and a hand of tricks is substantial as well.    
+ Sample Games    
+18xx (Tresham, 1974)    
+The Bottle Imp (Cornett, 1995)    
+Bridge (Vanderbilt, 1908)    
+Diamonds (Fitzgerald, 2014)    
+Little Devils (Feldkotter, 2012)    
+Shuff Off (Dorra, 2003)    
+Spades (Unknown)    
+Sticheln (Palesch, 1993)    
+Trick of the Rails (Hayashi, 2011)    
+Wizard (Fisher, 1984)    
