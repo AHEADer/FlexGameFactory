@@ -164,6 +164,8 @@ dialog {
     margin: auto;
     width: 600px;
     max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
 }
 
