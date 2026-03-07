@@ -37,6 +37,33 @@ async def get_news(query: Optional[str] = Query(None, description="The query of 
     try:
         # This now returns the full Markdown report string
         report = fetch_and_summarize_news(query, limit=10)
+        
+        # --- NEW: Save report to junda_games ---
+        try:
+            import re
+            from datetime import datetime
+            
+            # Create a clean folder name from the query
+            clean_name = re.sub(r'[^a-zA-Z0-9]', '_', query.strip()).lower()
+            timestamp = datetime.now().strftime("%m%d_%H%M")
+            folder_name = f"intel_{clean_name}_{timestamp}"
+            
+            root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+            target_dir = os.path.join(root_dir, "junda_games", folder_name)
+            
+            os.makedirs(target_dir, exist_ok=True)
+            with open(os.path.join(target_dir, "report.md"), "w", encoding="utf-8") as f:
+                f.write(report)
+            
+            # Create a placeholder index.html so it shows up in Library
+            with open(os.path.join(target_dir, "index.html"), "w", encoding="utf-8") as f:
+                f.write(f"<html><body style='background:#111;color:#eee;font-family:sans-serif;padding:20px;'><h1>Intel Report: {query}</h1><pre style='white-space:pre-wrap;'>{report}</pre></body></html>")
+                
+            print(f"[Storage] Saved news report to: {target_dir}")
+        except Exception as storage_err:
+            print(f"[Storage] Error saving report: {str(storage_err)}")
+        # ---------------------------------------
+
         from fastapi import Response
         return Response(content=report, media_type="text/markdown")
     except Exception as e:
