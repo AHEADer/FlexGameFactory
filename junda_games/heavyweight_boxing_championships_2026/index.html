@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid Punch-Out: Promoter War 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Stats Header -->
+        <header id="game-header">
+            <div class="stat-item">Cash: <span id="stat-money">$10,000,000</span></div>
+            <div class="stat-item">Reputation: <span id="stat-reputation">⭐⭐⭐</span></div>
+            <div class="stat-item">Phase: <span id="stat-phase">Bidding</span></div>
+        </header>
+
+        <!-- Main Display Area -->
+        <main id="game-view">
+            <!-- Bidding View -->
+            <section id="phase-bidding" class="phase-section">
+                <h2>The Draft: Sign Your Fighter</h2>
+                <div id="fighter-market">
+                    <!-- Market fighters will be injected here -->
+                </div>
+                <div id="bid-controls" class="hidden">
+                    <input type="number" id="bid-amount" placeholder="Your Bid (Sealed)">
+                    <button id="btn-submit-bid">Submit Sealed Bid</button>
+                </div>
+            </section>
+
+            <!-- Prep View -->
+            <section id="phase-prep" class="phase-section hidden">
+                <h2>Promotion Prep - Action Points: <span id="stat-ap">5</span></h2>
+                <div id="active-fighter-card"></div>
+                <div class="action-grid">
+                    <button id="btn-hype" class="action-btn">Build Hype (+Payout, -Stamina)</button>
+                    <button id="btn-train" class="action-btn">Intense Training (+Stamina, -Hype)</button>
+                    <button id="btn-sponsor" class="action-btn">Get Sponsors (+Cash)</button>
+                    <button id="btn-start-fight" class="action-btn primary">Go to Giza!</button>
+                </div>
+            </section>
+
+            <!-- Fight View -->
+            <section id="phase-fight" class="phase-section hidden">
+                <div id="fight-arena">
+                    <div class="fighter enemy">
+                        <h3>Opponent</h3>
+                        <div class="hp-bar"><div id="enemy-hp" class="hp-fill"></div></div>
+                    </div>
+                    <div id="fight-log">The crowd in Giza roars!</div>
+                    <div class="fighter player">
+                        <h3 id="player-fighter-name">Fighter</h3>
+                        <div class="hp-bar"><div id="player-hp" class="hp-fill"></div></div>
+                        <p>Stamina: <span id="player-stamina">100</span></p>
+                    </div>
+                </div>
+                <div class="fight-actions">
+                    <button id="btn-punch" class="fight-btn">Jab (Safe)</button>
+                    <button id="btn-combo" class="fight-btn risky">Power Combo (Risky)</button>
+                    <button id="btn-rest" class="fight-btn">Dodge & Recover</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Game Over Modal -->
+        <dialog id="game-over-modal" class="modal">
+            <h2 id="over-title">Game Over</h2>
+            <p id="over-msg"></p>
+            <button onclick="location.reload()">Restart Promotion</button>
+        </dialog>
+
+        <!-- Intro Modal -->
+        <dialog id="game-intro-modal" class="modal">
+            <div class="modal-content">
+                <h1>Pyramid Punch-Out: Promoter War 2026</h1>
+                <p class="lore">The year is 2026. The desert sands of Giza are shaking. Heavyweight champions from across the globe are clashing for the "Glory in Giza." But the real fight is in the boardrooms.</p>
+                <div class="instructions">
+                    <h3>How to Win:</h3>
+                    <ul>
+                        <li><strong>Step 1 (Bid):</strong> Use your $10M starting capital to win a fighter in a Sealed-Bid Auction. Don't overpay!</li>
+                        <li><strong>Step 2 (Prep):</strong> Spend Action Points to hype the fight or train your athlete. Hype increases payout but exhausts them.</li>
+                        <li><strong>Step 3 (Fight):</strong> In Giza, use Push-Your-Luck tactics. Power combos deal massive damage but carry a 50% risk of being countered, draining your stamina.</li>
+                        <li><strong>Victory:</strong> Reach $100M in Profit.</li>
+                    </ul>
+                </div>
+                <button id="btn-start-game" class="primary">Enter the Ring</button>
+            </div>
+        </dialog>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

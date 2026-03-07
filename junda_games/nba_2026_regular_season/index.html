@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Tankathon 2026: Race for Cooper Flagg</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>TANKATHON 2026</h1>
+            <div class="stats-bar">
+                <div class="stat-item" title="Progress towards the #1 Pick">
+                    <span class="label">Tank Score:</span>
+                    <div class="progress-bg"><div id="tank-score-bar" class="progress-fill" style="width: 0%;"></div></div>
+                    <span id="tank-score-val">0</span>/100
+                </div>
+                <div class="stat-item" title="How angry the fans are. Hits 100 = FIRED.">
+                    <span class="label">Fan Outrage:</span>
+                    <div class="progress-bg"><div id="outrage-bar" class="progress-fill outrage" style="width: 0%;"></div></div>
+                    <span id="outrage-val">0</span>/100
+                </div>
+                <div class="stat-item" title="Owner's faith in your 'process'. Hits 0 = FIRED.">
+                    <span class="label">Owner Patience:</span>
+                    <div class="progress-bg"><div id="patience-bar" class="progress-fill patience" style="width: 100%;"></div></div>
+                    <span id="patience-val">100</span>/100
+                </div>
+                <div class="stat-item">
+                    <span class="label">Week:</span>
+                    <span id="week-val">1</span>/20
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="game-board">
+                <div id="lottery-machine" class="machine-idle">
+                    <div class="lottery-ball-container">
+                        <div class="ball ball-1">#1</div>
+                        <div class="ball ball-2">#1</div>
+                        <div class="ball ball-3">#1</div>
+                        <div class="ball ball-4">#2</div>
+                        <div class="ball ball-5">#3</div>
+                    </div>
+                </div>
+                <div id="event-log">
+                    <p class="log-entry system">Welcome to the Front Office, GM. The season begins now.</p>
+                </div>
+            </div>
+
+            <section id="controls">
+                <button id="btn-play-fair" class="game-btn" title="Play your best lineup. Safe but doesn't help the tank.">
+                    Play Fair
+                    <span class="btn-desc">Outrage -2, Patience +2, Tank +1</span>
+                </button>
+                <button id="btn-load-management" class="game-btn" title="Rest your stars for 'reasons'. Increases tanking but fans hate it.">
+                    Load Management
+                    <span class="btn-desc">Outrage +12, Patience -5, Tank +10</span>
+                </button>
+                <button id="btn-trade-star" class="game-btn special" title="Trade your best player for picks. High tank value, but huge blowback. (Once per game)">
+                    Trade for Picks
+                    <span class="btn-desc">Outrage +30, Patience -15, Tank +25</span>
+                </button>
+            </section>
+        </main>
+
+        <!-- Intro Modal -->
+        <dialog id="game-intro-modal" open>
+            <div class="modal-content">
+                <img src="cover.png" alt="NBA Tankathon 2026" class="modal-cover">
+                <h2>THE TANK IS ON</h2>
+                <div class="lore">
+                    <p>The 2026 Regular Season is a disaster, and that's exactly how you planned it. Rookie phenom <strong>Cooper Flagg</strong> is the prize, and you need the worst record in the league to secure the best lottery odds.</p>
+                </div>
+                <div class="rules">
+                    <h3>HOW TO PLAY:</h3>
+                    <ul>
+                        <li><strong>CORE LOOP:</strong> Every week, choose how to manage your team.</li>
+                        <li><strong>WIN:</strong> Reach 100 Tank Score by Week 20 to enter the Lottery Finale.</li>
+                        <li><strong>LOSS:</strong> If Fan Outrage hits 100 or Owner Patience hits 0, you're fired!</li>
+                        <li><strong>MECHANICS:</strong> Balance "Load Management" (Tanking) against the wrath of the fans.</li>
+                    </ul>
+                </div>
+                <button id="start-game-btn" class="start-btn">EMBRACE THE TANK</button>
+            </div>
+        </dialog>
+
+        <!-- End Game Modal -->
+        <dialog id="game-over-modal">
+            <div class="modal-content">
+                <h2 id="end-title">SEASON OVER</h2>
+                <p id="end-message"></p>
+                <button onclick="location.reload()" class="start-btn">TRY AGAIN</button>
+            </div>
+        </dialog>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

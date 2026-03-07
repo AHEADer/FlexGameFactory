@@ -1,0 +1,300 @@
+:root {
+    --nba-blue: #00471B; /* Changed to a dark green for 'tank' vibes/Bucks-like */
+    --nba-dark: #121212;
+    --nba-orange: #f58426;
+    --nba-red: #C8102E;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #1a1a2e, #121212);
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 90vw;
+    max-width: 1000px;
+    height: 90vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0 0 15px 0;
+    letter-spacing: 5px;
+    background: linear-gradient(90deg, var(--nba-orange), #ffcc33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(245, 132, 38, 0.5);
+}
+
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.label {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 0.7rem;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4caf50;
+    transition: width 0.4s ease;
+}
+
+.progress-fill.outrage {
+    background: var(--nba-red);
+}
+
+.progress-fill.patience {
+    background: #2196f3;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#game-board {
+    flex-grow: 1;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    margin: 20px 0;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+#lottery-machine {
+    width: 60%;
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.lottery-ball-container {
+    width: 250px;
+    height: 250px;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    position: relative;
+}
+
+.ball {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+}
+
+.ball-1 { top: 20%; left: 30%; }
+.ball-2 { top: 50%; left: 10%; }
+.ball-3 { top: 60%; left: 60%; }
+.ball-4 { top: 10%; left: 55%; background: radial-gradient(circle at 30% 30%, #ffd700, #daa520); }
+.ball-5 { top: 40%; left: 40%; background: radial-gradient(circle at 30% 30%, #ff4500, #b22222); }
+
+#event-log {
+    width: 40%;
+    padding: 15px;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    border-left: 2px solid var(--nba-orange);
+    padding-left: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+.log-entry.system { border-left-color: #4caf50; color: #fff; }
+.log-entry.bad { border-left-color: var(--nba-red); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+#controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.game-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--glass-border);
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.game-btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.btn-desc {
+    font-size: 0.65rem;
+    text-transform: none;
+    margin-top: 5px;
+    color: #aaa;
+    font-weight: normal;
+}
+
+.special {
+    background: linear-gradient(135deg, #c31432, #240b36);
+}
+
+/* Modals */
+dialog {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80vw;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid var(--nba-orange);
+    box-shadow: 0 0 30px rgba(245, 132, 38, 0.3);
+}
+
+.modal-cover {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.lore {
+    font-style: italic;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+.rules {
+    text-align: left;
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.rules ul {
+    padding-left: 20px;
+    font-size: 0.9rem;
+}
+
+.start-btn {
+    background: var(--nba-orange);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(245, 132, 38, 0.4);
+    transition: transform 0.2s;
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+.spinning {
+    animation: bounceBalls 0.5s infinite alternate;
+}
+
+@keyframes bounceBalls {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(1.05) translateY(-5px); }
+}
