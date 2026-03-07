@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Users, Plus, Brain, MessageSquare, Star, Play, Cpu, RefreshCw } from 'lucide-react';
+import { Users, Plus, Brain, MessageSquare, Star, Play, Cpu, RefreshCw, Zap } from 'lucide-react';
 
 export default function Agents() {
     const [agents, setAgents] = useState([]);
@@ -112,6 +112,34 @@ export default function Agents() {
         }
     };
 
+    const handleRunAllReviews = async () => {
+        if (!selectedAgent || games.length === 0) return;
+
+        setIsEvaluating(true);
+        try {
+            for (let i = 0; i < games.length; i++) {
+                const targetGameId = games[i].id;
+                const res = await fetch('/api/evaluate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ agent_id: selectedAgent, game_id: targetGameId })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setReviews(prev => [data.review, ...prev]);
+                    setAgents(prev => prev.map(a => a.id === selectedAgent ? { ...a, balance: data.agent_balance } : a));
+                    setFunding(prev => ({ ...prev, [targetGameId]: data.funding }));
+                } else {
+                    console.error('Review failed for ' + targetGameId + ': ' + data.error);
+                }
+            }
+        } catch (err) {
+            console.error('Batch evaluation encountered an error:', err);
+        } finally {
+            setIsEvaluating(false);
+        }
+    };
+
     return (
         <div style={{ padding: '32px', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
 
@@ -140,7 +168,7 @@ export default function Agents() {
                         boxShadow: '0 8px 20px rgba(88, 166, 255, 0.3)'
                     }}
                 >
-                    <Plus size={20} /> Create New Agent
+                    <Plus size={20} /> Create agent help me play News
                 </button>
             </header>
 
@@ -220,25 +248,46 @@ export default function Agents() {
                                 </select>
                             </div>
 
-                            <button
-                                onClick={handleRunReview}
-                                disabled={isEvaluating || games.length === 0 || agents.length === 0}
-                                style={{
-                                    height: '46px',
-                                    padding: '0 24px',
-                                    background: 'var(--accent-success)',
-                                    color: '#fff',
-                                    borderRadius: '8px',
-                                    fontWeight: 700,
-                                    marginTop: '25px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '8px'
-                                }}
-                            >
-                                {isEvaluating ? <RefreshCw className="spin" size={18} /> : <Brain size={18} />}
-                                {isEvaluating ? 'PLAYING...' : 'RUN REVIEW'}
-                            </button>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '25px' }}>
+                                <button
+                                    onClick={handleRunReview}
+                                    disabled={isEvaluating || games.length === 0 || agents.length === 0}
+                                    style={{
+                                        height: '46px',
+                                        padding: '0 24px',
+                                        background: 'var(--accent-success)',
+                                        color: '#fff',
+                                        borderRadius: '8px',
+                                        fontWeight: 700,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '8px'
+                                    }}
+                                >
+                                    {isEvaluating ? <RefreshCw className="spin" size={18} /> : <Brain size={18} />}
+                                    {isEvaluating ? 'PLAYING...' : 'RUN REVIEW'}
+                                </button>
+                                <button
+                                    onClick={handleRunAllReviews}
+                                    disabled={isEvaluating || games.length === 0 || agents.length === 0}
+                                    style={{
+                                        height: '46px',
+                                        padding: '0 24px',
+                                        background: 'var(--accent-primary)',
+                                        color: '#fff',
+                                        borderRadius: '8px',
+                                        fontWeight: 700,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '8px'
+                                    }}
+                                >
+                                    {isEvaluating ? <RefreshCw className="spin" size={18} /> : <Zap size={18} />}
+                                    {isEvaluating ? 'BATCHING...' : 'REVIEW ALL GAMES'}
+                                </button>
+                            </div>
                         </div>
                     </div>
 
