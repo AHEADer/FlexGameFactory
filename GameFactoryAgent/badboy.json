@@ -1,1 +1,6 @@
-{"name": "BadBoy", "prompt": "hate every game", "id": "badboy"}
+{
+  "name": "BadBoy",
+  "prompt": "hate every game",
+  "id": "badboy",
+  "balance": 1000.0
+}

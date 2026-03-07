@@ -25,6 +25,7 @@ class AgentConfig(BaseModel):
     name: str
     prompt: str
     id: Optional[str] = None
+    balance: float = 0.0
 
 class ReviewRequest(BaseModel):
     agent_id: str
@@ -148,6 +149,34 @@ async def create_agent(config: AgentConfig):
     
     return {"success": True, "agent": config}
 
+@app.get("/games")
+async def list_games():
+    """Lists games from the junda_games directory."""
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    junda_dir = os.path.join(root_dir, "junda_games")
+    games = []
+    if os.path.exists(junda_dir):
+        for d in os.listdir(junda_dir):
+            if os.path.isdir(os.path.join(junda_dir, d)):
+                games.append({"id": d, "name": d.replace("_", " ").title()})
+    return {"success": True, "games": games}
+
+FUNDING_FILE = os.path.join(AGENTS_DIR, "funding.json")
+
+def get_funding():
+    if os.path.exists(FUNDING_FILE):
+        with open(FUNDING_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_funding(data):
+    with open(FUNDING_FILE, "w") as f:
+        json.dump(data, f)
+
+@app.get("/funding")
+async def get_funding_status():
+    return {"success": True, "funding": get_funding()}
+
 @app.get("/reviews")
 async def list_reviews(game_id: Optional[str] = None):
     reviews = []
@@ -185,8 +214,23 @@ async def evaluate_game(req: ReviewRequest):
         from gemini_service import review_game_with_gemini
         
         # Run AI review
-        ai_res = review_game_with_gemini(game_code, agent["prompt"])
+        ai_res = review_game_with_gemini(game_code, agent["prompt"], agent.get("balance", 0))
         
+        tip = ai_res.get("tip_amount", 0)
+        # Apply transaction
+        agent["balance"] = max(0, agent.get("balance", 0) - tip)
+        with open(agent_path, "w") as f:
+            json.dump(agent, f)
+            
+        # Update game funding
+        funding = get_funding()
+        game_fund = funding.get(req.game_id, {"total": 0, "goal": 1000, "investors": []})
+        game_fund["total"] += tip
+        if tip > 0:
+            game_fund["investors"].append({"agent_id": req.agent_id, "amount": tip, "date": datetime.now().isoformat()})
+        funding[req.game_id] = game_fund
+        save_funding(funding)
+
         review = {
             "id": f"rev_{int(datetime.now().timestamp())}",
             "agent_id": req.agent_id,
@@ -194,6 +238,7 @@ async def evaluate_game(req: ReviewRequest):
             "game_id": req.game_id,
             "score": ai_res.get("score", 0),
             "feedback": ai_res.get("feedback", "AI evaluation failed to generate feedback."),
+            "tip_amount": tip,
             "timestamp": datetime.now().isoformat()
         }
         
@@ -206,10 +251,11 @@ async def evaluate_game(req: ReviewRequest):
             report_filename = f"{req.game_id}_{req.agent_id}_{int(datetime.now().timestamp())}.md"
             report_path = os.path.join(REPORTS_DIR, report_filename)
             with open(report_path, "w", encoding="utf-8") as f:
-                f.write(f"# Agent Review Report\n\n")
+                f.write(f"# Agent Review & Investment Report\n\n")
                 f.write(f"- **Game:** {req.game_id}\n")
                 f.write(f"- **Agent:** {agent['name']}\n")
                 f.write(f"- **Score:** {review['score']}/100\n")
+                f.write(f"- **Tip/Investment:** ${tip}\n")
                 f.write(f"- **Date:** {review['timestamp']}\n\n")
                 f.write(f"## Qualitative Assessment\n\n")
                 f.write(f"{review['feedback']}\n")
@@ -217,7 +263,7 @@ async def evaluate_game(req: ReviewRequest):
         except Exception as report_err:
             print(f"[AgentReview] Failed to generate markdown report: {report_err}")
             
-        return {"success": True, "review": review}
+        return {"success": True, "review": review, "agent_balance": agent["balance"], "funding": game_fund}
     except Exception as e:
         import traceback
         traceback.print_exc()

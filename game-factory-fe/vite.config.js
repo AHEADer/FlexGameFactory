@@ -108,6 +108,16 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/evaluate/, '/evaluate')
+      },
+      '/api/funding': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/funding/, '/funding')
+      },
+      '/api/games': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/games/, '/games')
       }
     }
   }
