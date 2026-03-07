@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+google-genai
+python-dotenv
+newspaper3k
+ddgs
+lxml_html_clean
+google-genai
