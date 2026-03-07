@@ -1,0 +1,285 @@
+:root {
+    --bg-color: #0f172a;
+    --text-main: #f8fafc;
+    --accent-red: #ef4444;
+    --accent-green: #10b981;
+    --accent-blue: #3b82f6;
+    --belt-bg: #334155;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 90%;
+    max-width: 800px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.stat-box {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+#status-message {
+    font-size: 1rem;
+    color: #cbd5e1;
+    height: 24px;
+    transition: color 0.3s ease;
+}
+
+#board {
+    flex: 1;
+    position: relative;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.8);
+    border: 2px solid var(--glass-border);
+}
+
+#conveyor-belt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.belt-pattern {
+    width: 100%;
+    height: 200%;
+    background-image: repeating-linear-gradient(
+        0deg,
+        var(--belt-bg),
+        var(--belt-bg) 40px,
+        #1e293b 40px,
+        #1e293b 80px
+    );
+    animation: moveBelt 3s linear infinite;
+}
+
+@keyframes moveBelt {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(80px); }
+}
+
+#layoff-zone {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to top, rgba(239, 68, 68, 0.9), rgba(239, 68, 68, 0));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 20px;
+    z-index: 10;
+    border-top: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+#layoff-zone h2 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 1);
+    letter-spacing: 2px;
+}
+
+#player-avatar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 300px;
+    z-index: 20;
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.character {
+    font-size: 4rem;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+    animation: bobble 1s infinite alternate ease-in-out;
+}
+
+@keyframes bobble {
+    0% { transform: translateY(0) rotate(-2deg); }
+    100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+#actions h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #e2e8f0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.action-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+    transform: translateY(1px);
+}
+
+.action-btn .icon { font-size: 2rem; }
+.action-btn .label { font-weight: 600; font-size: 1.1rem; }
+.action-btn .desc { font-size: 0.85rem; color: #94a3b8; text-align: center; }
+
+.safe:hover { border-color: var(--accent-green); }
+.risky:hover { border-color: var(--accent-blue); }
+
+.primary {
+    background: linear-gradient(135deg, var(--accent-blue), #8b5cf6);
+    border: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    margin-top: 20px;
+}
+
+#game-over-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+#game-over-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 40px;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-content h2 {
+    color: var(--accent-red);
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-50%) translate3d(-5px, 0, 0); }
+  20%, 80% { transform: translateX(-50%) translate3d(5px, 0, 0); }
+  30%, 50%, 70% { transform: translateX(-50%) translate3d(-10px, 0, 0); }
+  40%, 60% { transform: translateX(-50%) translate3d(10px, 0, 0); }
+}
+
+.float-text {
+    position: absolute;
+    color: var(--accent-green);
+    font-weight: bold;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+    z-index: 30;
+}
+
+.float-text.negative {
+    color: var(--accent-red);
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1.5); }
+    100% { opacity: 0; transform: translateY(-30px) scale(1); }
+}

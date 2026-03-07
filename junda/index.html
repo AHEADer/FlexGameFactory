@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Layoff Survivor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>AI Layoff Survivor: 2026 Edition</h1>
+            <div class="stats">
+                <div class="stat-box">Day: <span id="day-counter">1</span></div>
+                <div class="stat-box">Corporate Value: <span id="score-counter">0</span></div>
+            </div>
+            <p id="status-message">Survive the AI shift! Don't let the conveyor belt drag you to the Layoff Zone.</p>
+        </header>
+
+        <main id="board">
+            <div id="conveyor-belt">
+                <div class="belt-pattern"></div>
+                <div id="layoff-zone">
+                    <h2>LAYOFF ZONE</h2>
+                    <p>Your role has been replaced by an LLM.</p>
+                </div>
+            </div>
+            
+            <div id="player-avatar">
+                <div class="character">🧑‍💻</div>
+            </div>
+        </main>
+
+        <section id="actions" class="glass-panel">
+            <h3>Daily Tasks (Worker Placement)</h3>
+            <div class="action-buttons">
+                <button id="btn-manual" class="action-btn safe">
+                    <span class="icon">💼</span>
+                    <span class="label">Manual Work</span>
+                    <span class="desc">Safe. Small value gain. Step back 1.</span>
+                </button>
+                <button id="btn-ai" class="action-btn risky">
+                    <span class="icon">🤖</span>
+                    <span class="label">Use AI to code</span>
+                    <span class="desc">Push-Your-Luck! 70% success (Step back 3), 30% Hallucination (Slip forward 2!).</span>
+                </button>
+            </div>
+        </section>
+
+        <div id="game-over-modal" class="hidden">
+            <div class="modal-content glass-panel">
+                <h2>Bzzzrt! You've been "Restructured"!</h2>
+                <p>The company shifting to AI means your role is no longer required.</p>
+                <p>You survived for <strong id="final-days">0</strong> days.</p>
+                <p>Final Corporate Value: <strong id="final-score">0</strong></p>
+                <button id="btn-restart" class="action-btn primary">Try entering the job market again</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
