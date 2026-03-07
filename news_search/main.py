@@ -19,28 +19,28 @@ class NewsArticle(BaseModel):
     source: str
 
 @app.get("/news", response_model=List[NewsArticle])
-async def get_news(category: Optional[str] = Query(None, description="The category of news to search for")):
+async def get_news(query: Optional[str] = Query(None, description="The query of news to search for")):
     # If user doesn't specify a category, randomly choose one.
-    if not category:
-        category = get_random_category()
+    if not query:
+        query = get_random_category()
     
     # Only capitalize if it's a single word to match standard lists, 
     # but preserve casing for phrases/sentences.
-    if " " not in category.strip():
-        category = category.capitalize()
+    if " " not in query.strip():
+        query = query.capitalize()
         
-    print(f"Fetching news for query: {category} using Gemini")
+    print(f"Fetching news for query: {query} using Gemini")
     
     if not os.environ.get("GEMINI_API_KEY"):
         raise HTTPException(status_code=500, detail="Server is missing GEMINI_API_KEY environment variable.")
     
     try:
-        articles = fetch_and_summarize_news(category, limit=10)
+        articles = fetch_and_summarize_news(query, limit=10)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Gemini API Error: {str(e)}")
     
     if not articles:
-        raise HTTPException(status_code=404, detail=f"No news found for category '{category}'")
+        raise HTTPException(status_code=404, detail=f"No news found for query '{query}'")
     
     result_articles = []
     

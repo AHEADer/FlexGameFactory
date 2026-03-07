@@ -38,40 +38,40 @@ def get_random_category() -> str:
 
 def fetch_top_links(category: str, limit: int = 10) -> List[Dict[str, str]]:
     """
-    Fetches the top news articles for a given category/query using DuckDuckGo News Search,
-    filtered to the top 20 embedded domains and published within the last 3 weeks.
+    Fetches the top news articles for a given category/query using DuckDuckGo News Search.
+    Filters by specific domains and time range (last month) are embedded directly into the query.
     """
-    # Handle category as a "line" (phrase/query)
-    full_query = category if " " in category.strip() else f"{category} news"
+    # 1. Handle category as a "line" (phrase/query)
+    base_query = category if " " in category.strip() else f"{category} news"
+    
+    # 2. Embed domains into query: "(base query) (site:cnn.com OR site:bbc.co.uk ...)"
+    # Note: DuckDuckGo has limits on query length, so we use the most prominent ones
+    domain_filter = " OR ".join([f"site:{d}" for d in TOP_20_DOMAINS[:10]])
+    full_query = f"{base_query} ({domain_filter})"
     
     articles = []
-    three_weeks_ago = datetime.now() - timedelta(weeks=3)
+    print(f"Querying DDG with optimized query: {full_query}")
     
-    print(f"Querying DDG for: {full_query}")
     try:
         with DDGS() as ddgs:
-            results = ddgs.news(keywords=full_query, max_results=100)
+            # timelimit='w' filters for the last week, 'm' for the last month.
+            # Since the user asked for 3 weeks, 'm' (month) is the closest built-in filter,
+            # we still keep the 3-week manual check for precision if needed, 
+            # but the API call is now much more efficient.
+            results = ddgs.news(query=full_query, timelimit='m', max_results=50)
+            
+            three_weeks_ago = datetime.now() - timedelta(weeks=3)
+            
             for r in results:
                 url = r.get("url", "")
                 published_str = r.get("date", "")
                 
-                # Filter by domain
-                if not any(domain in url for domain in TOP_20_DOMAINS):
-                    continue
-                
-                # Filter by date (last 3 weeks)
-                # DDGS date is usually in ISO format or similar: '2025-03-07T02:22:04+00:00'
+                # Double check time (3 weeks)
                 try:
-                    # Strip timezone for simple comparison or use fromisoformat
-                    # ddgs date format is '2024-03-07T10:30:41+08:00'
                     published_date = datetime.fromisoformat(published_str.replace("Z", "+00:00"))
-                    # Make everything offset-aware or offset-naive for comparison
-                    # Simplest is to make both naive (using local time or UTC)
                     if published_date.timestamp() < three_weeks_ago.timestamp():
                         continue
-                except (ValueError, TypeError):
-                    # If date parsing fails, we might still want the article but strictly we should skip if date is required
-                    print(f"Warning: Could not parse date '{published_str}' for {url}")
+                except:
                     pass
 
                 articles.append({
@@ -91,11 +91,14 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
     """
     Scrapes the text of an article using Newspaper3k and then passes the text to Gemini
     to generate a 300-word summary and a meaningful title.
+    Falls back to local NLP if Gemini fails.
     """
     url = article_data["url"]
     original_title = article_data["original_title"]
     
     # 1. Scrape the article
+    article_text = ""
+    nlp_summary = ""
     try:
         config = Config()
         config.browser_user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
@@ -105,10 +108,26 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
         article.parse()
         article_text = article.text
         
+        # Pre-process NLP fallback summary
+        try:
+            article.nlp()
+            nlp_summary = article.summary
+            if not nlp_summary:
+                # Fallback to a snippet if nlp() yields nothing
+                nlp_summary = article_text[:1000]
+            
+            # Ensure it's under 300 words
+            words = nlp_summary.split()
+            if len(words) > 300:
+                nlp_summary = " ".join(words[:300]) + "..."
+        except Exception as nlp_err:
+            print(f"Local NLP processing failed for {url}: {nlp_err}")
+            nlp_summary = "Local NLP summarization failed."
+
         if not article_text or len(article_text) < 50:
             return {
                 "title": original_title,
-                "summary": "Content could not be retrieved from the source.",
+                "summary": original_title,  # Fallback to title directly
                 "url": url,
                 "published": article_data["published"],
                 "source": article_data["source"]
@@ -118,7 +137,7 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
         print(f"Error scraping {url}: {e}")
         return {
             "title": original_title,
-            "summary": "Failed to extract content from the source.",
+            "summary": original_title,  # Fallback to title directly
             "url": url,
             "published": article_data["published"],
             "source": article_data["source"]
@@ -137,7 +156,6 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
     2. Provide a rich, detailed summary of Exactly roughly 300 words.
     
     Return the output STRICTLY as a raw JSON object. 
-    Do not wrap the JSON in markdown codeblocks (no ```json ... ```).
     The object must have the following keys:
     - "title": The meaningful title.
     - "summary": The 300-word summary.
@@ -145,7 +163,7 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
     
     try:
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-2.0-flash', # Using stable 2.0 flash
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
@@ -158,7 +176,7 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
         
         return {
             "title": result.get("title", original_title),
-            "summary": result.get("summary", "Summary generation failed."),
+            "summary": result.get("summary", nlp_summary or "Summary generation failed."),
             "url": url,
             "published": article_data["published"],
             "source": article_data["source"]
@@ -167,10 +185,10 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
         import traceback
         traceback.print_exc()
         error_msg = str(e).replace('"', "'")
-        print(f"Error summarizing {url} with Gemini: {error_msg}")
+        print(f"Error summarizing {url} with Gemini: {error_msg}. Using NLP Fallback.")
         return {
             "title": original_title,
-            "summary": f"Gemini generation failed: {error_msg}",
+            "summary": f"[NLP Fallback] {nlp_summary}",
             "url": url,
             "published": article_data["published"],
             "source": article_data["source"]
