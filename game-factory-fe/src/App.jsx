@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import Store from './pages/Store';
 import Factory from './pages/Factory';
+import Library from './pages/Library';
 
 function App() {
   return (
@@ -15,12 +16,7 @@ function App() {
             <Route path="/" element={<Store />} />
             <Route path="/factory" element={<Factory />} />
             {/* Library placeholder */}
-            <Route path="/library" element={
-              <div style={{ padding: '32px' }}>
-                <h1>Library</h1>
-                <p style={{ color: 'var(--text-muted)' }}>Games you generated.</p>
-              </div>
-            } />
+            <Route path="/library" element={<Library />} />
           </Routes>
         </main>
       </div>
