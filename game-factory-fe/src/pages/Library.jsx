@@ -7,10 +7,34 @@ export default function Library() {
     const [lastSyncTime, setLastSyncTime] = useState(null);
     const [autoSyncEnabled, setAutoSyncEnabled] = useState(true);
     const [syncInterval, setSyncInterval] = useState(30000); // Default 30s
+    const [workerRunning, setWorkerRunning] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGame, setSelectedGame] = useState(null);
+
+    const fetchWorkerStatus = async () => {
+        try {
+            const res = await fetch('/api/sync/status');
+            const data = await res.json();
+            setWorkerRunning(data.running);
+        } catch (e) {
+            console.error('Failed to get worker status', e);
+        }
+    };
+
+    const toggleWorker = async () => {
+        try {
+            const endpoint = workerRunning ? '/api/sync/stop' : '/api/sync/start';
+            const res = await fetch(endpoint, { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                setWorkerRunning(data.running);
+            }
+        } catch (e) {
+            console.error('Failed to toggle worker', e);
+        }
+    };
 
     const fetchGames = async (silent = false) => {
         if (!silent) setLoading(true);
@@ -48,6 +72,7 @@ export default function Library() {
 
     useEffect(() => {
         fetchGames();
+        fetchWorkerStatus();
     }, []);
 
     useEffect(() => {
@@ -116,12 +141,34 @@ export default function Library() {
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '12px',
+                        gap: '16px',
                         padding: '6px 16px',
                         background: 'rgba(255, 255, 255, 0.03)',
                         borderRadius: '12px',
                         border: '1px solid var(--border-subtle)',
                     }}>
+                        {/* 1. Background Push Worker Toggle */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingRight: '16px', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
+                            <div
+                                onClick={toggleWorker}
+                                style={{
+                                    width: '36px', height: '20px',
+                                    background: workerRunning ? '#2ea043' : 'rgba(255,255,255,0.1)',
+                                    borderRadius: '10px', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease'
+                                }}
+                            >
+                                <div style={{
+                                    width: '14px', height: '14px', background: '#fff', borderRadius: '50%',
+                                    position: 'absolute', top: '3px', left: workerRunning ? '19px' : '3px',
+                                    transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                                }} />
+                            </div>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: workerRunning ? '#2ea043' : 'var(--text-muted)' }}>
+                                {workerRunning ? 'PUSH WORKER ON' : 'PUSH WORKER OFF'}
+                            </span>
+                        </div>
+
+                        {/* 2. Client Auto-Pull Toggle */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <div
                                 onClick={() => setAutoSyncEnabled(!autoSyncEnabled)}

@@ -115,6 +115,71 @@ async def sync_repository():
         print(f"[Sync] Critical Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# --- Sync Worker Control Endpoints ---
+
+def get_sync_worker_pid():
+    import subprocess
+    try:
+        # ps rx output to find sync_worker.py process id
+        res = subprocess.run(["pgrep", "-f", "python3.*sync_worker\\.py"], capture_output=True, text=True)
+        pids = res.stdout.strip().split('\n')
+        pids = [p for p in pids if p]
+        if pids:
+            return int(pids[0])
+    except Exception:
+        pass
+    return None
+
+@app.get("/sync/status")
+async def get_sync_worker_status():
+    pid = get_sync_worker_pid()
+    return {"running": pid is not None, "pid": pid}
+
+@app.post("/sync/start")
+async def start_sync_worker():
+    pid = get_sync_worker_pid()
+    if pid is not None:
+        return {"success": True, "message": "Worker is already running", "pid": pid, "running": True}
+        
+    import subprocess
+    import os
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    
+    log_file = os.path.join(root_dir, "sync_worker.log")
+    
+    # Start process detached
+    try:
+        with open(log_file, "a") as f:
+            proc = subprocess.Popen(
+                ["python3", "sync_worker.py"], 
+                cwd=root_dir, 
+                stdout=f, 
+                stderr=f,
+                start_new_session=True # Detach from parent
+            )
+        return {"success": True, "message": "Worker started", "pid": proc.pid, "running": True}
+    except Exception as e:
+        return {"success": False, "message": str(e), "running": False}
+
+@app.post("/sync/stop")
+async def stop_sync_worker():
+    import os
+    import signal
+    pid = get_sync_worker_pid()
+    if pid is None:
+         return {"success": True, "message": "Worker was not running", "running": False}
+    
+    try:
+        os.kill(pid, signal.SIGTERM)
+        # Verify it's dead
+        import time
+        time.sleep(0.5)
+        if get_sync_worker_pid() is not None:
+             os.kill(pid, signal.SIGKILL)
+        return {"success": True, "message": "Worker stopped", "running": False}
+    except Exception as e:
+        return {"success": False, "message": f"Failed to stop: {e}", "running": get_sync_worker_pid() is not None}
+
 # --- Agent & Review Endpoints ---
 
 AGENTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "GameFactoryAgent"))
