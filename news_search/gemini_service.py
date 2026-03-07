@@ -378,10 +378,16 @@ Reply with valid JSON ONLY (no markdown fences):
                 print(f"[Review] {model} attempt {attempt + 1} failed (quota={is_quota}): {err_str[:150]}")
 
                 if is_quota:
-                    # Parse suggested retry delay from error message, e.g. "retry in 48s"
-                    m = _re.search(r'retry.*?(\d+)s', err_str, _re.IGNORECASE)
-                    wait = int(m.group(1)) + 3 if m else min(15 * (attempt + 1), 60)
-                    print(f"[Review] Rate limited. Waiting {wait}s ...")
+                    # Parse suggested retry delay from error message safely
+                    m = _re.search(r'retry.*?(\d+(?:\.\d+)?)\s*s', err_str, _re.IGNORECASE)
+                    try:
+                        parsed_wait = float(m.group(1)) if m else 0.0
+                    except:
+                        parsed_wait = 0.0
+                        
+                    # Bound the wait to a reasonable amount so the UI doesn't hang forever
+                    wait = min(parsed_wait + 1.0, 10.0) if parsed_wait > 0 else min(5.0 * (attempt + 1), 10.0)
+                    print(f"[Review] Rate limited. Waiting {wait:.1f}s ...")
                     time.sleep(wait)
                     if attempt == max_retries - 1:
                         print(f"[Review] All retries exhausted for {model}, trying next model.")

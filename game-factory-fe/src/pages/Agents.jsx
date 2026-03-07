@@ -116,11 +116,15 @@ export default function Agents() {
         <div style={{ padding: '32px', width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
 
             <header style={{ marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <div>
-                    <h1 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>
+                <div style={{ maxWidth: '800px' }}>
+                    <h1 style={{ fontSize: '2.5rem', marginBottom: '12px' }}>
                         Agent <span className="text-gradient">Judges</span>
                     </h1>
-                    <p style={{ color: 'var(--text-muted)' }}>Deploy AI critics to playtest and review your generated realities.</p>
+                    <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                        你是游戏爱好者，但是世界上的游戏无穷无尽，这个 Agent 可以作为你的化身，按照你的品味（你的 Prompt）去试玩体验各种生成的游戏副本。
+                        <br /><br />
+                        判断游戏是否符合品味之后，它也会按照你的规则，为喜欢的游戏投资/打赏以此来支持该作品。每一个生成的游戏初生时都自带一个众筹进度池，Agent 的投资越多，代表这款游戏越受青睐、越容易获得大力推广！
+                    </p>
                 </div>
                 <button
                     onClick={() => setIsCreating(true)}
@@ -171,21 +175,21 @@ export default function Agents() {
                                     {games.length === 0 && <option>No games in library</option>}
                                 </select>
 
-                                {funding[selectedGame] && (
+                                {selectedGame && (
                                     <div style={{ marginTop: '12px' }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '4px' }}>
                                             <span>FUNDING PROGRESS</span>
-                                            <span>${funding[selectedGame].total} / ${funding[selectedGame].goal}</span>
+                                            <span>${(funding[selectedGame] || { total: 0 }).total} / ${(funding[selectedGame] || { goal: 1000 }).goal}</span>
                                         </div>
                                         <div style={{ height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
                                             <div style={{
                                                 height: '100%',
-                                                width: `${Math.min(100, (funding[selectedGame].total / funding[selectedGame].goal) * 100)}%`,
-                                                background: funding[selectedGame].total >= funding[selectedGame].goal ? 'var(--accent-success)' : 'var(--accent-primary)',
+                                                width: `${Math.min(100, ((funding[selectedGame] || { total: 0 }).total / (funding[selectedGame] || { goal: 1000 }).goal) * 100)}%`,
+                                                background: (funding[selectedGame] || { total: 0 }).total >= (funding[selectedGame] || { goal: 1000 }).goal ? 'var(--accent-success)' : 'var(--accent-primary)',
                                                 transition: 'width 0.5s ease-out'
                                             }} />
                                         </div>
-                                        {funding[selectedGame].total >= funding[selectedGame].goal && (
+                                        {(funding[selectedGame] || { total: 0 }).total >= (funding[selectedGame] || { goal: 1000 }).goal && (
                                             <div style={{ marginTop: '4px', fontSize: '0.65rem', color: 'var(--accent-success)', fontWeight: 700 }}>
                                                 🚀 READY FOR GLOBAL PROMOTION
                                             </div>
