@@ -1,0 +1,1590 @@
+{
+    "categories": [
+        {
+            "directory": "1 Game Structure",
+            "title": "1 Game Structure",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "1 Game Structure",
+            "description": "The first choice designers make about a game is the game's basic structure. Who wins? Who loses? What's the overall scope of the game experience? Will it be just one game, or perhaps a series of hands? Maybe the game will encompass many scenarios, with game-state information persisting from play to play? The last 20 years of tabletop gaming have brought us enormous innovation in game structures, with no signs of slowing down."
+        },
+        {
+            "directory": "10 Movement",
+            "title": "10 Movement",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "10 Movement",
+            "description": "Perhaps the most common dynamic in games is movement. In large part this is because movement is inherent in what games model, whether it's an armed conflict, a journey, or a race. Movement is an incredibly effective and powerful tool in the designer's arsenal because of how dense movement can be in terms of information. Moving a single piece changes its relationship to every other piece on the board. And yet, signaling that change, communicating that it has occurred, is as simple as picking up a piece and placing it down again."
+        },
+        {
+            "directory": "11 Area Control",
+            "title": "11 Area Control",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "11 Area Control",
+            "description": "Wargaming is a thread that runs through much of boardgame design, and indeed, modeling conflicts through games remains a popular genre. At the center of games of conflict is the notion of controlling an area.\nHow a game represents this idea is tied to the overall scope of the conflict depicted. Theater-level games that deal with continents and countries tend to be more binary and abstract about control, while individual and squad-level games may not even define it, though the force-projcction capabilities of units will nonetheless enforce control over different parts of the board."
+        },
+        {
+            "directory": "12 Set Collection",
+            "title": "12 Set Collection",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "12 Set Collection",
+            "description": "Humans are pattern-seeking creatures, which perhaps explains why so many games incorporate some version of set collection. There's a nearly endless variety of types of sets to collect. Some sets are thematic, like Noah's pairs of animals, or the Three Little Pigs. Some are abstract, like Poker hands or melds in Gin Rummy, and some sets are arbitrary, like the compass, tablet and gear science cards in 7 Wonders. Even game concepts like contracts or tickets can be considered types of set. But no matter their variety and underlying commonality, all sets are built on the idea of synergy: the value or power of the set is greater than the sum of its parts."
+        },
+        {
+            "directory": "13 Card Mechanisms",
+            "title": "13 Card Mechanisms",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "13 Card Mechanisms",
+            "description": "Card games go back to the first millennium CE, possibly as early as the 800s in China, and by 1400, variations on the now-familiar 4-suit, 52-card deck are attested to in Persia, the Middle East, and Europe. All of this is to say that card games and their attendant mechanisms have been around for a long, long time."
+        },
+        {
+            "directory": "2 Turn Order and Structure",
+            "title": "2 Turn Order and Structure",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "2 Turn Order and Structure",
+            "description": "One of the elements that separates \"games\" from \"play\" is the introduction of structure. This takes many forms, including restrictions on how players perform activities and when they may perform them. Out of this arises the concept of a \"turn\"-an order or structure within which players take their actions."
+        },
+        {
+            "directory": "3 Actions",
+            "title": "3 Actions",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "3 Actions",
+            "description": "When watching a movie, or seeing a play, the story progresses independent of the viewer. Games, however, require action by the player to move things forward. These actions may be based purely on luck, rely solely on the player's skill, or lie somewhere in between. But a fundamental differentiator of games from many other activities is that the players must act."
+        },
+        {
+            "directory": "4 Resolution",
+            "title": "4 Resolution",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "4 Resolution",
+            "description": "In Chapter 3, we discussed Actions and the different ways that players can choose or plan Actions. Sometimes, the outcome of an Action is specific and definite. No chance is involved. For example, in Ches, if you take the Action of moving your Knight forward, it will happen exactly as you plan.\nHowever, some Actions have uncertain outcomes. Some are related to performative uncertainty, as in a dexterity game, where you may not succeed in performing your planned action. Others relate to chance interfering with your plans, which we call Output Randomness (see Chapter 6). For example, in Risk, you may declare an attack on Kamchatka (the Action), but the result of that Action is not known when it is declared. You may win without losing a single army, lose all your armies, or some result in between."
+        },
+        {
+            "directory": "5 Game End and Victory",
+            "title": "5 Game End and Victory",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "5 Game End and Victory",
+            "description": "Two characteristics that separate games from other activities are having a goal and a defined end-game point. Even in a role-playing game (RPG), which may not have a formal end-game point, a campaign or narrative arc reaches a climax, and though the characters may continue on to the next adventure, goals still exist. Achieving goals, or achieving them better than other players, defines who wins the game. Goals and end- game points are frequently intertwined in games, so we are exploring them together in this chapter. The first section primarily features ways of determining the winner, and the second section contains triggers for ending the game. We conclude this chapter by looking at several ancillary considerations for these topics."
+        },
+        {
+            "directory": "6 Uncertainty",
+            "title": "6 Uncertainty",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "6 Uncertainty",
+            "description": "Games, like life, are full of uncertainty: the roll of the dice, the turn of a card, the cube tumbling through the cube tower. But even in games of perfect information, such as Ches, our opponents' choices make our knowledge of how the game will unfold, imperfect.\nThe source of uncertainty and how uncertainty is perceived contributes much to the shape of the overall player experience. Uhcertainty that comes from a truly random process, like a die roll, creates a lighter and more chaotic feeling for players-even if the design calls for throwing enough dice enough times to smooth out the worst ends of the distribution curve. Players participating in a rock-paper-scissors contest, however, will feel a greater sense of agency and will harbor a belief, right or wrong, that the outcome of the contest is not random."
+        },
+        {
+            "directory": "7 Economics",
+            "title": "7 Economics",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "7 Economics",
+            "description": "In one sense, games are about gaining and using assets to achieve victory. Maximizing efficiency, utilization, and value are all important as players strive to win.\nMany things can be considered \"assets\" in a game. They can be obvious, like money in Monopoby, and goods like bricks or grain in Catan. Or they can be capital assets, like properties or buildings that generate other resources, or intangible, like turn order, board position, network efficiency, or hand size. In this text we will use the generic term \"asset\" to represent any of these. The term \"resource\" will refer to money and goods, and not structures or intangibles."
+        },
+        {
+            "directory": "8 Auctions",
+            "title": "8 Auctions",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "8 Auctions",
+            "description": "A common concern in game design is how to allocate resources fairly among players. One of the most versatile solutions is an auction. Auctions provide for player agency, drama, interaction, strategy and calculation. They are engaging and skill-testing, while providing players the opportunity to acquire whatever they wish, as long as they are able to pay."
+        },
+        {
+            "directory": "9 Worker Placement",
+            "title": "9 Worker Placement",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "9 Worker Placement",
+            "description": "Worker Placement, a type of Action Drafting (ACT-02), is often credited to designer Richard Breese and his game, Keydom, in 1998. Nonetheless, it was Caylus, by William Attia, that popularized the mechanism and inspired its name.\nMechanically, Worker Placement is isomorphic to action drafting. Players select actions in turn order by placing one of their pawns, or workers, into the action space, or building. This is the core mechanical concept and thematic conceit, and the mechanism has proven so durable because of that tight theme-mechanism correspondence. It's easy to understand why placing the worker in the sawmill will generate wood."
+        },
+        {
+            "directory": "Terminology",
+            "title": "Terminology",
+            "is_category": true,
+            "prefix": "",
+            "category_name": "Terminology",
+            "description": "For this book we have adopted the following commonly used terminologywhen describing turn structure:\nA Turn is typically one player taking a series of Actions or Steps, although sometimes other players may interrupt or otherwise paricipate.\nA Round is composed of multiple Turns. This can be a fixed number of turns, or variable depending on player actions or random events."
+        }
+    ],
+    "mechanisms": [
+        {
+            "directory": "ACT-01 Action Points",
+            "title": "ACT-01 Action Points",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "A player receives a number of Action Points on their turn. They may spend them on a variety of Actions."
+        },
+        {
+            "directory": "ACT-02 Action Drafting",
+            "title": "ACT-02 Action Drafting",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players select from an assortment of Actions in a shared pool. The available Actions are limited in quantity, and once a player has chosen an Action it may not be chosen again.\nThis mechanism creates player interaction within the Action selection itself. While many games have Actions, typically if an Action is chosen by one player, that does not deny it to another. Action Drafting creates a marketplace for Actions, with players competing to select them."
+        },
+        {
+            "directory": "ACT-03 Action Retrieval",
+            "title": "ACT-03 Action Retrieval",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Each player has a set of Actions available to them, embodied in cards, tokens, or some other affordance. Once performed, they are spent and may not be performed again until retrieved. Action Retrieval typicaly is itself an Action, or may take an entire turn.\nThis mechanism focuses on efficiency. Because retrieving the used cards takes an Action, players that retrieve more frequently will be at a disadvantage, as they will conduct fewer Actions that advance their cause."
+        },
+        {
+            "directory": "ACT-04 Action Event",
+            "title": "ACT-04 Action Event",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "On their turn, the player plays a card that shows Action Points and an Event. They must choose to either use the Action Points or perform the Event. If They choose to use Action Points, typically the Event may be perfiormed by another player.\nThis mechanism builds on a basic Action Point system, and allows designers to integrate a lot of flavor and special actions to a system to emphasize theme. It was pioneered in historical simulations as a way of introducing historical events without unduly adding rules overhead. For example, Twilight Struggle, a simulation of the Cold War, has a card that can either be used for 3 Action Points or the Warsaw Pact event. If the Action Points are chosen, there is a standard list of Actions on which they can be spent (ACT-01)."
+        },
+        {
+            "directory": "ACT-05 Command Cards",
+            "title": "ACT-05 Command Cards",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players have a hand of cards that allows them to activate and perform actions with a subset of their units."
+        },
+        {
+            "directory": "ACT-06 Action Queue",
+            "title": "ACT-06 Action Queue",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players create Action Queues and perform them in sequence.\nWhile this mechanism has many different implementations, at its core, the idea is that players must plan their actions and commit to a specific sequence of execution. For example, players may have to plot the movement of a robot by placing three Action cards in sequence that may, for example, cause the robot to move forward two spaces, then turn left, then move one more space. The types of actions, the way they are revealed and resolved, and other specifics have several variations."
+        },
+        {
+            "directory": "ACT-07 Shared Action Queue",
+            "title": "ACT-07 Shared Action Queue",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "All players add Actions to a central Action Queue. Actions in the Queue are performed by all players."
+        },
+        {
+            "directory": "ACT-08 Follow",
+            "title": "ACT-08 Follow",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "ACT-08\nFollow\nOne player selects an Action. Other players may then perform thar Action, or a modified version of it. This is closely related to Action Drafting (ACT-02) and Role Selection (TRN-10), and is often implemented alongside those systems.\nFollow mechanisms are a form of Action Selection that have a high degree of player involvement. Puerto Rico is a good example. On their turn, a player selects one of the available roles, and executes the action associated with it. Then, in turn, each player gets to execute the role. The player who selected the role also gets a bonus to their action. For example, the player who selects Builder gets a discount on the cost of construction and performs the action frst. The other players then each perform the Builder action, paying the normal cost."
+        },
+        {
+            "directory": "ACT-09 Order Counters",
+            "title": "ACT-09 Order Counters",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players place Order Tokens into regions, indicating what they want to do in that particular region of the board. After all tokens are placed, they are executed in sequence."
+        },
+        {
+            "directory": "ACT-10 Rondel",
+            "title": "ACT-10 Rondel",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "The available Actions are represented as pie wedges in a circle. Each player has one or more tokens on Rondel's wedges. On their turn, they may move their token around the Rondel and perform the Action indicated by the wedge where they stop. It is typically more costly to move further around the Rondel."
+        },
+        {
+            "directory": "ACT-11 Action Selection Restrictions",
+            "title": "ACT-11 Action Selection Restrictions",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players are restricted from which actions they may choose."
+        },
+        {
+            "directory": "ACT-12 Variable Player Powers",
+            "title": "ACT-12 Variable Player Powers",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Each player has special Actions that only he or she can perform, or that modify standard actions."
+        },
+        {
+            "directory": "ACT-13 Once-Per-Game Abilities",
+            "title": "ACT-13 Once-Per-Game Abilities",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Players have a special ability that they can use one time per game."
+        },
+        {
+            "directory": "ACT-14 Advantage Token",
+            "title": "ACT-14 Advantage Token",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "One player has a token that permits them to do a special Action, or modify an Action. Once used, the token passes to another player."
+        },
+        {
+            "directory": "ACT-15 Gating and Unlocking",
+            "title": "ACT-15 Gating and Unlocking",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "At certain points in the game, different actions are made available to the players. Actions may become available by a variety of means, including reaching a certain turn or game stage. Depleting a shared pool or bringing some track past a threshold level through the cumulative effects of the actions of all the players is another common approach to triggering unlocks."
+        },
+        {
+            "directory": "ACT-16 Tech Trees Tech Tracks Track Bonuses",
+            "title": "ACT-16 Tech Trees Tech Tracks Track Bonuses",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "During the course of the game, new Actions become available to specific players, or existing Actions are improved.\nThis is similar in many ways to the meta-mechanism of Gating and Unlocking(ACT-15). New actions and abilities are introduced as the game progresses.\nThe differences in this mechanism are subtle but important. First, these new and upgraded Actions are typicaly only available to a single player. It is possible that multiple players can earn the same additional Action, but it needs to happen individually."
+        },
+        {
+            "directory": "ACT-17 Events",
+            "title": "ACT-17 Events",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Actions occur outside the control of players that cause an immediate effect, change the state of the game, or impact subsequent actions."
+        },
+        {
+            "directory": "ACT-18 Narrative Choice",
+            "title": "ACT-18 Narrative Choice",
+            "is_category": false,
+            "prefix": "ACT",
+            "category_name": "3 Actions",
+            "description": "Multiple action options are presented to the players via a narrative format."
+        },
+        {
+            "directory": "ARC-01 Absolute Control",
+            "title": "ARC-01 Absolute Control",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "One player has Absolute Control of an area."
+        },
+        {
+            "directory": "ARC-02 Area Majority Influence",
+            "title": "ARC-02 Area Majority Influence",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "Multiple players may occupy a space and gain benefits based on their proportional presence in the space.\nAn elegant example of European design sensibilities applied to American-style conflict games is the area majority mechanism of El Grande. Each province is worth a different number of Victory Points (VPs) that will be awarded to the player with the most caballeros (soldiers) present in the province. Points are also awarded to the players with the 2nd- and 3rd-most caballeros in the region. Caballeros do not directly interact, and there is no confict resolution mechanism of any kind. Instead, the game implements a Multiple-Lot simultaneous Auction (AUC-11) themed as a conflict game. The game is not won with tactical brilliance or a lucky streak of die-rolling, but through eficiency in winning auctions for VPs."
+        },
+        {
+            "directory": "ARC-03 Troop Types",
+            "title": "ARC-03 Troop Types",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "To compete for or establish control requires troops, inhabitants, influence, presence, or some similar metaphor for being in a place. Many games have a variety of unit types, with different abilities, and sometimes, different implications for area control."
+        },
+        {
+            "directory": "ARC-04 Territories and Regions",
+            "title": "ARC-04 Territories and Regions",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "Maps can exhibit hierarchical relationships among their constituent spaces, such that a territory might exist in a region, and various attributes and parameters may be tied to the control of these areas."
+        },
+        {
+            "directory": "ARC-05 Area Parameters",
+            "title": "ARC-05 Area Parameters",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "In Area control games, Parameters are assigned to regions that impact why players might wish to control them and how they need to allocate resources to do so."
+        },
+        {
+            "directory": "ARC-06 Force Projection",
+            "title": "ARC-06 Force Projection",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "Force Projection is the impact of the movement, attack, and other abilities of units on the decision-making of your opponent.\nMuch of area control revolves around how units can claim and possess areas. However, achieving that control is a matter of how the various abilities andpowers of units are arrayed and used in combination. Chess is a good example: in Chess, units occupy their own spaces, but the only relevant parameters tied to that are that pawn movement into the space is blocked, and bishop, rook, and queen units are blocked from passing through those spaces, and must end their movements on capture. Where units are positioned in Chess matters much for where they project force. A bishop, knight and rook may, from three different places on the board, train a withering triple attack on an opposing pawn. Similarly, a powerful queen piece might be harassed and forced off into a corner because all the spaces she could land on are being threatened by other units. Famously, a knight against the edge of the board can be corralled by a bishop in a position exactly three spaces away, orthogonally. In such a position, every space the knight may move to is threatened by the bishop. Force projection as a mechanism is strongly tied to Movement (Chapter 10)."
+        },
+        {
+            "directory": "ARC-07 Zone of Control",
+            "title": "ARC-07 Zone of Control",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "Spaces adjacent to a unit impact the ability of opposing units to move or attack."
+        },
+        {
+            "directory": "ARC-08 Line of Sight",
+            "title": "ARC-08 Line of Sight",
+            "is_category": false,
+            "prefix": "ARC",
+            "category_name": "11 Area Control",
+            "description": "Units may only see certain areas.\nMany tactical games need to determine if a unit can see another, typically for purposes of attacking. This is referred to as Line of Sight (LOS). A variety of mechanisms have been developed to deal with this situation, with different degrees of accuracy and complexity. LOS is a type of Force Projection (ARC-06) in that it controls which areas of the board a unit may impact."
+        },
+        {
+            "directory": "AUC-01 Open Auction",
+            "title": "AUC-01 Open Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "Players shout out bids as they will, with no turn order. While an Open Auction will typically end when a certain amount of time with no increases occurs, or it is clear that no one wishes to raise the current bid, a true Open Auction allows a seller to accept any bid at any time and close the Auction. Though the usual outcome is that the high bidder is the winner, no rule requires this outcome."
+        },
+        {
+            "directory": "AUC-02 English Auction",
+            "title": "AUC-02 English Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "An auctioneer asks for bids of a certain amount and players indicate their willingness to bid at that amount, usually by holding up a hand or paddle, or by calling out. Players are permitted to adjust the increment of the bid, usually by shouting out their actual bid, though this is done infrequently, and usually either to indicate a smaller increment than the auctioneer requests, or a much larger one. When a certain amount of time with no increases occurs, or it is clear that no one wishes to raise the current bid, the auctioneer declares that the high bidder is the winner."
+        },
+        {
+            "directory": "AUC-03 Turn Order Until Pass Auction",
+            "title": "AUC-03 Turn Order Until Pass Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-03 Turn Order Until Pass Auction\nStarting with one player and going in turn order, players may raise the current bid or pass. When all players but one have passed, the player remaining in the auction is the winner.\nNormally players that pass may not re-enter the auction. However, allowing re-entry is a variation that is not uncommon."
+        },
+        {
+            "directory": "AUC-04 Sealed-Bid Auction",
+            "title": "AUC-04 Sealed-Bid Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-04\nSealed-Bid Auction\nPlayers secretly make a bid. All bids are revealed simultaneously, and the high bidder wins.\nSealed-Bid Auctions, also called Blind-Bid Auctions, compress all the excitement of an auction into one tense bidding decision, followed by a big reveal. Designers favor them for these features, as well as for their speed. In games in which an auction is one sub-system in a larger game, or in which there are many sequential auctions, a single sealed-bid system is perfect for moving the game along. A good example of this is the Game of Thrones board game, in which players run a gauntlet of three auctions in a row every few turns. The consecutive auctions allocate special abilities among the players, and thus must be quick and decisive, as the rest of the game involves intricate and time-consuming planning, negotiations, and troop movements."
+        },
+        {
+            "directory": "AUC-05 Sealed Bid with Cancellation",
+            "title": "AUC-05 Sealed Bid with Cancellation",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-05\nSealed Bid with Cancellation\nPlayers secretly make a bid. All bids are revealed simultaneously, and the high bidder wins, unless there are ties for high bidder. Tied bids cancel each other out and are treated as the lowest bids.\nThe purpose of ties cancelling out is in some sense a response to the challenge of running auctions without an auctioneer. A skilled auctioneer can help sort out two tied bidders and create some separation between them. Cancellation acts as a kind of heavy-handed auctioneer who refuses to acknowledge tied bids."
+        },
+        {
+            "directory": "AUC-06 Constrained Bidding",
+            "title": "AUC-06 Constrained Bidding",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "This is a meta-mechanism that can modify other auction techniques. Players may not bid any number that they wish. They may only bid based on increments and/or combinations of certain resources."
+        },
+        {
+            "directory": "AUC-07 Once-Around Auction",
+            "title": "AUC-07 Once-Around Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-07\nOnce-Around Auction\nThe players each have one opportunity to bid, either passing or raising the prior bidder. The order of bids is determined by one of the Turn Order structures. After the last player has their opportunity to bid, the high bidder wins.\nThe Once-Around Auction structure takes a straightforward approach to shortening auctions by simply collapsing the whole auction into one round. This works very well for speeding the auction, but it does have disparate impacts on players depending on their position in the turn order. The first player is faced with the substantial challenge of making a bid without any other information. Their bid will set the market and is vulnerable to being outbid by any player, who can bid as little as one dollar more. By contrast, the last player in turn order has perfect information. They know exactly how much to bid to win the lot. Often, the player in the next-to-last place is faced with a lot that is relatively inexpensive, but which they don't actually want. However, they feel like they must police the auction and raise the bid to prevent the last player from getting a windfall."
+        },
+        {
+            "directory": "AUC-08 Dutch Auction",
+            "title": "AUC-08 Dutch Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "A simultaneous single-bid system in which the lot starts ata very high price, and then is gradually decreased by the auctioneer or other controlling mechanism, until someone agrees to claim the item at its current price, ending the auction. The first bidder to accept the current price is the winner, such that there are no ties. A Dutch Auction is sometimes also called a one-bid auction because of this feature that the first bid made is also the only bid in the auction."
+        },
+        {
+            "directory": "AUC-09 Second-Bid Auction",
+            "title": "AUC-09 Second-Bid Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "This mechanism modifies other auctions, such as Turn Order Until Pass, or Sealed Bid. The amount paid by the Highest Bidder is equal to the second highest bid.\nIn game theory, Second-Bid auctions, also called Second-Price auctions, or Vickrey auctions, are well studied in relation to the question of how will the choice of auction type impact the price of a good? IfI have a car that I want to sell, for example, which auction type will fetch me the best price? One way to ensure the highest possible price for the seller is to use an auction mechanism that encourages bidders to make mistakes in their bidding strategies. A Dutch Auction (AUC-08) is a great example. The added pressure of the clock, and the possibility of someone else making a bid that can't be countered leads to somewhat higher settlement prices than a traditional English Auction."
+        },
+        {
+            "directory": "AUC-10 Selection Order Bid",
+            "title": "AUC-10 Selection Order Bid",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "Selection Order Bid is a form of multiple-lot auction in which players are not directly bidding on the lots themselves, but the order in which they'll draft the lots. As the bid increases, players may pass and accept a later place in the order. In some cases, players must pay their entire current bid (an all-pay mechanism), and in others they may recover some of their bid."
+        },
+        {
+            "directory": "AUC-11 Multiple-Lot Auction",
+            "title": "AUC-11 Multiple-Lot Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "An auction in which players simultaneously bid on Multiple Lots in parallel, instead of bidding for one lot at a time serially."
+        },
+        {
+            "directory": "AUC-12 Closed-Economy Auction",
+            "title": "AUC-12 Closed-Economy Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-12 Closed-Economy Auction\nClosed-Economy is a meta-mechanism that can modify any auction type. In a Closed-Economy Auction, all the money spent in the auction is paid out to the auction participants themselves. The total amount of money in the system never changes.\nWhile many auctions feature the winning bid being paid to one of the players at the table (such as MarraCash or Modern Art), a true Closed Economy is relatively rare. There's typically some way to earn more money or inject money into the system. However, Closed- Economy systems do exist, and are perhaps more common in constrained bidding systems that feature unique bidding markers, like Ra."
+        },
+        {
+            "directory": "AUC-13 Reverse Auction",
+            "title": "AUC-13 Reverse Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "Players bid to avoid taking the lot up for bid because it has some negative effect. Common effects include a negative victory point value, or a requirement to discard something of value such as a resource or special ability. Typically, in a Reverse Auction all players, except the claimant of the lot, pay their bids. Sometimes, the lot claimant will receive those payments."
+        },
+        {
+            "directory": "AUC-14 Dexterity Auction",
+            "title": "AUC-14 Dexterity Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "A Dexterity Auction requires performance of some act of dexterity to submit a valid bid. Typically, this would involve the bid marker itself being placed into some valid bidding area, but other methods for implementing this may be used."
+        },
+        {
+            "directory": "AUC-15 Fixed-Placement Auction",
+            "title": "AUC-15 Fixed-Placement Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "AUC-15 Fixed-Placement Auction\nFixed Placement is a meta-mechanism that modifes a multiple-lot auction by creating rules about which lots players may bid on, and representing bids visually on a board or cards. It is often combined with constrained-value bids. A Fixed-Placement auction ends when every player passes and/or no player has the right to bid further. The highest bidder for each lot wins the lot."
+        },
+        {
+            "directory": "AUC-16 Dutch Priority Auction",
+            "title": "AUC-16 Dutch Priority Auction",
+            "is_category": false,
+            "prefix": "AUC",
+            "category_name": "8 Auctions",
+            "description": "A Dutch Priority Auction, a term of our own invention, is a multiple-lot auction in which prices for the lots are determined based on the number of bids placed on the lots up for bid. The winning bidder is the frst player, in bid priority, who chooses to pay the current price for a lot, which is equal to the number of bidding tokens there. Priority may be determined by a variety of factors, including global turn order or turn order for each lot based on order of bid placement. Players may typically pass on the purchase when they are the priority bidder by removing their bidding token. This has the effect of reducing the price for the lot by one."
+        },
+        {
+            "directory": "CAR-01 Trick Taking",
+            "title": "CAR-01 Trick Taking",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "Players play cards from their hand to the table in a series of rounds, or \"tricks\" which are each evaluated separately to determine a winner and to apply other potential effects."
+        },
+        {
+            "directory": "CAR-02 Ladder Climbing",
+            "title": "CAR-02 Ladder Climbing",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "Players play one card, or a set of related cards. Subsequently, players must play cards of an equal or higher value of the same set already played. The last player to successfully play wins the right to start a new round of Climbing.\nLadder Climbing games, or simply Climbing games, are closely related to trick-taking games. The two began to differentiate geographically, with Western games in Europe developing around winning tricks and trump suits, and Eastern games in China, Korea, and Japan developing around shedding hands and playing sets."
+        },
+        {
+            "directory": "CAR-03 Melding and Splaying",
+            "title": "CAR-03 Melding and Splaying",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "A set of cards in a specific relationship to one another that allows them to be played to a table or scored is a meld. When laying these cards down, the way the cards splay, or overlap one another, may sometimes reveal or conceal certain abilities or attributes."
+        },
+        {
+            "directory": "CAR-04 Card Draw, Limits and Deck Exhaustion",
+            "title": "CAR-04 Card Draw, Limits and Deck Exhaustion",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "Games frequently limit the number of cards that may be held in a given container, whether that is a hand, a deck, or something else. Similarly, various game effects trigger when a deck, draw pile, or hand becomes exhausted."
+        },
+        {
+            "directory": "CAR-05 Deck Building",
+            "title": "CAR-05 Deck Building",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "Players play cards out of individual decks, seeking to acquire new cards and to play through their decks iteratively, improving them over time through card acquisition."
+        },
+        {
+            "directory": "CAR-06 Drafting",
+            "title": "CAR-06 Drafting",
+            "is_category": false,
+            "prefix": "CAR",
+            "category_name": "13 Card Mechanisms",
+            "description": "Drafting is a means of distributing cards or other game elements to players through an ordered selection process."
+        },
+        {
+            "directory": "ECO-01 Exchanging",
+            "title": "ECO-01 Exchanging",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Players Exchange a set of assets for a different set with the bank.\nWhile traditionally this mechanism is thought of as Exchanging similar types of resources, for example Exchanging two sheep for a wood at a sheep port in Catan, under the expansive definition of assets, it also covers purchasing as a mechanism. For example, in Monopoly players exchange the asset money for the asset property. Similar considerations apply, so they are both covered here."
+        },
+        {
+            "directory": "ECO-02 Trading",
+            "title": "ECO-02 Trading",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Players may Trade assets with each other."
+        },
+        {
+            "directory": "ECO-03 Market",
+            "title": "ECO-03 Market",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-03\nMarket\nPlayers may buy from or sell resources to Markets, where prices and quantities can vary.\nMarkets are a specialized form of Exchanging (ECO-01), as players are typically exchanging stocks or commodities for money, all of which are resources. However, there are some specific considerations for this implementation, particularly around changing prices. Note that we are defning a Market mechanism as one where prices change. Mechanisms like that, found in Concordia, where you can buy or sell for a fixed value throughout the game would fall under Exchange, even though it is called a Market."
+        },
+        {
+            "directory": "ECO-04 Delayed Purchase",
+            "title": "ECO-04 Delayed Purchase",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Items that are purchased do not enter play right away but arrive on a future turn.\nIn most games, when you purchase an item, it is immediately available to use. However, in the real world, it can take time to produce something, or get something delivered.\nSeveral games use this Delayed Purchase mechanic to force players to plan ahead. A simple implementation is to place purchased items directly on a"
+        },
+        {
+            "directory": "ECO-05 Income",
+            "title": "ECO-05 Income",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-05\nPlayers gain resources at defined times.\nTo foster a sense of growth and forward progress, mos games with economic elements have some form of Income, where players receive additional resources. This is a large topic, and several specific mechanisms discussed in this chapter fall into this category. See \"Automatic Resource Growth\"(ECO-06), \"Loans\" (ECO-07), \"Exchanging\" (ECO-01), \"Market\" (ECO-03), and \"Random Production\" (ECO-12). However, there are some broad generalizations that can be discussed."
+        },
+        {
+            "directory": "ECO-06 Automatic Resource Growth",
+            "title": "ECO-06 Automatic Resource Growth",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Resources held by a player will automatically grow over time.\nIn the purest form of this mechanism one or more resources increases by a set amount (usually one) each turn. This allows the designer to gradually ramp up player power in a simple and intuitive manner.\nA popular example of this is in the digital card game Hearthstone. The resource Mana is used to play cards. The Mana available at each turn begins the game at one and is increased by one at each turn until it reaches a maximum of 10. This gives the game an arc, as the options are much more restricted at low Mana values, and complexity and combos are gradually introduced. It also encourages players to balance their decks. If they only select cards with high Mana values, they will not be able to play for several turns. But if they only select low Mana cards, they may run out of cards quickly as they play multiple cards per turn later in the game."
+        },
+        {
+            "directory": "ECO-07 Loans",
+            "title": "ECO-07 Loans",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-07\nPlayers may take a Loan from the bank to get more money.\nMany games with money allow players to borrow. These can serve several purposes for the design. First, they can be punishments for players who do not manage their money properly, and exist to keep those players in the game. But they can also provide a means to victory, giving players resources required to jump-start their engine, or complete a big project. In fact, some games, like Railroad Tycoon: The Board Game, essentially require taking Loans to be a part of a winning strategy. Designers need to be careful to frame the concept of Loans in their game to incentivize players in the appropriate way."
+        },
+        {
+            "directory": "ECO-08 Always Available Purchases",
+            "title": "ECO-08 Always Available Purchases",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Certain resources are Always Available to Purchase, while others may not or may be limited in quantity.\nThis mechanism has traditionally been used in Deck-Building games(CAR-05). In Ascension: Deckbuilding Game, for example, there are two basic actions for players: purchasing an available card or attacking a card. In addition to a rotating queue of cards in the center, there are three cards that are always available: Heavy Infantry and Mystics are always available for purchase, and Cultists are always available to be attacked."
+        },
+        {
+            "directory": "ECO-09 I Cut, You Choose",
+            "title": "ECO-09 I Cut, You Choose",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "One player divides a set of resources into different groups. Other players have first choice of which group to select.\nThis I Cut, You Choose mechanism is based on a technique that parents often use with two children who are, for example, dividing up a bar of candy. One child breaks it into two pieces, and then the other selects which one they want. This ensures that the one doing the dividing is incentivized to make it as equitable as possible, because they know the other will take the larger piece."
+        },
+        {
+            "directory": "ECO-10 Discounts",
+            "title": "ECO-10 Discounts",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "A player can obtain an asset at a reduced cost.\nIn the typical implementation of this mechanism, players accumulate Discounts that make future purchases less expensive, these Discounts persist, and they stack (build on each other). These characteristics make this mechanism well suited to create an engine-building effect, where players are able to achieve more as the game continues."
+        },
+        {
+            "directory": "ECO-11 Upgrades",
+            "title": "ECO-11 Upgrades",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-11 Upgrades\nAssets may be Upgraded to improved versions.\nUpgrades share many characteristics with Discounts (ECO-10), but with some distinctions. Typically, they are implemented by first representing the action or ability with a card or tile, and then replacing it with a better version, or adding another card or element to it to show its improved status."
+        },
+        {
+            "directory": "ECO-12 Random Production",
+            "title": "ECO-12 Random Production",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Resources are generated from a random process and distributed to qualifying players."
+        },
+        {
+            "directory": "ECO-13 Investment",
+            "title": "ECO-13 Investment",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-13 Investment\nPlayers own a share of an entity.\nTypically, this Investment mechanism represents ownership in the form of stock. Players may buy shares of stock and accrue benefits based on the amount of stock owned.\nThe benefits take two basic forms. In the simplest, players earn a dividend based on the number of shares owned. This may occur periodically, or at specific trigger points. Other systems give benefits to the player who owns the most shares, or to the top shareholders. This is very similar to an Area Majority system (ARC-02), so the considerations there apply."
+        },
+        {
+            "directory": "ECO-14 Ownership",
+            "title": "ECO-14 Ownership",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Players own entities, and perform actions for those entities, or colect benefits if others use them.\nIn Le Havre and Caylus, players may build buildings, which become newaction spaces that all workers can use (see \"Worker Placement\" in Chapter 9 for more details). Typically, the owner can use the space free-of-charge, but when other players use the space, they must pay a fee to the owner."
+        },
+        {
+            "directory": "ECO-15 Contracts",
+            "title": "ECO-15 Contracts",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Players fulfll Contracts to earn rewards.\nTypically to complete a Contract, players turn in a specific combination of goods and earn a reward, which is usually money or victory points (VPs).\nContracts can either be public or private. Public Contracts are face-up and shared by all players who race to fulfill it first. Often the Contract is discarded, but sometimes other players can fulfll the Contract later for a lesser reward. Century: Spice Road is an example game with Public Contracts."
+        },
+        {
+            "directory": "ECO-16 Bribery",
+            "title": "ECO-16 Bribery",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-16\nPlayers offer bribes to other players to get them to perform specific actions.\nBribery is a subset of the Trading mechanism (ECO-02); however, it is typically more structured and given a different thematic basis. In a Bribery mechanism, a player needs to make a decision, and the other players then make monetary offers to entice the active playver to make a particular choice."
+        },
+        {
+            "directory": "ECO-17 Increase Value of Unchosen Resources",
+            "title": "ECO-17 Increase Value of Unchosen Resources",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "If players do not select certain Actions or Resources, then they increase in value."
+        },
+        {
+            "directory": "ECO-18 Negotiation",
+            "title": "ECO-18 Negotiation",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "Players make agreements about courses of action."
+        },
+        {
+            "directory": "ECO-19 Alliances",
+            "title": "ECO-19 Alliances",
+            "is_category": false,
+            "prefix": "ECO",
+            "category_name": "7 Economics",
+            "description": "ECO-19\nPlayers have formal relationships that may change over the course of the game.\nIn pure Negotiation games (ECO-18), agreements to cooperate are informal and can be made or broken at will. This mechanism differs in that there is a formal step to enter into and leave an Alliance, and the game rules specify how the Alliance operates."
+        },
+        {
+            "directory": "MOV-01 Tessellation",
+            "title": "MOV-01 Tessellation",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "MOV-01\nTessellation\nThe playing field is divided into spaces to regulate movement.\nThere are several ways to sub-divide boards, all of which are covered in this section.\nThe most basic is a one-dimensional division. This is often called a track, and it is commonly used in Race games, Roll and Move games, and others. There are several variations on the standard track."
+        },
+        {
+            "directory": "MOV-02 Roll and Move",
+            "title": "MOV-02 Roll and Move",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "A randomizer is used to determine how far to move a piece. The space landed on determines the action(s) a player can take."
+        },
+        {
+            "directory": "MOV-03 Pattern Movement",
+            "title": "MOV-03 Pattern Movement",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Pieces move in a specific pattern relative to the board grid.\nThis Pattern Movement mechanism gives pieces specific ways that they canmove relative to a grid. There are three basic styles:\n1. Fixed Target Spaces: This is similar to the way that knights move in Chess. There are a few specified target squares, and the piece may be moved to any of them. They may or may not be able to jump over spaces that are blocked by friendly or enemy pieces. These moves do not need to be reversible. While a Chess knight may return to the square it came from, a pawn may not move backwards. In Shogi the Gold, for example, may move diagonally forward, but not diagonally backward (although it may move straight backward)."
+        },
+        {
+            "directory": "MOV-04 Movement Points",
+            "title": "MOV-04 Movement Points",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "A piece is given a number of points to spend on movement.\nThis Movement Points mechanism allows the designer to differentiate units as well as movement conditions. It is commonly used in wargames, as in Rise and Decline of the Third Reich, for example, where infantry units have three movement points, and armor units have six. However, it is also used in train games like Empire Builder and racing games like Formula De to control movement. Normally, each space takes one Movement Point, but certain obstacles and terrain, like mountains, or swamps, may take more. In more tactical games, rivers and roads may slow or accelerate movement by controlling how many Movement Points are used. Movement Points may be further generalized as Action Points (ACT-01), where movement is just one of the actions that points may be spent on, as in Tikal."
+        },
+        {
+            "directory": "MOV-05 Resource to Move",
+            "title": "MOV-05 Resource to Move",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Players expend a Resource to Move."
+        },
+        {
+            "directory": "MOV-06 Measurement",
+            "title": "MOV-06 Measurement",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Pieces may be moved up to a certain distance, measured by a ruler."
+        },
+        {
+            "directory": "MOV-07 Different Dice",
+            "title": "MOV-07 Different Dice",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Different Dice are used to move depending on unit or game state."
+        },
+        {
+            "directory": "MOV-08 Drift",
+            "title": "MOV-08 Drift",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Two movement cards are played to move. The sum represents the distance forward moved; the difference represents the sideways movement (Drift)."
+        },
+        {
+            "directory": "MOV-09 Impulse",
+            "title": "MOV-09 Impulse",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "A turn is broken up into a series of small Impulses. Depending on their speed, units will be able to move in specific Impulses."
+        },
+        {
+            "directory": "MOV-10 Programmed Movement",
+            "title": "MOV-10 Programmed Movement",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Players simultaneously program their movement, and then reveal and execute it.\nThis is a subset of Action Queues (ACT-06), so the considerations there apply. However, there are some specifics relating to movement to cover here.\nFirst is the Right-Left issue. Programmed Movement games often have turning as one of the orders. Robo Rally is an example. This can often be difficult for players to visualize and can result in turning the wrong way. It can be beneficial to have the turn cards labeled as Clockwise and Counter- Clockwise, rather than Right or Left, as these may be simpler for players to visualize, but the issue remains."
+        },
+        {
+            "directory": "MOV-11 Relative Position",
+            "title": "MOV-11 Relative Position",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "The precise location of units is not tracked. Only their Relative Position is important."
+        },
+        {
+            "directory": "MOV-12 Mancala",
+            "title": "MOV-12 Mancala",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Movement is based on the number of units at the starting location.\nThis system arises from a family of games from Africa, most notably Mancala. In Mancala, the board is a series of pits organized essentially in a ring. Various numbers of playing pieces are in each pit. On their turn, a player selects a pit and removes all the pieces in that pit, and places one in each successive pit in a single direction. If there are three pieces in a pit, for example, one each will be placed in each of the next three pits going around the ring."
+        },
+        {
+            "directory": "MOV-13 Chaining",
+            "title": "MOV-13 Chaining",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Pieces are stationary but are built out in chains."
+        },
+        {
+            "directory": "MOV-14 Bias",
+            "title": "MOV-14 Bias",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "MOV-14\nBias\nPieces automatically move in a certain direction, or it is easier to move in a certain direction.\nThe Bias mechanism is typically used to simulate wind, currents, conveyor belts, and other physical systems. There are typically two types: Automatic and Influencers. Automatic Bias mechanisms move pieces in a set direction, typically at the end of each turn. An example is the conveyor belts in Robo Rally, which automatically move all robots on them, as well as possibly rotating them. Others are the rivers in Niagara and The Adventurers: The Temple of Chac, which slide all pieces on the river toward the falls, or the magnets or fans in Darter. This is also commonly seen as gravity in space games, such as Demon's Run, which move players that go too close to black holes."
+        },
+        {
+            "directory": "MOV-15 Moving Multiple Units",
+            "title": "MOV-15 Moving Multiple Units",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Actions may Move one or Multiple Units."
+        },
+        {
+            "directory": "MOV-16 Map Addition",
+            "title": "MOV-16 Map Addition",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "The map is added to as it is explored."
+        },
+        {
+            "directory": "MOV-17 Map Reduction",
+            "title": "MOV-17 Map Reduction",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Over the course of the game, the map shrinks."
+        },
+        {
+            "directory": "MOV-18 Map Deformation",
+            "title": "MOV-18 Map Deformation",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "The map is modified during the course of the game through rotation or shifts."
+        },
+        {
+            "directory": "MOV-19 Move Through Deck",
+            "title": "MOV-19 Move Through Deck",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "Players Move Through a Deck of cards."
+        },
+        {
+            "directory": "MOV-20 Movement Template",
+            "title": "MOV-20 Movement Template",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "A defined Movement Template is used to determine where a piece moves to.\nFirst pioneered in Wings of War, this system has been widely used since, most notably in the Star Wars: X-Wing Miniatures Game. Each turn, players simultaneously select which Movement Template will be used by each of their units. For example, it may be a Short Straight, a Gradual Left, or a Sharp Right. Moves are revealed, and the templates are used to determine where each piece will end."
+        },
+        {
+            "directory": "MOV-21 Pieces as Map",
+            "title": "MOV-21 Pieces as Map",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "The Pieces themselves compose the Map."
+        },
+        {
+            "directory": "MOV-22 Multiple Maps",
+            "title": "MOV-22 Multiple Maps",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "The game takes place on Muliple Maps which are connected at defined points."
+        },
+        {
+            "directory": "MOV-23 Shortcuts",
+            "title": "MOV-23 Shortcuts",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "MOV-23\nShortcuts\nA shorter or quicker route exists that may not always be available.\nShortcuts are a way for designers to warp the geometry of the board, to give players other options. For example, in Clue, players may move directly between the diagonal corners of the board. This system reduces travel time, which is not a core feature of Chue."
+        },
+        {
+            "directory": "MOV-24 Hidden Movement",
+            "title": "MOV-24 Hidden Movement",
+            "is_category": false,
+            "prefix": "MOV",
+            "category_name": "10 Movement",
+            "description": "MOV-24\nHidden Movement\nMovement occurs that is not visible to all players.\nHidden Movement is closely tied to many of the mechanisms discussed in Chapter 6, \"Uncertainty,\" but there are specific considerations that are reviewed here.\nScotland Yard is a classic example of a game with Hidden Movement. One player, Mr. X, is trying to evade the other players for a set number of turns. Hidden Movement games require the hidden players to track their location somehow, and in Scotland Yard it is done by recording it on a pad. This method is commonly used in these games, as it also allows for the players to review the hidden players' locations after the game is complete, both for the fun of seeing \"close calls\" as well as ensuring that the rules were followed."
+        },
+        {
+            "directory": "RES-01 High Number",
+            "title": "RES-01 High Number",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Each player is represented by a numeric \"strength,\" and the higher strength wins the conflict."
+        },
+        {
+            "directory": "RES-02 Stat Check",
+            "title": "RES-02 Stat Check",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "There is a target number required to succeed at some test. A random number is generated (by card draw, die roll, etc.), which is compared to the target. If it meets or exceeds the target, the action succeeds."
+        },
+        {
+            "directory": "RES-03 Critical Hits and Failures",
+            "title": "RES-03 Critical Hits and Failures",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Dice are rolled, and those exceeding a target number generate a success. Certain rolls (typically the highest and/or lowest on the die) generate additional success or extreme failure."
+        },
+        {
+            "directory": "RES-04 Ratio Combat Results Table",
+            "title": "RES-04 Ratio Combat Results Table",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "The Attacker and Defender each total their strength. This is then expressed as a ratio and is used to index into a Combat Results Table (CRT). A dice roll then determines the result of the conflict."
+        },
+        {
+            "directory": "RES-05 Die Icons",
+            "title": "RES-05 Die Icons",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "The player rolls a number of dice. Any die showing the target icon is a success."
+        },
+        {
+            "directory": "RES-06 Card Play",
+            "title": "RES-06 Card Play",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Each player simultaneously or sequentially plays one or more cards. These modify the base outcome of a conflict and allow various special abilities to apply."
+        },
+        {
+            "directory": "RES-07 Rock, Paper, Scissors",
+            "title": "RES-07 Rock, Paper, Scissors",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "RES-07\nThere are three possible options, and they are cyclically superior (A beats B, B beats C, and C beats A).\nRock, Paper, Scissors (RPS) is one of the core resolution mechanisms. Unlike High Number or Stat Check, it is intransitive. A transitive relationship means that if A beats B and B beats C, then A beats C. For example, simply comparing strengths leads to a transitive relationship."
+        },
+        {
+            "directory": "RES-08 Prisoner's Dilemma",
+            "title": "RES-08 Prisoner's Dilemma",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Each player has a choice between Cooperating or Defecting. Total payoff is maximized if both players Cooperate, but if one Defects and the other Cooperates, the Defector will score more individual points."
+        },
+        {
+            "directory": "RES-09 Alternate Removal",
+            "title": "RES-09 Alternate Removal",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "The player with fewer units removes one. Then players alternate removing units until reaching a set number, one player is out of units, or some other stopping mechanism."
+        },
+        {
+            "directory": "RES-10 Physical Action",
+            "title": "RES-10 Physical Action",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "A Physical Action needs to be performed by one or more players to determine the outcome of the action."
+        },
+        {
+            "directory": "RES-11 Static Capture",
+            "title": "RES-11 Static Capture",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Pieces are captured when another piece occupies or passes over their space.\nThis is one of the oldest conflict resolution mechanisms, going back thousands of years.\nTypically combined with a movement system, a token is affected in some way when another enters its space. For example, it may be captured (Ches, Checkers), sent back to start (Parcheesi, Trouble, Sorry!, Backgammon) or switch sides (Shogi)."
+        },
+        {
+            "directory": "RES-12 Enclosure",
+            "title": "RES-12 Enclosure",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Dating back thousands of years, Go is one of the most famous examples of this type of confict resolution. If a group of connected stones has no empty spaces adjacent to it, it is captured. While the stones themselves are static, the evolution of groups gives Go a dynamic feel.\nReversi implements Enclosure by allowing players to fip tiles of the opposing color that are between two tiles of their own color."
+        },
+        {
+            "directory": "RES-13 Minimap",
+            "title": "RES-13 Minimap",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "When a confict is initiated, pieces are moved to a separate board for resolution.\nThis is a meta-mechanic, as it is a way of organizing conflict, and relies on one of the other methods discussed here to actually resolve individual attacks.\nOne of the earliest examples of the Minimap mechanism is the 1962 game Bismarck. In this naval game, players secretly move task forces around a search board. When they discover each other, task forces are moved to the Battle Board, where the conflict is actually resolved (through a Stat Check mechanism in Bismarck's case). It is like \"zooming in\" on the battle to get more tactical. Video games like Master of Orion and Heroes of Might and Magic implement a similar system."
+        },
+        {
+            "directory": "RES-14 Force Commitment",
+            "title": "RES-14 Force Commitment",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "The players select how many of their forces they will commit to the battle to different categories. The players then reveal their assignments, and resolve.\nThis is a meta-mechanic that builds on other Resolution means. Typically, players will reveal their strengths in different categories, with the High Number gaining the benefit (RES-01). If the allocation portion of this mechanism is done secredly, it is a Sealed Bid Auction, so considerations noted in that section (AUC-05) apply here."
+        },
+        {
+            "directory": "RES-15 Voting",
+            "title": "RES-15 Voting",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Players vote on whether a proposed action will occur or not."
+        },
+        {
+            "directory": "RES-16 Player Judge",
+            "title": "RES-16 Player Judge",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "One player, the judge, decides the outcome of the Action."
+        },
+        {
+            "directory": "RES-17 Targeted Clues",
+            "title": "RES-17 Targeted Clues",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "A player gives cues that he or she wants some, but not all, players to guess.\nThis resolution mechanism is often used in party games, or lighter social games. The core idea is that one player is giving cues to the group about, typically, a word or phrase, and the other players try to guess the answer. However, it is bad for the clue-giver if either no players guess correctly, or if all players guess correctly. The player scores the most points when some of the players guess correctly, but not all."
+        },
+        {
+            "directory": "RES-18 Tie-Breakers",
+            "title": "RES-18 Tie-Breakers",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "If a resolution results in a tie, players look to an alternate means to break it."
+        },
+        {
+            "directory": "RES-19 Dice Selection",
+            "title": "RES-19 Dice Selection",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Player rolls multiple dice and selects one based on a rule."
+        },
+        {
+            "directory": "RES-20 Action Speed",
+            "title": "RES-20 Action Speed",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Actions are rated for a speed or initiative. Faster actions are executed first.\nThis system is most commonly used in Simultaneous Action systems(TRN-09). In Critical Mass, each player selects an action card from their hand and plays it simultaneously. Each is rated for speed, and faster actions go sooner than slower ones."
+        },
+        {
+            "directory": "RES-21 Rerolling and Locking",
+            "title": "RES-21 Rerolling and Locking",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "Dice may be rerolled, or may be locked, preventing rerolling."
+        },
+        {
+            "directory": "RES-22 Kill Steal",
+            "title": "RES-22 Kill Steal",
+            "is_category": false,
+            "prefix": "RES",
+            "category_name": "4 Resolution",
+            "description": "RES-22\nKill Steal\nPlayers contribute towards completing a task, but only the player who finally completes it gets a benefit.\nThis Kill Steal mechanism originated in video games, which is where the term came from. In tabletop games, it is most frequently seen in combat games, where the player scoring the last hit to kill a creature gains the experience, treasure, or other reward."
+        },
+        {
+            "directory": "SET-01 Set Valuation",
+            "title": "SET-01 Set Valuation",
+            "is_category": false,
+            "prefix": "SET",
+            "category_name": "12 Set Collection",
+            "description": "SET-01\nSet Valuation\nSet Valuation is the logic or underlying mathematical model by which designers assign values to sets of game elements. Set Valuation can be in terms of currency, resources, or victory points.\nTo paraphrase Jerry Seinfeld, it's one thing to colleet the set, but something else entirely to value the set. Many other chapters in this book, like \"Economics\"(Chapter 7), \"Auctions\" (Chapter 8), and \"Card Mechanisms\" (Chapter 13), discuss how resources are allocated and acquired, but in this section we'll discuss what those resources are actually worth. Implicit in this framing is that sets are nearly always converted into some benefit and consumed, turned in, or otherwise removed from play, even if only at game-end. Sets are not typically semi-persistent: either you make them and spend or score them right"
+        },
+        {
+            "directory": "SET-02 Tile-Laying",
+            "title": "SET-02 Tile-Laying",
+            "is_category": false,
+            "prefix": "SET",
+            "category_name": "12 Set Collection",
+            "description": "Set-collection mechanisms with spatial elements. There are other aspects to Tile-Laying games like Area-Majority scoring (ARC-02) that we won't cover in this section."
+        },
+        {
+            "directory": "SET-03 Grid Coverage",
+            "title": "SET-03 Grid Coverage",
+            "is_category": false,
+            "prefix": "SET",
+            "category_name": "12 Set Collection",
+            "description": "A family of mechanisms in which players cover a grid or fill a space using a variety of shapes.\nThere's a rich mathematical background to how different shapes can fill a two-dimensional plane or a three-dimensional volume, and as a result, many games that operate on this basic framework. Undoubtedly, many of these aren't really set-collection games, but many are. In Patchwork, players are trying to acquire the set of tiles that will allow them to fully tessellate their9 x 9 grids. Tiles have a calculable valuation: each tile covers some number of spaces, and each uncovered space is -2 Victory Points (VPs). Tiles may also feature buttons, which are worth 1 VP per payout space that will be activated. However, simply adding up these values doesn't give the true value of the tile, because how well it fits on the board, and which other pieces it allows to still be placed is crucially important too. In this manner, the game is a set-collection game: the value of the tiles is greater than the sum of the parts."
+        },
+        {
+            "directory": "SET-04 Network Building",
+            "title": "SET-04 Network Building",
+            "is_category": false,
+            "prefix": "SET",
+            "category_name": "12 Set Collection",
+            "description": "Network Building is a specialized kind of set collection in which the sets collected represent ties between nodes, often represented as routes between destinations."
+        },
+        {
+            "directory": "SET-05 Combo Abilities",
+            "title": "SET-05 Combo Abilities",
+            "is_category": false,
+            "prefix": "SET",
+            "category_name": "12 Set Collection",
+            "description": "A collection of Abilities that are acquired separately and synergize together."
+        },
+        {
+            "directory": "STR-01 Competitive Games",
+            "title": "STR-01 Competitive Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A game with two or more players and a single winner."
+        },
+        {
+            "directory": "STR-02 Cooperative Games",
+            "title": "STR-02 Cooperative Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "STR-02 Cooperative Games\nPlayers coordinate their actions to achieve a common win condition or conditions. Players all win or lose the game together.\nQuite a few games call for cooperative play among players, including team games, one-vs.-many games, role-playing games, and games with secret traitors. These can be viewed as belonging to a hierarchical category of cooperative games. Some might even include solo games in this group. For our purposes, we'll treat each of these as separate categories, and limit ourselves here to \"pure\" cooperative games in which all players play on one side and win or lose as a group."
+        },
+        {
+            "directory": "STR-03 Team-Based Games",
+            "title": "STR-03 Team-Based Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "STR-03 Team-Based Games\nIn team-based games, teams of players compete with one another to obtain victory. There are a variety of possible team structures, incuding symmetrical teams like 2v2 and 3v3, multiple sides like 2v2v2, and even One vs. All.\nTeam-based play is an ancient human pastime and is prevalent in sports, classic card games, and war games. Thematic board games that model some conflict often have to deal with a bilateral narrative, whether in the conflict of good versus evil like in War of the Ring, the epony mous conflict of Axis & Allies, or"
+        },
+        {
+            "directory": "STR-04 Solo Games",
+            "title": "STR-04 Solo Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A solo game is a game or game mode intended for play by a single player."
+        },
+        {
+            "directory": "STR-05 Semi-Cooperative Games",
+            "title": "STR-05 Semi-Cooperative Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A game which ends with either no winners or with the players winning as a group, but a single player being recognized as the individual winner as well."
+        },
+        {
+            "directory": "STR-06 Single Loser Games",
+            "title": "STR-06 Single Loser Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A game with three or more players which ends with only one loser."
+        },
+        {
+            "directory": "STR-07 Traitor Games",
+            "title": "STR-07 Traitor Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A traitor game can be seen as a kind of team game, or as a cooperative game with a betrayal mechanism. The traitors typically win by triggering a failure condition for the players. For our purposes, a traitor game is characterized by traitors that begin the game with hidden identities."
+        },
+        {
+            "directory": "STR-08 Scenario Mission Campaign Games",
+            "title": "STR-08 Scenario Mission Campaign Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "This is a game system that can be applied to a variety of different maps, starting resources and positions, and even different win and loss conditions. These variable conditions can be assembled into a broader narrative or campaign, or they can be entirely disconnected from one another."
+        },
+        {
+            "directory": "STR-09 Score-and-Reset Games",
+            "title": "STR-09 Score-and-Reset Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "This is a game in which players play until reaching a stopping condition, then record scores, reset the game, and play one or more additional rounds. The game concudes after some number of rounds, and the cumulative score is calculated to determine a winner."
+        },
+        {
+            "directory": "STR-10 Legacy Games",
+            "title": "STR-10 Legacy Games",
+            "is_category": false,
+            "prefix": "STR",
+            "category_name": "1 Game Structure",
+            "description": "A legacy game is a multisession game in which permanent and irreversible changes to the game state carry over from session to session."
+        },
+        {
+            "directory": "TRN-01 Fixed Turn Order",
+            "title": "TRN-01 Fixed Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Turn order is set at the start of the game and never varies. Each player takes a turn in the same sequence until the end of the game.\nA Fixed Turn Order is the most basic turn order, one that we are introduced to from the first games we play at a young age. Typically, play proceeds from a starting player clockwise around the table; however, Asian games often proceed counter-clockwise. In this book we will assume that games proceed clockwise (Progressive or Become First Player Action, for example). We recommend that the direction match the cultural norm to reduce the cognitive load on players."
+        },
+        {
+            "directory": "TRN-02 Stat Turn Order",
+            "title": "TRN-02 Stat Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "The turn order within each Round is set by some statistic relating to the players resources or position in the game."
+        },
+        {
+            "directory": "TRN-03 Bid Turn Order",
+            "title": "TRN-03 Bid Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "TRN-03\nBid Turn Order\nPlayers bid for turn order. A variety of auction mechanisms may be used(see \"Auctions\" in Chapter 8 for more details).\nAdding an auction for turn order, or Bid Turn Order, helps improve balance by allowing the players to decide the relative merits of different turn orders at different times and situations. However, there are several drawbacks to this method. First, it will slow the game down. Auctions in general can add a lot of time to the game and can feel tacked-on when the auction is not integrated into the core game mechanism. This is normally the case with auctioning off turn order, which is usually a prelude to the main gameplay."
+        },
+        {
+            "directory": "TRN-04 Progressive Turn Order",
+            "title": "TRN-04 Progressive Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "One player has the First Player token. At the end of the round, the token passes to the player to the left who becomes the new First Player for that round. During the round, players take turns clockwise around the table."
+        },
+        {
+            "directory": "TRN-05 Claim Turn Order",
+            "title": "TRN-05 Claim Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "In each round there is a First Player, and turns are taken clockkwise from the first player. There is an action that may be taken to claim a place in the turn order (typically, but not always, first) for the next round, with play proceeding clockwise from the First Player. If no one takes the action, turn order remains unchanged."
+        },
+        {
+            "directory": "TRN-06 Pass Order",
+            "title": "TRN-06 Pass Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "TRN-06\nOn their turn, players may either take an action or pass. The first player who passes becomes the new first player for the next round. The second player who passes becomes the second player for the next round, and so on. Reversing pass order and turn order is also possible when going later in turn order is more advantageous."
+        },
+        {
+            "directory": "TRN-07 Real-Time",
+            "title": "TRN-07 Real-Time",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "There are no turns. Players play as quickly as possible, subject to certain constraints, until the game or phase is completed."
+        },
+        {
+            "directory": "TRN-08 Punctuated Real-Time",
+            "title": "TRN-08 Punctuated Real-Time",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "There are no turns. Players play as quickly as possible, subject to certain constraints, until the game or phase is completed. Play is also interrupted by specific player actions, which are resolved before resuming the real-time action."
+        },
+        {
+            "directory": "TRN-09 Simultaneous Action Selection",
+            "title": "TRN-09 Simultaneous Action Selection",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Players plan their turn simultaneously and secretly. Then, they reveal their plans at the same time."
+        },
+        {
+            "directory": "TRN-10 Role Order",
+            "title": "TRN-10 Role Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Players secredly and simultaneously select an action, role, or priority. Then they are revealed, and the actions/roles revealed determine the order in which players act."
+        },
+        {
+            "directory": "TRN-11 Random Turn Order",
+            "title": "TRN-11 Random Turn Order",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Representatives of play pieces or players are randomized, and one is drawn at a time. That player or play piece takes its turn, then a new random draw is made."
+        },
+        {
+            "directory": "TRN-12 Action Timer",
+            "title": "TRN-12 Action Timer",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Players place owned timers on action spaces and pieces and take an action. When the time runs out,it may be moved to another location to take that action. There are no turns; players may move their own timers any time after they have expired."
+        },
+        {
+            "directory": "TRN-13 Time Track",
+            "title": "TRN-13 Time Track",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "There is a linear \"Time Track\" with many spaces. Each player has a marker on the track, which indicates where they are \"in time.\" Markers farther on the track are further forward in time.    \nThe player with the marker lowest on the track (furthest \"back in time\") takes the next action. Each action has a cost in time, and the player's marker is advanced a number of spaces according to that cost. Then, the next lowest marker on the track takes an action. It is possible that the same player takes multiple turns in a row."
+        },
+        {
+            "directory": "TRN-14 Passed Action Token",
+            "title": "TRN-14 Passed Action Token",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "Players possess one or more Action Tokens. Those who have an Action Token may take a turn, then they pass the token clockwise, allowing the next player to perform an action. Actions are performed in real time; there is no pausing and structure within the turn.    \n Typically, to prevent stalling and to keep the game moving, in games with multiple Action Tokens, if both tokens are held by the same player, then they suffer a penalty."
+        },
+        {
+            "directory": "TRN-15 Interleaved vs. Sequential Phases",
+            "title": "TRN-15 Interleaved vs. Sequential Phases",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "This describes two different meta-turn structures. In an Interleaved Phase structure (a), all players perform the first phase, then all perform the second phase, etc. In a Sequential Phase structure (b), each player performs all phases before moving on to the next player, who then performs all phases, etc."
+        },
+        {
+            "directory": "TRN-16 Lose a Turn",
+            "title": "TRN-16 Lose a Turn",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "This is a meta-mechanism that can be applied to a variety of turn structures. A player who \"Loses a Turn\" must skip their next opportunity for a turn, and will go to the next round, or the next time their turn arises."
+        },
+        {
+            "directory": "TRN-17 Interrupts",
+            "title": "TRN-17 Interrupts",
+            "is_category": false,
+            "prefix": "TRN",
+            "category_name": "2 Turn Order and Structure",
+            "description": "This is a meta-mechanism for Turn Order. Players may take an action that interrupts the normal turn flow."
+        },
+        {
+            "directory": "UNC-01 Betting and Blufing",
+            "title": "UNC-01 Betting and Blufing",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Players commit a stake of currency or resources to purchase a chance of winning everyone's stake, based on some random outcome like being dealt a superior set of cards or rolling a higher number. Players typically have partial information about the overall game state, and may \"bluf,\" by representing through their in-game actions that they hold a stronger position than they do. Conversely, players may \"fold,\" or quit the contest, and limit their losses to whatever they had already staked."
+        },
+        {
+            "directory": "UNC-02 Push-Your-Luck",
+            "title": "UNC-02 Push-Your-Luck",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Players must decide between setting for existing gains, or risking them all for further rewards. Push-Your-Luck is also known as press-your-luck.\nA good example of a game whose central mechanism is Push-Your-Luck is Sid Sackson's Can't Stop. In Can't Stop, the active player rolls four dice and advances up to two pawns in tracks numbered from 2 to 12, based on matching the sum of any two dice to the numbers on the tracks. The player may choose at any point to stop rolling, and lock in their progress along the tracks, or reroll to attempt to advance again. However, if after rolling, the player cannot match the sum of the dice to any of the three active tracks the player is advancing on, the player \"busts,\" and all progress from that turn is lost. Push-Your-Luck is a type of wager in which players have less control over the ante or the stakes than in most casino games."
+        },
+        {
+            "directory": "UNC-03 Memory",
+            "title": "UNC-03 Memory",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "UNC-03\nMemory\nHidden, trackable information whose tracking gives players an advantage.\nMemory can be a game mechanism, or a capability a player draws upon when engaging with one or more mechanisms. It's an important design ingredient, a lever whose setting will have substantial impact on a game's weight, intended audience, and general reception. Our discussion will focus on games where memory is at the center of the game design, rather than where memory is an ancillary skill that the game tests."
+        },
+        {
+            "directory": "UNC-04 Hidden Roles",
+            "title": "UNC-04 Hidden Roles",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "One or more players are assigned differing roles that are not publicly revealed at the start of the game.\nWhile uncertainty lurks in many games, in Hidden Roles games, uncertainty is at the very heart of the gameplay. We can broadly talk about three types of Hidden Roles games: social deduction games, traitor games, and competing roles games. We touched on this topic earlier in the chapter about game structure (see Chapter 1). Social deduction games are team games in which the object of gameplay is to deduce the team allegiances of the players, like in the classic open-source game Mafia (which, ten years after its invention, was recast as Werewolf)."
+        },
+        {
+            "directory": "UNC-05 Roles with Asymmetric Information",
+            "title": "UNC-05 Roles with Asymmetric Information",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "One or more players are secretly assigned roles at the start of the game which have different win conditions, and receive different starting information about the game state."
+        },
+        {
+            "directory": "UNC-06 Communication Limits",
+            "title": "UNC-06 Communication Limits",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Games may limit players from communicating with one another openly. These restrictions can be absolute as they relate to certain specific picces of information, or they may restrict certain types of communication, such as speaking."
+        },
+        {
+            "directory": "UNC-07 Unknown Information",
+            "title": "UNC-07 Unknown Information",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Aspects of the game state are unknown to all players, but lie within a known range."
+        },
+        {
+            "directory": "UNC-08 Hidden Information",
+            "title": "UNC-08 Hidden Information",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Aspects of the game state are hidden from all but one or a few players.\nInformation can be known to one or more players, but not to all players. This includes information we've covered elsewhere, like Hidden Roles (UNC-04), or private hands of cards. However, in this context, we refer less to those sets of information which are permanent elements of a player's role in a game, like their hand of cards. Instead, we're considering things like the strength of the monsters that all players can battle for victory points in Champions of Midgard. The types of information that may be hidden in this manner typically fall into a few categories: secret player abilities, secret goals, strength of enemies, and the location of specific items or resources. Players might spend actions or resources to gain this knowledge, or not. Another type of information of this sort is specific knowledge of another player's hand based on deduction. If you hold the Princess in Love Letter, you can be certain that nobody else does, but no other player can be certain about whether the Princess is in your hand, any other player's hand, or the draw deck."
+        },
+        {
+            "directory": "UNC-09 Probability Management",
+            "title": "UNC-09 Probability Management",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Mechanism which allows players to influence the probabilities of certain outcomes, but not directly determine them."
+        },
+        {
+            "directory": "UNC-10 Variable Setup",
+            "title": "UNC-10 Variable Setup",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "The starting game state varies from game to game, through changes to shared game components like the map, and/or or changes to starting player setups, resources, objectives, etc.\nVariable Setup is sometimes equated with replayability, and can certainly contribute to it, though they are not the same thing. The line between setup and gameplay isn't always that clear either. But setup can have an outsize effect on uncertainty and overall game outcomes. Catan's rules recommend new players play with a specific board layout, and provide rules for board construction that ensure that no one spot is over-powered relative to others. Players often ignore this rule, and this imbalanced setup can easily advantage one player over the other. Similarly, the randomly dealt alien powers in Cosmic Encounter define the game almost entirely, and shape its dynamics even more dramatically than Catan's setup. Dominion's selection of ten kingdom cards is similarly impactful--those cards can be considered the last page of the rules."
+        },
+        {
+            "directory": "UNC-11 Hidden Control",
+            "title": "UNC-11 Hidden Control",
+            "is_category": false,
+            "prefix": "UNC",
+            "category_name": "6 Uncertainty",
+            "description": "Players have hidden influence on locations or characters, which they reveal to perform actions."
+        },
+        {
+            "directory": "VIC-01 Victory Points from Game State",
+            "title": "VIC-01 Victory Points from Game State",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "An event causes the Game State to be evaluated relative to some scoring condition. Players earn points based upon how that state matches the condition."
+        },
+        {
+            "directory": "VIC-02 Victory Points from Player Actions",
+            "title": "VIC-02 Victory Points from Player Actions",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Players earn points by performing actions.    \n Discussion    \n In contrast with Victory Points from Game State, this mechanism gives players points based on discrete actions which may be very local. An example would be capturing stones in Go, where each stone is worth one point. Surrounding territory in Go, the other way of scoring points, is only evaluated at the end of the game, and until that point can be invaded, shrunk, or expanded.    \n Eclipse and Kemet offer Victory Points (VPs) for winning battles. Many games, like Lords of Waterdeep, Nexus Ops, or Splendor, have players take actions to complete or caim private or public goal cards (VIC-11), which are worth points.    \n The relationship between the Action that you perform to gain VPs and how that affects your position and the game state has an important impact on the flow of the game. In some, like Lords of Waterdeep, completing quest cards is the main point of the game, and doesn't aid or hinder your ability to perform other actions in the future.    \n However, in games like Dominion and Splendor, taking Victory cards can hinder your ability to gain more Victory cards. In Dominion, the point cards become part of your deck, but they have no purpose if drawn. They simply clog things up. In Splendor, purchasing high value cards does not give you as much of a \"bang for your buck\" for getting gem bonuses as purchasing lower cost cards. In these games, the players need to choose between building up their engine or economy and cashing in on it. It creates what we call a \"pivot,\"    \n where players need to transition between building and scoring. This can be an interesting puzzle for players to work through."
+        },
+        {
+            "directory": "VIC-03 Temporary and Permanent Victory Points",
+            "title": "VIC-03 Temporary and Permanent Victory Points",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Some Victory Points (VPs) are never lost. Others depend on the game state and may be lost if that state changes."
+        },
+        {
+            "directory": "VIC-04 Victory Points as a Resource",
+            "title": "VIC-04 Victory Points as a Resource",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Victory Points (VPs) may be spent as a currency to impact the game state.\nEconomic games, where money represents victory, are the primary examples of this mechanism. Having players spend and invest money to make more money is at the core of business and finds representation in many business games. This forces players to think about valuation and Return On Investment(ROI) as key drivers in their decisions. What is the expected payback on the available options?"
+        },
+        {
+            "directory": "VIC-05 Hidden and Exposed Victory Points",
+            "title": "VIC-05 Hidden and Exposed Victory Points",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "####  Victory Points (VPs) may be public or private information.\n Discussion    \n The decision of whether to have the number of VPs each player has be public or private information can have a big impact on the play experience. It is particularly dependent on the method for ending the game, and the overall amount of hidden and public information.    \n If a game has a set number of turns, so that players know exactly when the end is coming, and most information is public, including VPs, it can lead to over-analysis during the last turn, as players try to optimize that last play. Alternatively, there can be situations where the last turn is meaninglessbecause the leading player cannot be unseated (in which case consider VIC-15 Short Circuits). Typically, this is considered undesirable by players, although certain types of games and players can support this. If the points are hidden, or if players are not sure what other players can do, through hidden information, this tendency is alleviated.    \n As an example, the 1999 game, Vinci, had players controlling civilizations that would rise and fall across Europe. Scores were open, and the number of turns was fixed. Vinci was in general positively regarded, however, many reviewers found the final turn very unsatisfying. Players scored points at    \n the end of their turn, and turns were deterministic. Players could calculate exactly how to maximize their score, and often spent quite a bit of time doing so, to squeeze out one more point. Years later, the game was reworked and re-released as Small World. The main structural change was the introduction of hidden scores, and a minor random element. These changes were sufficient to alleviate the last turn issue, and give the game a much lighter feel, turning it into one of the staples of the hobby gaming market.    \n Conversely, having too many hidden bonus points at the end of the game can lead to an unsatisfying play experience. See VIC-06 for a full discussion."
+        },
+        {
+            "directory": "VIC-06 End-Game Bonuses",
+            "title": "VIC-06 End-Game Bonuses",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Players earn bonus Victory Points (VPs) at the end of the game."
+        },
+        {
+            "directory": "VIC-07 Race",
+            "title": "VIC-07 Race",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "VIC-07\nRace\nThe winner is the first player to reach the end of a track.\nThis mechanism is both a way of determining when the game ends and determining a victory. Both typically occur at the same time as one or more players cross a finish line or reach a goal.\nSome of the oldest games in human history are Race games, including Senet, Backgammon, Snakes & Ladders, and Parchees. They are intuitive about the goal and it is clear who is in the lead at any point."
+        },
+        {
+            "directory": "VIC-08 Player Elimination",
+            "title": "VIC-08 Player Elimination",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The winner is the only player remaining in the game."
+        },
+        {
+            "directory": "VIC-09 Fixed Number of Rounds",
+            "title": "VIC-09 Fixed Number of Rounds",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game ends after a set number of rounds.\nThis is a basic approach to determine when the game will end. However, there are still some considerations for the designer.\nFirst, players must track the current round, often with a marker on a track. It's not a big burden on the players, but it does require them to remember to advance the token at the end of each round."
+        },
+        {
+            "directory": "VIC-10 Exhausting Resources",
+            "title": "VIC-10 Exhausting Resources",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game end is triggered by a resource being exhausted. Players can affect the length of the game by how these resources are used."
+        },
+        {
+            "directory": "VIC-11 Completing Targets",
+            "title": "VIC-11 Completing Targets",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game ends after a set number of targets or goals are completed."
+        },
+        {
+            "directory": "VIC-12 Fixed Number of Events",
+            "title": "VIC-12 Fixed Number of Events",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game ends after an event occurs a specified number of times."
+        },
+        {
+            "directory": "VIC-13 Elapsed Real Time",
+            "title": "VIC-13 Elapsed Real Time",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game ends after a set amount of actual time has elapsed."
+        },
+        {
+            "directory": "VIC-14 Connections",
+            "title": "VIC-14 Connections",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game ends when a specified number of connections are made on the board."
+        },
+        {
+            "directory": "VIC-15 Circuit Breaker Sudden Death",
+            "title": "VIC-15 Circuit Breaker Sudden Death",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game has a fixed and known victory condition, and a special variable condition that ends the game prematurely."
+        },
+        {
+            "directory": "VIC-16 Finale",
+            "title": "VIC-16 Finale",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "When the main game ends, a special mini-game is played to determine the victor."
+        },
+        {
+            "directory": "VIC-17 King of the Hill",
+            "title": "VIC-17 King of the Hill",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Players earn points by occupying a special position on the board."
+        },
+        {
+            "directory": "VIC-18 Catch the Leader",
+            "title": "VIC-18 Catch the Leader",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "The game systems advantage players that are behind or disadvantage players that are ahead."
+        },
+        {
+            "directory": "VIC-19 Tug of War",
+            "title": "VIC-19 Tug of War",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "A marker is moved up and back on a track towards or away from a neutral position."
+        },
+        {
+            "directory": "VIC-20 Highest Lowest",
+            "title": "VIC-20 Highest Lowest",
+            "is_category": false,
+            "prefix": "VIC",
+            "category_name": "5 Game End and Victory",
+            "description": "Each player's score is equal to the lowest value of several categories. Whoever has the highest lowest value is the winner."
+        },
+        {
+            "directory": "WPL-01 Standard Worker Placement",
+            "title": "WPL-01 Standard Worker Placement",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Players select actions, in turn order, by placing a worker from their supply on a building associated with a specific action and then execute that action immediately. The round ends when all workers have been placed, ar which point they return to their owners pools and a new round begins."
+        },
+        {
+            "directory": "WPL-02 Workers of Differing Types",
+            "title": "WPL-02 Workers of Differing Types",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Workers can differ in abilities, or can be upgraded and downgraded, or are valid for placement in different areas and buildings."
+        },
+        {
+            "directory": "WPL-03 Acquiring and Losing Workers",
+            "title": "WPL-03 Acquiring and Losing Workers",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Workers beyond the original complement may be acquired in some manner, either temporarily or permanently. Workers may also be lost as the game progresses."
+        },
+        {
+            "directory": "WPL-04 Workers-As-Dice",
+            "title": "WPL-04 Workers-As-Dice",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Workers are represented by dice whose pip values impact play."
+        },
+        {
+            "directory": "WPL-05 Adding and Blocking Buildings",
+            "title": "WPL-05 Adding and Blocking Buildings",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Buildings, and their corresponding actions, may be added to the pool of actions players may select from. Buildings may also be occupied to prevent or hinder players from accessing those actions."
+        },
+        {
+            "directory": "WPL-06 Single Workers",
+            "title": "WPL-06 Single Workers",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Players control only a Single primary Worker and cannot acquire more workers."
+        },
+        {
+            "directory": "WPL-07 Building Actions and Rewards",
+            "title": "WPL-07 Building Actions and Rewards",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Buildings can offer varying rewards to different players, based on ownership and turn order, or they may be upgraded to increase their rewards to all players."
+        },
+        {
+            "directory": "WPL-08 Turn Order and Resolution Order",
+            "title": "WPL-08 Turn Order and Resolution Order",
+            "is_category": false,
+            "prefix": "WPL",
+            "category_name": "9 Worker Placement",
+            "description": "Worker placement is ulimately a drafting mechanism, and the order by which actions are selected and resolved is an opportunity for design variations."
+        }
+    ]
+}
