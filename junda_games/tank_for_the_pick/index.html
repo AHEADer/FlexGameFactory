@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank for the Pick: The Mark Cuban Way</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>TANK FOR THE PICK</h1>
+            <p class="subtitle">"Embrace the Tank" - Mark Cuban</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="stat-box" id="tank-box">
+                <span class="label">Tank Progress (Losses)</span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="tank-bar"></div>
+                </div>
+                <span class="value" id="tank-val">0%</span>
+            </div>
+            
+            <div class="stat-box" id="fan-box">
+                <span class="label">Fan Interest</span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar warning" id="fan-bar" style="width: 100%"></div>
+                </div>
+                <span class="value" id="fan-val">100%</span>
+            </div>
+
+            <div class="stat-box" id="heat-box">
+                <span class="label">Commissioner Heat</span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar danger" id="heat-bar" style="width: 0%"></div>
+                </div>
+                <span class="value" id="heat-val">0%</span>
+            </div>
+        </div>
+
+        <main>
+            <div class="narrative-log" id="game-log">
+                <p class="log-entry system">Welcome to the 2026 Season. The goal is simple: Lose. But don't get fired.</p>
+                <p class="log-entry system">Tip: Unused strategies gain media hype (Bonus Multiplier) over time.</p>
+            </div>
+
+            <div class="action-deck" id="action-container">
+                <!-- Actions will be injected here by JS -->
+            </div>
+        </main>
+
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">Game Over</h2>
+                <p id="modal-message">You were fired.</p>
+                <button onclick="location.reload()">Rebuild Franchise</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

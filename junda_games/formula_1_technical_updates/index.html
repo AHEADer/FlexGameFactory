@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 2026: The Sandbagging Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Game Intro Modal -->
+    <dialog id="game-intro-modal" open>
+        <div class="modal-content">
+            <h1>F1 2026: The Sandbagging Simulator</h1>
+            <p class="lore">
+                It's 2026. The new regulations are here. The cars are smaller, lighter, and have "active aerodynamics".
+                Drivers say they are "anti-racing" and "difficult to drive".
+                Max says the engine sounds weird.
+            </p>
+            <div class="instructions">
+                <h2>Your Mission</h2>
+                <p>Complete <strong>3 Laps</strong> without spinning out or blowing up your engine.</p>
+                <p>Collect <strong>Sandbags</strong> to hide your true performance (and upgrade your car).</p>
+            </div>
+            <div class="controls-info">
+                <h2>Controls</h2>
+                <div class="key-group">
+                    <span class="key">←</span> <span class="key">→</span> : Steer
+                </div>
+                <div class="key-group">
+                    <span class="key">↑</span> : Accelerate / Overtake Mode
+                </div>
+                <div class="key-group">
+                    <span class="key">↓</span> : Brake / Regen
+                </div>
+            </div>
+            <button id="start-game-btn">Start Engine</button>
+        </div>
+    </dialog>
+
+    <!-- Game UI -->
+    <div id="game-ui">
+        <div class="hud-panel left">
+            <div class="stat-box">
+                <label>LAP</label>
+                <div class="value" id="lap-display">1/3</div>
+            </div>
+            <div class="stat-box">
+                <label>TIME</label>
+                <div class="value" id="time-display">00:00</div>
+            </div>
+        </div>
+
+        <div class="hud-panel center">
+             <div id="message-area"></div>
+        </div>
+
+        <div class="hud-panel right">
+            <div class="stat-box">
+                <label>MODE</label>
+                <div class="value mode-normal" id="mode-display">NORMAL</div>
+            </div>
+            <div class="stat-box">
+                <label>SPEED</label>
+                <div class="value"><span id="speed-display">0</span> <span class="unit">km/h</span></div>
+            </div>
+            <div class="meter-container">
+                <label>INSTABILITY (Push-Your-Luck)</label>
+                <div class="meter-bar">
+                    <div id="instability-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+             <div class="stat-box">
+                <label>SANDBAGS</label>
+                <div class="value" id="sandbag-display">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Menu (Hidden by default) -->
+    <div id="upgrade-menu" class="hidden">
+        <h2>Technical Updates</h2>
+        <p>Spend Sandbags to fix your car!</p>
+        <div class="upgrade-options">
+            <button class="upgrade-btn" data-type="grip" data-cost="5">
+                <span class="icon">🛞</span>
+                <span class="name">More Downforce</span>
+                <span class="cost">5 💰</span>
+                <span class="desc">Reduces drift in corners.</span>
+            </button>
+            <button class="upgrade-btn" data-type="cooling" data-cost="5">
+                <span class="icon">❄️</span>
+                <span class="name">Better Cooling</span>
+                <span class="cost">5 💰</span>
+                <span class="desc">Reduces instability buildup.</span>
+            </button>
+            <button class="upgrade-btn" data-type="power" data-cost="8">
+                <span class="icon">⚡</span>
+                <span class="name">Unleash Engine</span>
+                <span class="cost">8 💰</span>
+                <span class="desc">Higher top speed.</span>
+            </button>
+        </div>
+        <button id="resume-btn">Resume Race</button>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
