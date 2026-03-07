@@ -8,8 +8,10 @@ export default function Factory() {
     const [isSearching, setIsSearching] = useState(false);
     const [isFallback, setIsFallback] = useState(false);
     const [errorLog, setErrorLog] = useState('');
+    const [searchError, setSearchError] = useState('');
     const [status, setStatus] = useState('idle'); // idle -> building -> complete
     const [progress, setProgress] = useState(0);
+    const abortRef = useState(null);
 
     const SUGGESTED_TOPICS = [
         // Sports
@@ -62,48 +64,52 @@ export default function Factory() {
         const queryToUse = overrideQuery || searchQuery;
         if (!queryToUse.trim()) return;
 
-        console.log(`[NewsSearch] Initializing search for: "${queryToUse}"`);
         const startTime = performance.now();
+        const controller = new AbortController();
+        abortRef[0] = controller;
+        // Auto-cancel after 90s to never leave user stuck
+        const timer = setTimeout(() => controller.abort(), 90000);
 
         setIsSearching(true);
         setIsFallback(false);
         setErrorLog('');
+        setSearchError('');
         setSearchResult('');
         try {
             const apiPath = `/api/news_search?query=${encodeURIComponent(queryToUse)}`;
-            console.log(`[NewsSearch] Requesting: ${apiPath}`);
-
-            const response = await fetch(apiPath);
+            const response = await fetch(apiPath, { signal: controller.signal });
             const markdown = await response.text();
+            clearTimeout(timer);
 
             const duration = ((performance.now() - startTime) / 1000).toFixed(2);
-            console.log(`[NewsSearch] Response received in ${duration}s. Length: ${markdown.length} chars.`);
+            console.log(`[NewsSearch] Done in ${duration}s`);
 
             if (markdown.includes('[NLP Fallback]') || markdown.includes('news_search_gemini_failure')) {
-                console.warn('[NewsSearch] Warning: Result contains Fallback or Failure markers.');
                 setIsFallback(true);
-
-                // Extract specific error if present
                 const errorMatch = markdown.match(/\*\*CRITICAL ERROR:\*\* (.*)/);
-                if (errorMatch) {
-                    setErrorLog(errorMatch[1]);
-                } else if (markdown.includes('(Error:')) {
-                    const inlineMatch = markdown.match(/\(Error: (.*?)\.\.\.\)/);
-                    if (inlineMatch) setErrorLog(inlineMatch[1]);
-                }
+                if (errorMatch) setErrorLog(errorMatch[1]);
             } else {
-                console.log('[NewsSearch] Success: Received AI synthesized report.');
                 setIsFallback(false);
             }
-
             setSearchResult(markdown);
         } catch (err) {
-            console.error('[NewsSearch] API Error:', err);
-            alert('Failed to reach news search server. Make sure the Python server is running in /news_search.');
+            clearTimeout(timer);
+            if (err.name === 'AbortError') {
+                setSearchError('The search timed out. The AI is busy — please try again in a moment.');
+            } else {
+                setSearchError('Could not reach the news server. Make sure the backend is running.');
+            }
+            console.error('[NewsSearch] Error:', err);
         } finally {
             setIsSearching(false);
+            abortRef[0] = null;
         }
     };
+
+    const cancelSearch = () => {
+        if (abortRef[0]) abortRef[0].abort();
+    };
+
 
     const handleGenerate = (e, incomingNews = null) => {
         if (e) e.preventDefault();
@@ -133,6 +139,21 @@ export default function Factory() {
         setProgress(0);
     };
 
+    const SCAN_LINES = [
+        'Connecting to global intel feeds...',
+        'Scraping live news sources...',
+        'Running Gemini synthesis engine...',
+        'Distilling key events and themes...',
+        'Compiling intelligence report...',
+        'Finalizing AI analysis...',
+    ];
+    const [scanLine, setScanLine] = useState(0);
+    useEffect(() => {
+        if (!isSearching) return;
+        const t = setInterval(() => setScanLine(s => (s + 1) % SCAN_LINES.length), 1400);
+        return () => clearInterval(t);
+    }, [isSearching]);
+
     return (
         <div style={{ padding: '48px', width: '100%', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '32px' }}>
 
@@ -141,7 +162,59 @@ export default function Factory() {
                 <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Search for any global event. Our AI will synthesize the intel and generate a fully playable desktop game that lets you experience the news firsthand.</p>
             </div>
 
-            {status === 'idle' && (
+            {/* ── Beautiful Loading Screen ── */}
+            {isSearching && (
+                <div className="glass-panel" style={{
+                    padding: '64px 32px',
+                    textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    border: '1px solid rgba(88,166,255,0.2)'
+                }}>
+                    {/* ambient glow */}
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '300px', height: '300px', background: 'var(--accent-primary)', filter: 'blur(120px)', opacity: 0.08, borderRadius: '50%', pointerEvents: 'none' }} />
+                    {/* scan-line overlay */}
+                    <div style={{ position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(88,166,255,0.025) 3px, rgba(88,166,255,0.025) 4px)', pointerEvents: 'none' }} />
+
+                    {/* Orbiting rings */}
+                    <div style={{ position: 'relative', width: '100px', height: '100px', margin: '0 auto 32px' }}>
+                        <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '2px solid rgba(88,166,255,0.15)' }} />
+                        <div style={{ position: 'absolute', inset: '8px', borderRadius: '50%', border: '2px solid rgba(88,166,255,0.3)', animation: 'spin 3s linear infinite' }} />
+                        <div style={{ position: 'absolute', inset: '20px', borderRadius: '50%', border: '2px solid rgba(88,166,255,0.5)', animation: 'spin 2s linear infinite reverse' }} />
+                        <div style={{ position: 'absolute', inset: '32px', borderRadius: '50%', background: 'rgba(88,166,255,0.12)', display: 'grid', placeItems: 'center' }}>
+                            <Search size={20} color="var(--accent-primary)" />
+                        </div>
+                    </div>
+
+                    <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '8px', letterSpacing: '0.05em' }}>Scanning Global Intelligence</h2>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '28px' }}>Topic: <strong style={{ color: 'var(--accent-primary)' }}>{searchQuery}</strong></p>
+
+                    {/* animated status line */}
+                    <div style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '10px',
+                        background: 'rgba(88,166,255,0.06)', border: '1px solid rgba(88,166,255,0.15)',
+                        borderRadius: '999px', padding: '8px 20px',
+                        fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--accent-primary)',
+                        animation: 'fadeIn 0.3s ease-out'
+                    }}>
+                        <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-primary)', animation: 'pulse 1.2s ease-in-out infinite', display: 'inline-block', flexShrink: 0 }} />
+                        <span key={scanLine} style={{ animation: 'fadeIn 0.4s ease-out' }}>{SCAN_LINES[scanLine]}</span>
+                    </div>
+
+                    {/* progress dots */}
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
+                        {[0, 1, 2, 3, 4].map(i => (
+                            <div key={i} style={{
+                                width: '6px', height: '6px', borderRadius: '50%',
+                                background: 'var(--accent-primary)',
+                                animation: `bounce 1.4s ease-in-out infinite ${i * 0.18}s`
+                            }} />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {!isSearching && status === 'idle' && (
                 <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', border: '1px solid var(--accent-primary)', background: 'rgba(88, 166, 255, 0.05)' }}>
                     <h3 style={{ fontSize: '1.1rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <Search size={18} color="var(--accent-primary)" /> News Intel Search
@@ -232,38 +305,13 @@ export default function Factory() {
                 </div>
             )}
 
-            {status === 'idle' && searchResult && (
-                <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', animation: 'fadeIn 0.5s ease-out', border: isFallback ? '1px solid #ff4444' : 'none' }}>
+            {!isSearching && status === 'idle' && searchResult && (
+                <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', animation: 'fadeIn 0.5s ease-out' }}>
+                    {/* Subtle fallback badge - low key, doesn't alarm the user */}
                     {isFallback && (
-                        <div style={{
-                            background: 'rgba(255, 68, 68, 0.1)',
-                            border: '1px solid rgba(255, 68, 68, 0.2)',
-                            borderRadius: '8px',
-                            padding: '10px 16px',
-                            marginBottom: '16px',
-                            color: '#ff6b6b',
-                            fontSize: '0.85rem',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '8px',
-                            fontWeight: 600
-                        }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                ⚠️ Gemini API Failed: Switched to [NLP Fallback]
-                            </div>
-                            {errorLog && (
-                                <div style={{
-                                    fontFamily: 'monospace',
-                                    background: 'rgba(0,0,0,0.3)',
-                                    padding: '8px',
-                                    borderRadius: '4px',
-                                    fontSize: '0.75rem',
-                                    color: '#ff8888',
-                                    wordBreak: 'break-all'
-                                }}>
-                                    DEBUG_LOG: {errorLog}
-                                </div>
-                            )}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '12px', opacity: 0.55 }}>
+                            <span style={{ fontSize: '0.7rem', background: 'rgba(255,180,0,0.12)', border: '1px solid rgba(255,180,0,0.2)', color: '#ffb400', borderRadius: '999px', padding: '2px 10px', fontWeight: 600, letterSpacing: '0.04em' }}>FALLBACK MODE</span>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Results sourced from alternative pipeline</span>
                         </div>
                     )}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -407,16 +455,20 @@ export default function Factory() {
           100% { transform: rotate(360deg); }
         }
         @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.7); }
         }
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-8px); }
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
+          from { opacity: 0; transform: translateY(6px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+          0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+          40% { transform: translateY(-10px); opacity: 1; }
         }
       `}</style>
 

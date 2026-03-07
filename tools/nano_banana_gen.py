@@ -54,8 +54,7 @@ def main():
         config = types.GenerateContentConfig(
             response_modalities=["IMAGE"],
             image_config=types.ImageConfig(
-                aspect_ratio=args.aspect_ratio,
-                image_size=args.image_size
+                aspect_ratio=args.aspect_ratio
             )
         )
 

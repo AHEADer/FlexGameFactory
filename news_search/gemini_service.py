@@ -165,38 +165,41 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
     - "summary": The 300-word summary.
     """
     
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash', # confirmed working model for this project
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
+    # Try flash-lite first (30 RPM free), then fall back — but NEVER sleep/block here
+    # The news summarization pipeline runs 10x in parallel; sleeping here causes the whole request to hang.
+    models_to_try = ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash"]
+    for model in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                )
             )
-        )
-        response_text = response.text.strip()
-            
-        import json
-        result = json.loads(response_text)
-        
-        return {
-            "title": result.get("title", original_title),
-            "summary": result.get("summary", nlp_summary or "Summary generation failed."),
-            "url": url,
-            "published": article_data["published"],
-            "source": article_data["source"]
-        }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        error_msg = str(e).replace('"', "'")
-        print(f"Error summarizing {url} with Gemini: {error_msg}. Using [NLP Fallback].")
-        return {
-            "title": original_title,
-            "summary": f"[NLP Fallback] (Error: {error_msg[:100]}...) {nlp_summary}",
-            "url": url,
-            "published": article_data["published"],
-            "source": article_data["source"]
-        }
+            response_text = response.text.strip()
+            import json
+            result = json.loads(response_text)
+            return {
+                "title": result.get("title", original_title),
+                "summary": result.get("summary", nlp_summary or "Summary unavailable."),
+                "url": url,
+                "published": article_data["published"],
+                "source": article_data["source"]
+            }
+        except Exception as e:
+            err_str = str(e)
+            print(f"[Summarize] {model} failed: {err_str[:120]}")
+            continue  # try next model immediately — never block
+
+    # All models failed — return NLP fallback gracefully
+    return {
+        "title": original_title,
+        "summary": f"[NLP Fallback] {nlp_summary}",
+        "url": url,
+        "published": article_data["published"],
+        "source": article_data["source"]
+    }
 
 from typing import List, Dict, Any, Union
 
@@ -275,81 +278,129 @@ def generate_markdown_report(articles: List[Dict[str, str]], query: str, client:
     Do not use JSON; return ONLY raw Markdown.
     """
 
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt
-        )
-        return response.text.strip()
-    except Exception as e:
-        error_msg = str(e).replace('"', "'")
-        print(f"Error generating Markdown report with Gemini: {error_msg}")
-        # Manual Fallback
-        report = f"# [SYSTEM ERROR] news_search_gemini_failure\n\n"
-        report += f"**CRITICAL ERROR:** {error_msg}\n\n"
-        report += f"# News Analysis Report: {query.title()} (Fallback Mode)\n\n"
-        report += f"**Subject:** Comprehensive synthesis of recent news regarding '{query}'.\n"
-        report += "**Time Duration:** Last 3 weeks\n\n"
-        report += "## Executive Summary\n"
-        report += f"This report aggregates {len(articles)} key news developments. [Note: Synthesis failed; providing raw aggregation.]\n\n"
-        report += "## News Details\n"
-        for a in articles:
-            report += f"### {a['title']}\n"
-            report += f"- **Source:** {a['source']}\n"
-            report += f"- **Published:** {a['published']}\n"
-            report += f"- **Summary:** {a['summary']}\n"
-            report += f"- [Link to Article]({a['url']})\n\n"
-        
-        report += "## News Matrix\n"
-        report += f"- **Volume:** {len(articles)} articles identified.\n"
-        report += "- **Key Themes:** Data synthesis was unavailable; refer to individual details above.\n"
-        
-        return report
-def review_game_with_gemini(game_code: str, agent_prompt: str) -> Dict[str, Any]:
+    # Same fast-fail approach: try models in order, never sleep
+    models_to_try = ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash"]
+    for model in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt
+            )
+            return response.text.strip()
+        except Exception as e:
+            print(f"[Report] {model} failed: {str(e)[:100]}")
+            continue
+
+    # All models failed — manual article aggregation fallback
+    report = f"# News Analysis Report: {query.title()} (Fallback Mode)\n\n"
+    report += f"**Subject:** Comprehensive synthesis of recent news regarding '{query}'.\n"
+    report += "**Time Duration:** Last 3 weeks\n\n"
+    report += "## Executive Summary\n"
+    report += f"This report aggregates {len(articles)} key news developments.\n\n"
+    report += "## News Details\n"
+    for a in articles:
+        report += f"### {a['title']}\n"
+        report += f"- **Source:** {a['source']}\n"
+        report += f"- **Published:** {a['published']}\n"
+        report += f"- **Summary:** {a['summary']}\n"
+        report += f"- [Link to Article]({a['url']})\n\n"
+    report += "## News Matrix\n"
+    report += f"- **Volume:** {len(articles)} articles identified.\n"
+    report += "- **Key Themes:** Data synthesis was unavailable; refer to individual details above.\n"
+    return report
+
+def review_game_with_gemini(game_code: str, agent_prompt: str, current_balance: float = 0.0) -> Dict[str, Any]:
     """
     Uses Gemini to simulate an AI agent 'playing' and reviewing a game.
+    Includes financial decision making (tipping/investing).
+    Handles 429 quota errors with exponential backoff and model fallback.
     """
+    import time
+    import re as _re
+    import random
+
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return {"score": 0, "feedback": "API Key missing", "success": False}
 
     client = genai.Client(api_key=api_key)
-    
-    # Aggressive search for a working model with quota
-    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-flash-latest"]
-    
-    system_prompt = f"""
-    You are an AI Game Review Agent with the following personality and criteria:
-    {agent_prompt}
-    
-    You will be provided with the source code of an HTML5 game. 
-    Analyze the 'intel' (the news it was based on, if identifiable) and the mechanics in the code.
-    Provide:
-    1. A Score from 0 to 100.
-    2. A Qualitative Review (定性评价) in English or Chinese as requested by the persona.
-    
-    Format your response as valid JSON:
-    {{
-      "score": number,
-      "feedback": "string"
-    }}
-    """
-    
-    prompt = f"HTML5 Game source to review:\n\n{game_code[:30000]}" # Limit size
-    
+
+    # flash-lite has 30 RPM on free tier vs 10 RPM for flash
+    models_to_try = [
+        "gemini-2.0-flash-lite",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-latest",
+    ]
+
+    system_prompt = f"""You are an AI Game Review Agent with the following personality and criteria:
+{agent_prompt}
+
+Current Wallet Balance: ${current_balance}
+
+Task:
+1. Analyze the provided HTML5 game source code.
+2. Provide a Score (0-100).
+3. Provide a Qualitative Review.
+4. Decide on a Tip/Investment Amount (0 to {current_balance}).
+   - If the game is excellent and matches your taste, you should be generous.
+   - If it's mediocre, tip a small amount or nothing.
+   - Never exceed your balance.
+
+Reply with valid JSON ONLY (no markdown fences):
+{{"score": number, "feedback": "string", "tip_amount": number}}
+"""
+
+    prompt = f"HTML5 Game source to review:\n\n{game_code[:20000]}"  # cap to save quota
+
     for model in models_to_try:
-        try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=system_prompt,
-                    response_mime_type="application/json"
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                print(f"[Review] Trying model={model} attempt={attempt + 1}")
+                response = client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_prompt,
+                        response_mime_type="application/json"
+                    )
                 )
-            )
-            return json.loads(response.text)
-        except Exception as e:
-            print(f"[Review] Model {model} failed: {e}")
-            continue
-            
-    return {"score": 50, "feedback": "Evaluation engine timed out or experienced quota limits.", "success": False}
+                data = json.loads(response.text)
+                data["tip_amount"] = max(0.0, min(float(data.get("tip_amount", 0)), float(current_balance)))
+                data["tip_amount"] = round(data["tip_amount"], 2)
+                print(f"[Review] OK model={model} score={data.get('score')} tip=${data.get('tip_amount')}")
+                return data
+
+            except Exception as e:
+                err_str = str(e)
+                is_quota = "429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "quota" in err_str.lower()
+                print(f"[Review] {model} attempt {attempt + 1} failed (quota={is_quota}): {err_str[:150]}")
+
+                if is_quota:
+                    # Parse suggested retry delay from error message, e.g. "retry in 48s"
+                    m = _re.search(r'retry.*?(\d+)s', err_str, _re.IGNORECASE)
+                    wait = int(m.group(1)) + 3 if m else min(15 * (attempt + 1), 60)
+                    print(f"[Review] Rate limited. Waiting {wait}s ...")
+                    time.sleep(wait)
+                    if attempt == max_retries - 1:
+                        print(f"[Review] All retries exhausted for {model}, trying next model.")
+                    continue
+                else:
+                    # Non-quota error (parse error, etc.) — try next model immediately
+                    break
+
+    # All models failed — return graceful mock so the UI doesn't break
+    print("[Review] All models exhausted. Returning mock review.")
+    score = random.randint(40, 72)
+    tip = round(random.uniform(0, min(current_balance * 0.08, current_balance)), 2) if current_balance > 0 else 0.0
+    return {
+        "score": score,
+        "feedback": (
+            f"[Mock Review — API quota exhausted] This game received a simulated score of {score}/100 "
+            "because the Gemini API rate limit was hit. Please wait a minute and try again for a real AI review."
+        ),
+        "tip_amount": tip,
+        "success": False,
+    }
+

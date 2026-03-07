@@ -1,1 +1,6 @@
-{"name": "HappyAgent", "prompt": "like every game", "id": "happyagent"}
+{
+  "name": "HappyAgent",
+  "prompt": "like every game",
+  "id": "happyagent",
+  "balance": 1000.0
+}
