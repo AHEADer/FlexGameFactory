@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artemis: The Race to the South Pole</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Mission Control Header -->
+        <header id="mission-header">
+            <div class="stat-group">
+                <span class="label">MISSION PHASE:</span>
+                <span id="current-phase" class="value">Artemis II: Flyby</span>
+            </div>
+            <div class="stat-group">
+                <span class="label">CURRENT YEAR:</span>
+                <span id="current-year" class="value">2026</span>
+            </div>
+            <div class="stat-group pulse">
+                <span class="label">POLITICAL PRESSURE:</span>
+                <div class="progress-bar-container">
+                    <div id="pressure-bar" class="progress-bar" style="width: 10%;"></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="game-area">
+            <!-- Visual Board -->
+             <div id="visual-board">
+                <img src="cover.png" alt="Mission Control" id="bg-image">
+                <div id="mission-path">
+                    <div class="node active" id="node-2">II</div>
+                    <div class="node-line"></div>
+                    <div class="node locked" id="node-3">III</div>
+                    <div class="node-line"></div>
+                    <div class="node locked" id="node-4">IV</div>
+                    <div class="node-line"></div>
+                    <div class="node locked" id="node-5">V</div>
+                </div>
+                <div id="rocket-icon" class="floating">🚀</div>
+             </div>
+
+             <!-- Control Panel -->
+             <div id="control-panel">
+                <div id="stats-panel">
+                    <div class="stat-card">
+                        <span class="stat-label">BUDGET</span>
+                        <span id="stat-budget" class="stat-value">$100M</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">TECH CONFIDENCE</span>
+                        <span id="stat-confidence" class="stat-value">50%</span>
+                    </div>
+                </div>
+
+                <div id="action-buttons">
+                    <button id="btn-research" class="action-btn">🔬 RESEARCH (+$10% Tech)</button>
+                    <button id="btn-fundraise" class="action-btn">💰 LOBBY (+$20M Budget)</button>
+                    <button id="btn-launch" class="action-btn launch-btn">🚀 LAUNCH MISSION</button>
+                </div>
+
+                <div id="news-log">
+                    <div class="log-title">LIVE FEED</div>
+                    <div id="log-content">
+                        <p class="log-entry">Artemis II SLS is on the pad. Helium flaw detected, but we're "vowing" to launch anyway.</p>
+                    </div>
+                </div>
+             </div>
+        </main>
+
+        <!-- Game Intro Modal -->
+        <dialog id="game-intro-modal">
+            <div class="modal-content">
+                <h2>ARTEMIS: RACE TO THE SOUTH POLE</h2>
+                <div class="lore">
+                    <p>It's 2026. The Artemis program is facing "helium flaws," "hydrogen leaks," and a massive roadmap overhaul. Political pressure is mounting to land on the Moon by 2028 before the administration changes or Elon Musk does it himself.</p>
+                    <p><strong>Core Loop:</strong> Balance your dwindling budget and technical confidence against the ticking clock of Political Pressure (the <strong>MOV-14 Bias</strong>). Research to lower risks, or push your luck to advance mission phases.</p>
+                    <p><strong>Win:</strong> Complete Artemis V (Moon Landing) before 2028 ends.</p>
+                    <p><strong>Lose:</strong> Run out of budget or let Political Pressure hit 100%.</p>
+                </div>
+                <div class="controls">
+                    <h3>CONTROLS</h3>
+                    <p>Click buttons to take actions. Each action advances time and increases Political Pressure. Launches are risky—high confidence helps!</p>
+                </div>
+                <button id="start-game-btn" class="modal-btn">INITIATE MISSION</button>
+            </div>
+        </dialog>
+
+        <!-- Game Over Modal -->
+        <dialog id="game-over-modal">
+            <div class="modal-content">
+                <h2 id="game-over-title">MISSION FAILURE</h2>
+                <p id="game-over-msg"></p>
+                <button onclick="location.reload()" class="modal-btn">RETRY PROGRAM</button>
+            </div>
+        </dialog>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

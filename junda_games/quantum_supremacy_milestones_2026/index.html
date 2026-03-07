@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Supremacy: The Great Dutch Drift</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div class="stat-box">
+                <span class="label">DISTANCE</span>
+                <span id="distance-val">0</span>m / 10,000m
+                <div class="progress-container">
+                    <div id="distance-bar" class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <span class="label">ENTROPY</span>
+                <span id="entropy-val">0</span>%
+                <div class="progress-container entropy">
+                    <div id="entropy-bar" class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <span class="label">SPEED</span>
+                <span id="speed-val">0</span> qubits/s
+            </div>
+        </div>
+
+        <div id="game-world">
+            <div id="skater"></div>
+            <div id="track-lines"></div>
+        </div>
+
+        <div id="controls">
+            <button id="pulse-btn">QUANTUM PULSE [SPACE]</button>
+            <p class="hint">Pulse to gain speed, but watch your Entropy! Above 80%, you risk Decoherence.</p>
+        </div>
+    </div>
+
+    <dialog id="game-intro-modal" open>
+        <div class="modal-content">
+            <h1>QUANTUM SUPREMACEY 2026</h1>
+            <h3>The Great Dutch Drift</h3>
+            <div class="lore">
+                <p>The year is 2026. The Dutch have achieved the ultimate milestone: <strong>Quantum Speed Skating</strong>.</p>
+                <p>You are entangled in the Quantum Slipstream. Reach the 10,000m finish line to achieve Absolute Supremacy.</p>
+            </div>
+            <div class="mechanics">
+                <p><strong>Core Loop:</strong> You automatically drift forward. Use the <strong>Quantum Pulse</strong> to overclock your speed.</p>
+                <p><strong>Win:</strong> Reach 10,000m.</p>
+                <p><strong>Loss:</strong> If your Entropy gets too high, you risk <strong>Decoherence</strong> (Bust).</p>
+            </div>
+            <div class="controls-guide">
+                <p>Click the <strong>PULSE</strong> button or press <strong>SPACE</strong>.</p>
+            </div>
+            <button id="start-btn">START RACE</button>
+        </div>
+    </dialog>
+
+    <dialog id="game-over-modal">
+        <div class="modal-content">
+            <h1 id="end-title">DECOHERENCE!</h1>
+            <p id="end-msg">Your wave function collapsed at 4,231m.</p>
+            <button onclick="location.reload()">RE-ENTANGLE</button>
+        </div>
+    </dialog>
+
+    <script src="game.js"></script>
+</body>
+</html>
