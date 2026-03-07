@@ -3,31 +3,65 @@ import { Play, Search, Gamepad2, Settings, ExternalLink, RefreshCw } from 'lucid
 
 export default function Library() {
     const [games, setGames] = useState([]);
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [lastSyncTime, setLastSyncTime] = useState(null);
+    const [autoSyncEnabled, setAutoSyncEnabled] = useState(true);
+    const [syncInterval, setSyncInterval] = useState(30000); // Default 30s
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGame, setSelectedGame] = useState(null);
 
-    const fetchGames = async () => {
-        setLoading(true);
+    const fetchGames = async (silent = false) => {
+        if (!silent) setLoading(true);
         try {
             const response = await fetch('/api/games');
             const data = await response.json();
             if (data.success) {
                 setGames(data.games);
             } else {
-                setError(data.error);
+                if (!silent) setError(data.error);
             }
         } catch (err) {
-            setError('Failed to connect to backend engine.');
+            if (!silent) setError('Failed to connect to backend engine.');
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
+        }
+    };
+
+    const syncWithCloud = async () => {
+        setIsSyncing(true);
+        try {
+            console.log(`[Library] Auto-syncing with cloud at ${new Date().toLocaleTimeString()}...`);
+            const response = await fetch('/api/sync');
+            const data = await response.json();
+            if (data.success) {
+                setLastSyncTime(new Date().toLocaleTimeString());
+                await fetchGames(true); // Refetch games silently
+            }
+        } catch (err) {
+            console.error('[Library] Sync failed:', err);
+        } finally {
+            setIsSyncing(false);
         }
     };
 
     useEffect(() => {
         fetchGames();
     }, []);
+
+    useEffect(() => {
+        if (!autoSyncEnabled) return;
+
+        // Initial sync on enable
+        syncWithCloud();
+
+        const intervalId = setInterval(() => {
+            syncWithCloud();
+        }, syncInterval);
+
+        return () => clearInterval(intervalId);
+    }, [autoSyncEnabled, syncInterval]);
 
     const filteredGames = games.filter(game =>
         game.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -77,7 +111,90 @@ export default function Library() {
                     <p style={{ color: 'var(--text-muted)' }}>Found {games.length} generated games in the factory vault.</p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '16px' }}>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    {/* Auto Sync Controls */}
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        padding: '6px 16px',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border-subtle)',
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div
+                                onClick={() => setAutoSyncEnabled(!autoSyncEnabled)}
+                                style={{
+                                    width: '36px',
+                                    height: '20px',
+                                    background: autoSyncEnabled ? 'var(--accent-primary)' : 'rgba(255,255,255,0.1)',
+                                    borderRadius: '10px',
+                                    position: 'relative',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease'
+                                }}
+                            >
+                                <div style={{
+                                    width: '14px',
+                                    height: '14px',
+                                    background: '#fff',
+                                    borderRadius: '50%',
+                                    position: 'absolute',
+                                    top: '3px',
+                                    left: autoSyncEnabled ? '19px' : '3px',
+                                    transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                                }} />
+                            </div>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: autoSyncEnabled ? 'var(--text-bright)' : 'var(--text-muted)' }}>
+                                {autoSyncEnabled ? 'AUTO PULL' : 'MANUAL'}
+                            </span>
+                        </div>
+
+                        {autoSyncEnabled && (
+                            <div style={{ display: 'flex', gap: '4px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '12px', marginLeft: '4px' }}>
+                                {[5000, 30000, 60000].map(val => (
+                                    <button
+                                        key={val}
+                                        onClick={() => setSyncInterval(val)}
+                                        style={{
+                                            fontSize: '0.7rem',
+                                            padding: '4px 8px',
+                                            borderRadius: '4px',
+                                            background: syncInterval === val ? 'rgba(255,255,255,0.1)' : 'transparent',
+                                            color: syncInterval === val ? 'var(--accent-primary)' : 'var(--text-muted)',
+                                            border: 'none',
+                                            fontWeight: 700
+                                        }}
+                                    >
+                                        {val / 1000}s
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Status Indicator */}
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        padding: '6px 12px',
+                        background: autoSyncEnabled ? 'rgba(56, 139, 253, 0.1)' : 'rgba(255,255,255,0.05)',
+                        borderRadius: '20px',
+                        border: autoSyncEnabled ? '1px solid rgba(56, 139, 253, 0.2)' : '1px solid rgba(255,255,255,0.1)',
+                        fontSize: '0.8rem',
+                        color: autoSyncEnabled ? 'var(--accent-primary)' : 'var(--text-muted)'
+                    }}>
+                        <div className={(autoSyncEnabled && isSyncing) ? 'spin' : (autoSyncEnabled ? 'pulse-dot' : '')} style={{
+                            width: '8px',
+                            height: '8px',
+                            background: autoSyncEnabled ? 'var(--accent-primary)' : 'var(--text-muted)',
+                            borderRadius: '50%'
+                        }} />
+                        {isSyncing ? 'Pulling...' : autoSyncEnabled ? `Next sync in ${syncInterval / 1000}s` : 'Sync Disabled'}
+                    </div>
+
                     <div style={{ position: 'relative' }}>
                         <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                         <input
@@ -91,21 +208,23 @@ export default function Library() {
                                 borderRadius: '8px',
                                 padding: '10px 12px 10px 40px',
                                 color: 'var(--text-bright)',
-                                width: '240px',
+                                width: '180px',
                                 outline: 'none'
                             }}
                         />
                     </div>
                     <button
-                        onClick={fetchGames}
+                        onClick={() => fetchGames(false)}
+                        disabled={loading}
                         style={{
                             background: 'var(--bg-panel)',
                             color: 'var(--text-muted)',
                             padding: '10px',
                             borderRadius: '8px',
-                            border: '1px solid var(--border-subtle)'
+                            border: '1px solid var(--border-subtle)',
+                            opacity: loading ? 0.5 : 1
                         }}
-                        title="Refresh vault"
+                        title="Force refresh"
                     >
                         <RefreshCw size={18} className={loading ? 'spin' : ''} />
                     </button>
@@ -226,6 +345,14 @@ export default function Library() {
                 }
                 @keyframes spin {
                     100% { transform: rotate(360deg); }
+                }
+                .pulse-dot {
+                    animation: pulse-dot 2s infinite;
+                }
+                @keyframes pulse-dot {
+                    0% { opacity: 0.4; transform: scale(0.8); }
+                    50% { opacity: 1; transform: scale(1.1); }
+                    100% { opacity: 0.4; transform: scale(0.8); }
                 }
                 .game-card:hover {
                     border-color: var(--accent-primary) !important;

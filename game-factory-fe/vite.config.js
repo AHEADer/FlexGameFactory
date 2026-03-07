@@ -88,6 +88,11 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/news_search/, '/news')
+      },
+      '/api/sync': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/sync/, '/sync')
       }
     }
   }

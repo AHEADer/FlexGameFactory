@@ -42,6 +42,41 @@ async def get_news(query: Optional[str] = Query(None, description="The query of 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating report: {str(e)}")
 
+@app.get("/sync")
+async def sync_repository():
+    """Triggers a git pull --rebase on the repository to sync latest game assets."""
+    import subprocess
+    import os
+    
+    # Target the root directory (parent of news_search)
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    
+    print(f"[Sync] Starting git pull in {root_dir}")
+    try:
+        result = subprocess.run(
+            ["git", "pull", "--rebase", "origin", "main"],
+            cwd=root_dir,
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        print(f"[Sync] Success: {result.stdout}")
+        return {
+            "success": True, 
+            "message": "Repository synced successfully", 
+            "output": result.stdout
+        }
+    except subprocess.CalledProcessError as e:
+        print(f"[Sync] Error: {e.stderr}")
+        return {
+            "success": False, 
+            "error": e.stderr if e.stderr else str(e),
+            "output": e.stdout
+        }
+    except Exception as e:
+        print(f"[Sync] Critical Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
