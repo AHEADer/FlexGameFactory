@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANK COMMANDER: Executive Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-void: #030305;
+            --glass-bg: rgba(16, 20, 30, 0.6);
+            --glass-border: rgba(0, 243, 255, 0.2);
+            --neon-blue: #00f3ff;
+            --neon-red: #ff003c;
+            --neon-green: #00ff66;
+            --neon-orange: #ffaa00;
+            --text-main: #e0e6ed;
+            --text-muted: #5c6c7c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-void);
+            background-image: radial-gradient(circle at 50% 0%, #1a1c29 0%, var(--bg-void) 70%);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+            user-select: none;
+            position: relative;
+        }
+
+        /* Scanline Overlay for "Screen" Effect */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        #game-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 92vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 243, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header / HUD */
+        header {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .title-box {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .title-box h1 {
+            font-size: 3rem;
+            letter-spacing: 6px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            text-transform: uppercase;
+        }
+
+        .title-box p {
+            color: var(--neon-blue);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        .hud-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .hud-panel h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Segmented Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #000;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: repeating-linear-gradient(90deg, var(--neon-blue), var(--neon-blue) 8px, transparent 8px, transparent 10px);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .progress-bar-container.danger .progress-bar {
+            background: repeating-linear-gradient(90deg, var(--neon-red), var(--neon-red) 8px, transparent 8px, transparent 10px);
+            box-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .record-box {
+            text-align: right;
+        }
+
+        .record-numbers {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .record-numbers .wins {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .record-numbers .losses {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        #timer-display {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #timer-display span {
+            font-size: 2rem;
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--neon-orange);
+        }
+
+        /* Timer Pulse */
+        @keyframes alarm {
+            0% {
+                color: var(--neon-orange);
+                transform: scale(1);
+            }
+
+            50% {
+                color: var(--neon-red);
+                transform: scale(1.2);
+                text-shadow: 0 0 20px var(--neon-red);
+            }
+
+            100% {
+                color: var(--neon-orange);
+                transform: scale(1);
+            }
+        }
+
+        .timer-low {
+            display: inline-block;
+            animation: alarm 0.5s infinite;
+        }
+
+        /* Commissioner Warning */
+        #commissioner-warning {
+            background: rgba(255, 0, 60, 0.05);
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #commissioner-warning.shake {
+            animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+            background: rgba(255, 0, 60, 0.15);
+            border-color: var(--neon-red);
+        }
+
+        /* Main Game Area */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zones-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+            height: 350px;
+        }
+
+        .zone {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zone::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        #zone-court::before {
+            background: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        #zone-bench::before {
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        #zone-ir::before {
+            background: var(--neon-red);
+            box-shadow: 0 0 15px var(--neon-red);
+        }
+
+        .zone.drag-over {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #zone-court.drag-over {
+            border-color: var(--neon-green);
+        }
+
+        #zone-bench.drag-over {
+            border-color: var(--neon-blue);
+        }
+
+        #zone-ir.drag-over {
+            border-color: var(--neon-red);
+        }
+
+        .zone h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+
+        .zone-desc {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .slots,
+        .worker-pool {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .worker-pool {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* The Workers (Premium Cards) */
+        .worker {
+            background: linear-gradient(145deg, #161a23, #0b0d12);
+            border: 1px solid #2a3441;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s;
+            position: relative;
+            width: 100%;
+            max-width: 260px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .worker:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.2);
+        }
+
+        .worker:active {
+            cursor: grabbing;
+        }
+
+        .worker.dragging {
+            opacity: 0.7;
+            transform: scale(1.05) rotate(3deg);
+            z-index: 50;
+        }
+
+        .worker.star {
+            border-left: 4px solid var(--neon-orange);
+        }
+
+        .worker.benchwarmer {
+            border-left: 4px solid var(--text-muted);
+        }
+
+        .player-icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .player-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .worker.star .player-stat {
+            color: var(--neon-red);
+            font-size: 0.85rem;
+        }
+
+        .worker.benchwarmer .player-stat {
+            color: var(--neon-green);
+            font-size: 0.85rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .action-button {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 15px 60px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
+            box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.2), 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        .action-button:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 243, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Overlays */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .overlay.hidden {
+            display: none;
+        }
+
+        .overlay-content {
+            background: var(--bg-void);
+            border: 2px solid var(--neon-blue);
+            padding: 50px;
+            text-align: center;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.3);
+            animation: popup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .overlay-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .win-title {
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .lose-title {
+            color: var(--neon-red);
+            text-shadow: 0 0 20px var(--neon-red);
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-2px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(4px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-6px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(6px, 0, 0);
+            }
+        }
+
+        @keyframes popup {
+            0% {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Custom Scrollbar for inner elements */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <header>
+            <div class="hud-panel">
+                <h2>Season Progress</h2>
+                <div class="progress-bar-container">
+                    <div id="season-progress" class="progress-bar"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:5px;">
+                    <span>GAME <span id="game-number" style="color:var(--neon-blue);">1</span>/20</span>
+                    <span id="timer-display">T-MINUS: <span>5</span>s</span>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <h1>Embrace the Tank</h1>
+                <p>SYSTEM OVERRIDE: SECURE THE DRAFT PICK</p>
+            </div>
+
+            <div class="hud-panel record-box">
+                <h2>Team Record</h2>
+                <div class="record-numbers">
+                    <span class="wins" id="win-count">0</span> : <span class="losses" id="loss-count">0</span>
+                </div>
+                <span style="font-size:0.75rem; color:var(--text-muted)">MAX WINS ALLOWED: 4</span>
+            </div>
+        </header>
+
+        <div id="commissioner-warning">
+            <h2 style="font-family:'Orbitron', sans-serif; color:var(--neon-red); font-size:1rem; min-width: 150px;">⚠
+                SUSPICION</h2>
+            <div class="progress-bar-container danger" style="margin:0; flex-grow:1;">
+                <div id="suspicion-progress" class="progress-bar"></div>
+            </div>
+            <span id="suspicion-text"
+                style="font-size:1.5rem; font-weight:bold; color:var(--neon-red); min-width:60px; text-align:right;">0%</span>
+        </div>
+
+        <main>
+            <div class="zones-container">
+                <div class="zone" id="zone-court">
+                    <h3 style="color: var(--neon-green);">THE COURT</h3>
+                    <p class="zone-desc">Active Roster. Stars trigger WINS.</p>
+                    <div class="slots" id="court-slots"></div>
+                </div>
+
+                <div class="zone" id="zone-bench">
+                    <h3 style="color: var(--neon-blue);">THE BENCH</h3>
+                    <p class="zone-desc">Neutral Zone. Zero outcome impact.</p>
+                    <div class="slots" id="bench-slots"></div>
+                </div>
+
+                <div class="zone" id="zone-ir">
+                    <h3 style="color: var(--neon-red);">LOAD MGMT</h3>
+                    <p class="zone-desc">Hides Stars. Generates High Suspicion.</p>
+                    <div class="slots" id="ir-slots"></div>
+                </div>
+            </div>
+
+            <div class="hud-panel" style="margin-bottom: 20px;">
+                <h2 style="text-align: center; margin-bottom: 15px;">AVAILABLE PERSONNEL</h2>
+                <div class="worker-pool" id="worker-pool">
+                    <div class="worker star" id="player-lebron" draggable="true" data-type="star">
+                        <div class="player-icon">👑</div>
+                        <div class="player-details">
+                            <span class="player-name">Le-Aging James</span>
+                            <span class="player-stat">IMPACT: +WIN</span>
+                        </div>
+                    </div>
+                    <div class="worker star" id="player-ant" draggable="true" data-type="star">
+                        <div class="player-icon">🐜</div>
+                        <div class="player-details">
+                            <span class="player-name">Ant-Man Edwards</span>
+                            <span class="player-stat">IMPACT: +WIN</span>
+                        </div>
+                    </div>
+                    <div class="worker benchwarmer" id="player-scrub1" draggable="true" data-type="bench">
+                        <div class="player-icon">🗑️</div>
+                        <div class="player-details">
+                            <span class="player-name">G-League Gary</span>
+                            <span class="player-stat">IMPACT: -LOSS</span>
+                        </div>
+                    </div>
+                    <div class="worker benchwarmer" id="player-scrub2" draggable="true" data-type="bench">
+                        <div class="player-icon">🧱</div>
+                        <div class="player-details">
+                            <span class="player-name">Turnover Tim</span>
+                            <span class="player-stat">IMPACT: -LOSS</span>
+                        </div>
+                    </div>
+                    <div class="worker benchwarmer" id="player-scrub3" draggable="true" data-type="bench">
+                        <div class="player-icon">📉</div>
+                        <div class="player-details">
+                            <span class="player-name">Brick Layer Bob</span>
+                            <span class="player-stat">IMPACT: -LOSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="sim-btn" class="action-button">EXECUTE SIMULATION</button>
+            </div>
+        </main>
+
+        <div id="game-over-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h2 id="end-title">SYSTEM HALT</h2>
+                <p id="end-message" style="font-size: 1.2rem; margin-bottom: 20px; color:var(--text-main);">Outcome
+                    determined.</p>
+                <div
+                    style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-bottom: 30px; border: 1px solid var(--glass-border);">
+                    <p style="font-size:1.5rem; font-family:'Orbitron', sans-serif;">FINAL RECORD: <span id="final-wins"
+                            style="color: var(--neon-red);">0</span> - <span id="final-losses"
+                            style="color: var(--neon-green);">0</span></p>
+                </div>
+                <button id="restart-btn" class="action-button">REBOOT SYSTEM</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MAX_GAMES = 20;
+        const MAX_WINS = 4;
+        const MAX_SUSPICION = 100;
+        const BASE_TIMER = 8;
+
+        let currentGameState = {
+            gameNumber: 1, wins: 0, losses: 0, suspicion: 0, timer: BASE_TIMER, intervalId: null
+        };
+
+        const els = {
+            gameNumber: document.getElementById('game-number'),
+            timerDisplay: document.querySelector('#timer-display span'),
+            seasonProgress: document.getElementById('season-progress'),
+            winCount: document.getElementById('win-count'),
+            lossCount: document.getElementById('loss-count'),
+            suspicionText: document.getElementById('suspicion-text'),
+            suspicionProgress: document.getElementById('suspicion-progress'),
+            commissionerWarning: document.getElementById('commissioner-warning'),
+            simBtn: document.getElementById('sim-btn'),
+            overlay: document.getElementById('game-over-overlay'),
+            endTitle: document.getElementById('end-title'),
+            endMessage: document.getElementById('end-message'),
+            finalWins: document.getElementById('final-wins'),
+            finalLosses: document.getElementById('final-losses'),
+            restartBtn: document.getElementById('restart-btn'),
+            slots: { pool: document.getElementById('worker-pool'), court: document.getElementById('court-slots'), bench: document.getElementById('bench-slots'), ir: document.getElementById('ir-slots') },
+            workers: document.querySelectorAll('.worker')
+        };
+
+        els.workers.forEach(worker => {
+            worker.addEventListener('dragstart', () => { worker.classList.add('dragging'); });
+            worker.addEventListener('dragend', () => { worker.classList.remove('dragging'); });
+        });
+
+        const dropZones = [els.slots.pool, els.slots.court, els.slots.bench, els.slots.ir];
+
+        dropZones.forEach(zone => {
+            const parentZone = zone.parentElement.classList.contains('zone') ? zone.parentElement : null;
+            zone.addEventListener('dragover', (e) => { e.preventDefault(); if (parentZone) parentZone.classList.add('drag-over'); });
+            zone.addEventListener('dragleave', () => { if (parentZone) parentZone.classList.remove('drag-over'); });
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (parentZone) parentZone.classList.remove('drag-over');
+                const draggable = document.querySelector('.dragging');
+                if (draggable) zone.appendChild(draggable);
+            });
+        });
+
+        function startTurnTimer() {
+            clearInterval(currentGameState.intervalId);
+            currentGameState.timer = Math.max(3, BASE_TIMER - Math.floor(currentGameState.gameNumber / 4));
+            els.timerDisplay.textContent = currentGameState.timer;
+            els.timerDisplay.classList.remove('timer-low');
+
+            currentGameState.intervalId = setInterval(() => {
+                currentGameState.timer--;
+                els.timerDisplay.textContent = currentGameState.timer;
+                if (currentGameState.timer <= 3) els.timerDisplay.classList.add('timer-low');
+                if (currentGameState.timer <= 0) {
+                    clearInterval(currentGameState.intervalId);
+                    simulateGame();
+                }
+            }, 1000);
+        }
+
+        function updateUI() {
+            els.gameNumber.textContent = currentGameState.gameNumber;
+            els.seasonProgress.style.width = `${(currentGameState.gameNumber / MAX_GAMES) * 100}%`;
+            els.winCount.textContent = currentGameState.wins;
+            els.lossCount.textContent = currentGameState.losses;
+            els.suspicionText.textContent = `${Math.floor(currentGameState.suspicion)}%`;
+            els.suspicionProgress.style.width = `${currentGameState.suspicion}%`;
+
+            if (currentGameState.suspicion > 75) {
+                els.commissionerWarning.style.borderColor = 'var(--neon-red)';
+            }
+        }
+
+        function showWarning() {
+            els.commissionerWarning.classList.remove('shake');
+            void els.commissionerWarning.offsetWidth;
+            els.commissionerWarning.classList.add('shake');
+        }
+
+        function simulateGame() {
+            clearInterval(currentGameState.intervalId);
+            let starsOnCourt = 0, scrubsOnCourt = 0, starsInIR = 0;
+
+            Array.from(els.slots.court.children).forEach(w => {
+                if (w.dataset.type === 'star') starsOnCourt++;
+                if (w.dataset.type === 'bench') scrubsOnCourt++;
+            });
+            Array.from(els.slots.ir.children).forEach(w => { if (w.dataset.type === 'star') starsInIR++; });
+
+            if (starsInIR > 0) {
+                currentGameState.suspicion += (10 * starsInIR) * (1 + (currentGameState.gameNumber / 10));
+                showWarning();
+            }
+            if (starsOnCourt > 0) currentGameState.suspicion = Math.max(0, currentGameState.suspicion - (5 * starsOnCourt));
+
+            let gameResult = 'loss';
+            if (starsOnCourt >= 2) gameResult = 'win';
+            else if (starsOnCourt === 1) { if (Math.random() < (0.7 - (scrubsOnCourt * 0.1))) gameResult = 'win'; }
+            else {
+                if (scrubsOnCourt === 0) { currentGameState.suspicion += 20; showWarning(); gameResult = 'loss'; }
+                else if (Math.random() < 0.1) gameResult = 'win';
+            }
+
+            if (gameResult === 'win') currentGameState.wins++; else currentGameState.losses++;
+
+            if (checkEndCondition()) return;
+
+            currentGameState.gameNumber++;
+            updateUI();
+            if (currentGameState.gameNumber > MAX_GAMES) { endGame('win'); return; }
+            startTurnTimer();
+        }
+
+        function checkEndCondition() {
+            if (currentGameState.suspicion >= MAX_SUSPICION) { currentGameState.suspicion = 100; updateUI(); endGame('fired'); return true; }
+            if (currentGameState.wins > MAX_WINS) { endGame('mediocre'); return true; }
+            return false;
+        }
+
+        function endGame(reason) {
+            clearInterval(currentGameState.intervalId);
+            els.overlay.classList.remove('hidden');
+            els.finalWins.textContent = currentGameState.wins;
+            els.finalLosses.textContent = currentGameState.losses;
+            const overlayContent = els.overlay.querySelector('.overlay-content');
+
+            if (reason === 'win') {
+                els.endTitle.textContent = "MISSION ACCOMPLISHED";
+                els.endTitle.className = 'win-title';
+                els.endMessage.textContent = "No. 1 Pick Secured. The rebuild begins.";
+                overlayContent.style.borderColor = 'var(--neon-green)';
+            } else if (reason === 'fired') {
+                els.endTitle.textContent = "ACCOUNT TERMINATED";
+                els.endTitle.className = 'lose-title';
+                els.endMessage.textContent = "The Commissioner exposed your operation. You are fired.";
+                overlayContent.style.borderColor = 'var(--neon-red)';
+            } else if (reason === 'mediocre') {
+                els.endTitle.textContent = "PURGATORY";
+                els.endTitle.className = 'lose-title';
+                els.endTitle.style.color = 'var(--neon-orange)';
+                els.endMessage.textContent = "Too many wins. You are stuck with the 14th pick.";
+                overlayContent.style.borderColor = 'var(--neon-orange)';
+            }
+        }
+
+        function initGame() {
+            els.overlay.classList.add('hidden');
+            currentGameState = { gameNumber: 1, wins: 0, losses: 0, suspicion: 0, timer: BASE_TIMER, intervalId: null };
+            els.workers.forEach(worker => { els.slots.pool.appendChild(worker); });
+            updateUI();
+            startTurnTimer();
+        }
+
+        els.simBtn.addEventListener('click', simulateGame);
+        els.restartBtn.addEventListener('click', initGame);
+        initGame();
+    </script>
+</body>
+
+</html>
