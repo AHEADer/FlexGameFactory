@@ -30,5 +30,5 @@ This skill guides the AI to create a satirical or thematic web game based on a p
 - **Tidy Up:** Create a specific directory for the final game output and move all game files (`index.html`, `style.css`, `game.js`) into it securely. Clean up temporary verify scripts.
 - **Document Output:** 
   - Complete a `game_summary.md` detailing the game's theme, mechanics, and instructions on how to play.
-  - Generate a cover image for the game named `cover.png` using the `nano_banana_gen` skill based on the game's theme and visual design.
-
+  - Craft a concise plain text prompt describing the game's cinematic visual theme (do not use the full markdown layout as the prompt).
+  - Generate a cover image for the game named `cover.png` using the `nano_banana_gen` skill with this plain text prompt. Ensure you pass the arguments `--aspect_ratio 16:9` and `--image_size 1K` to achieve the recommended 1280x720 resolution required for the library cards.
