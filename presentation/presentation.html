@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsPlay | Hackathon Pitch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #fdfdff;
+            --accent-primary: #6366f1; /* Modern Indigo */
+            --accent-secondary: #a855f7; /* Soft Purple */
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --text-main: #1e1b4b; /* Deep Navy */
+            --text-dim: #475569; /* Slate Gray */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(99, 102, 241, 0.1);
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Snap Container */
+        .presentation-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .presentation-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        section {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 4rem;
+            overflow: hidden;
+        }
+
+        /* Background Visual Elements */
+        .bg-glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .bg-glow-top-right { top: -20%; right: -20%; }
+        .bg-glow-bottom-left { bottom: -20%; left: -20%; }
+
+        /* Typography & Content */
+        h1, h2 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            color: var(--text-main);
+        }
+
+        h1 { font-size: 5rem; text-align: center; }
+        h2 { font-size: 3.5rem; }
+
+        p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .accent-text {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glass Cards for Videos */
+        .video-container {
+            width: 80%;
+            height: 60%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+            margin-top: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-container:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--accent-primary);
+            box-shadow: 0 40px 60px -15px rgba(99, 102, 241, 0.1);
+        }
+
+        .video-placeholder-text {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        .video-placeholder-text span {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+            font-weight: 400;
+            color: var(--text-dim);
+        }
+
+        /* Timeline Navigation */
+        .timeline-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 1.5rem 0.75rem;
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+            transform: scale(1.6);
+        }
+
+        /* Timestamp Indicator */
+        .time-badge {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Specific Visual Elements */
+        .tech-logos {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Split Screen for Tech Section */
+        .split-screen {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 80%;
+            height: 60%;
+            margin-top: 2rem;
+        }
+
+        .split-card {
+            background: white;
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .split-card h3 {
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Floating Shapes for Impact Section */
+        .floating-shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { opacity: 0; }
+        .visible .animate { animation: fadeInUp 0.8s forwards ease-out; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        /* Split Screen for Tech Section */
+        .split-screen {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 80%;
+            height: 60%;
+            margin-top: 2rem;
+        }
+
+        .split-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .split-card h3 {
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Floating Shapes for Impact Section */
+        .floating-shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timeline-nav" id="timelineNav">
+        <div class="nav-dot active" data-target="slide1" title="The Hook"></div>
+        <div class="nav-dot" data-target="slide2" title="The Solution"></div>
+        <div class="nav-dot" data-target="slide3" title="The Tech"></div>
+        <div class="nav-dot" data-target="slide4" title="The Progress"></div>
+        <div class="nav-dot" data-target="slide5" title="Impact"></div>
+        <div class="nav-dot" data-target="slide6" title="Outro"></div>
+    </div>
+
+    <div class="presentation-container" id="container">
+
+        <!-- Slide 1: The Hook (0:00 - 0:15) -->
+        <section id="slide1" class="visible">
+            <div class="time-badge">0:00 - 0:15 | The Hook</div>
+            <div class="bg-glow bg-glow-top-right"></div>
+            <h1 class="animate">Beyond <span class="gradient-text">Passive Headlines.</span></h1>
+            <p class="animate delay-1" style="text-align: center;">We consume news every day, but it’s passive. What if we could engage with the news instead of just reading it?</p>
+            <div class="video-container animate delay-2">
+                <div class="video-placeholder-text">
+                    [VIDEO: FAST NEWS FEED]
+                    <span>Overwhelming & Dry Content Visual</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: The Solution (0:15 - 0:35) -->
+        <section id="slide2">
+            <div class="time-badge">0:15 - 0:35 | The Reveal</div>
+            <div class="bg-glow bg-glow-bottom-left" style="background: radial-gradient(circle, rgba(74, 0, 224, 0.4) 0%, transparent 70%);"></div>
+            <h2 class="animate">Introducing <span class="accent-text">NewsPlay</span></h2>
+            <p class="animate delay-1">Built during the Google Gemini Hackathon, we transform raw news data into interactive game mechanics instantly.</p>
+            <div class="video-container animate delay-2">
+                <div class="video-placeholder-text">
+                    [VIDEO: INTERFACE TRANSFORMATION]
+                    <span>News Headline → Gameplay Environment</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Tech (0:35 - 0:50) -->
+        <section id="slide3">
+            <div class="time-badge">0:35 - 0:50 | Intelligence</div>
+            <h2 class="animate">Powered by <span class="gradient-text">Gemini 1.5 Pro</span></h2>
+            <p class="animate delay-1">Leveraging long context windows to analyze entire news cycles and extract complex entities for world-building.</p>
+            
+            <div class="split-screen animate delay-2">
+                <div class="split-card">
+                    <h3>Raw News Extraction</h3>
+                    <div class="video-placeholder-text" style="font-size: 0.8rem;">[VIDEO: SIDE A - ENTITY LOGS]</div>
+                </div>
+                <div class="split-card" style="border-color: var(--accent-primary);">
+                    <h3>Dynamic Game Rules</h3>
+                    <div class="video-placeholder-text" style="font-size: 0.8rem;">[VIDEO: SIDE B - SCHEMA GENERATION]</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Gameplay Demo (0:50 - 1:05) -->
+        <section id="slide4">
+            <div class="time-badge">0:50 - 1:05 | The Demo</div>
+            <h2 class="animate"><span class="accent-text">Antigravity</span> Data Flow</h2>
+            <p class="animate delay-1">Seamlessly bridging the gap between information and interaction with real-time news retrieval.</p>
+            <div class="video-container animate delay-2">
+                <div class="video-placeholder-text">
+                    [VIDEO: CORE GAMEPLAY]
+                    <span>The News is the Level Design</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Impact & Future (1:05 - 1:20) -->
+        <section id="slide5">
+            <div class="time-badge">1:05 - 1:20 | Impact</div>
+            <div class="bg-glow bg-glow-top-right"></div>
+            <h2 class="animate">Making <span class="gradient-text">Information Addictive.</span></h2>
+            <p class="animate delay-1">From Politics RPGs to Climate Survival sims, we're turning the world's news into an educational playground.</p>
+            <div class="video-container animate delay-2" style="background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.01));">
+                <div class="video-placeholder-text">
+                    [VIDEO: GENRE MONTAGE]
+                    <span>Politics | Science | Economy | Climate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Outro (1:20 - 1:30) -->
+        <section id="slide6">
+            <div class="time-badge">1:20 - 1:30 | The Outro</div>
+            <h1 class="animate">Team <span class="accent-text">NewsPlay</span></h1>
+            <p class="animate delay-1" style="text-align: center;">Turning the world's headlines into the world's playground.</p>
+            
+            <div class="tech-logos animate delay-2">
+                <div class="logo-item">
+                    <div class="logo-circle" style="background: #4285F4; color: white;">G</div>
+                    <span>Gemini</span>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-circle" style="background: #1a1a1a; letter-spacing: 0;">Ag</div>
+                    <span>Antigravity</span>
+                </div>
+            </div>
+
+            <div class="video-container animate delay-2" style="height: 30%; width: 50%; margin-top: 3rem;">
+                <div class="video-placeholder-text">
+                    [VIDEO: TEAM OUTRO]
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        // Observer to handle animations on enter
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    updateNav(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        function updateNav(id) {
+            navDots.forEach(dot => {
+                dot.classList.toggle('active', dot.getAttribute('data-target') === id);
+            });
+        }
+
+        // Click to scroll
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetId = dot.getAttribute('data-target');
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
