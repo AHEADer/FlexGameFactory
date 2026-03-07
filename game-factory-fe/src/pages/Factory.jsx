@@ -6,6 +6,8 @@ export default function Factory() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResult, setSearchResult] = useState('');
     const [isSearching, setIsSearching] = useState(false);
+    const [isFallback, setIsFallback] = useState(false);
+    const [errorLog, setErrorLog] = useState('');
     const [status, setStatus] = useState('idle'); // idle -> building -> complete
     const [progress, setProgress] = useState(0);
 
@@ -64,6 +66,8 @@ export default function Factory() {
         const startTime = performance.now();
 
         setIsSearching(true);
+        setIsFallback(false);
+        setErrorLog('');
         setSearchResult('');
         try {
             const apiPath = `/api/news_search?query=${encodeURIComponent(queryToUse)}`;
@@ -75,10 +79,21 @@ export default function Factory() {
             const duration = ((performance.now() - startTime) / 1000).toFixed(2);
             console.log(`[NewsSearch] Response received in ${duration}s. Length: ${markdown.length} chars.`);
 
-            if (markdown.includes('[NLP Fallback]')) {
-                console.warn('[NewsSearch] Warning: Result contains NLP Fallback. Gemini AI might be failing or Key is invalid.');
+            if (markdown.includes('[NLP Fallback]') || markdown.includes('news_search_gemini_failure')) {
+                console.warn('[NewsSearch] Warning: Result contains Fallback or Failure markers.');
+                setIsFallback(true);
+
+                // Extract specific error if present
+                const errorMatch = markdown.match(/\*\*CRITICAL ERROR:\*\* (.*)/);
+                if (errorMatch) {
+                    setErrorLog(errorMatch[1]);
+                } else if (markdown.includes('(Error:')) {
+                    const inlineMatch = markdown.match(/\(Error: (.*?)\.\.\.\)/);
+                    if (inlineMatch) setErrorLog(inlineMatch[1]);
+                }
             } else {
                 console.log('[NewsSearch] Success: Received AI synthesized report.');
+                setIsFallback(false);
             }
 
             setSearchResult(markdown);
@@ -216,15 +231,51 @@ export default function Factory() {
             )}
 
             {status === 'idle' && searchResult && (
-                <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', animation: 'fadeIn 0.5s ease-out' }}>
+                <div className="glass-panel" style={{ padding: '24px', marginBottom: '24px', animation: 'fadeIn 0.5s ease-out', border: isFallback ? '1px solid #ff4444' : 'none' }}>
+                    {isFallback && (
+                        <div style={{
+                            background: 'rgba(255, 68, 68, 0.1)',
+                            border: '1px solid rgba(255, 68, 68, 0.2)',
+                            borderRadius: '8px',
+                            padding: '10px 16px',
+                            marginBottom: '16px',
+                            color: '#ff6b6b',
+                            fontSize: '0.85rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '8px',
+                            fontWeight: 600
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                ⚠️ Gemini API Failed: Switched to [NLP Fallback]
+                            </div>
+                            {errorLog && (
+                                <div style={{
+                                    fontFamily: 'monospace',
+                                    background: 'rgba(0,0,0,0.3)',
+                                    padding: '8px',
+                                    borderRadius: '4px',
+                                    fontSize: '0.75rem',
+                                    color: '#ff8888',
+                                    wordBreak: 'break-all'
+                                }}>
+                                    DEBUG_LOG: {errorLog}
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                        <h3 style={{ fontSize: '1rem', color: 'var(--accent-success)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <CheckCircle2 size={18} /> Intelligence Report Received
+                        <h3 style={{ fontSize: '1rem', color: isFallback ? '#ffb86c' : 'var(--accent-success)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {isFallback ? <Terminal size={18} /> : <CheckCircle2 size={18} />}
+                            {isFallback ? 'Intelligence Report (Fallback Mode)' : 'Gemini AI Synthesis Received'}
                         </h3>
                         <div style={{ display: 'flex', gap: '12px' }}>
                             <button
-                                onClick={() => setSearchResult('')}
-                                style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}
+                                onClick={() => {
+                                    setSearchResult('');
+                                    setIsFallback(false);
+                                }}
+                                style={{ fontSize: '0.85rem', color: 'var(--text-muted)', cursor: 'pointer', background: 'none', border: 'none' }}
                             >
                                 Clear
                             </button>

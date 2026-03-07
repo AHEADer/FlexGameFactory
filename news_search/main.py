@@ -43,23 +43,21 @@ async def get_news(query: Optional[str] = Query(None, description="The query of 
             import re
             from datetime import datetime
             
-            # Create a clean folder name from the query
+            # Create a very simple folder name
             clean_name = re.sub(r'[^a-zA-Z0-9]', '_', query.strip()).lower()
-            timestamp = datetime.now().strftime("%m%d_%H%M")
-            folder_name = f"intel_{clean_name}_{timestamp}"
+            # Take first 4 words and remove extra underscores
+            folder_name = "_".join([w for w in clean_name.split("_") if w][:4])
             
             root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
             target_dir = os.path.join(root_dir, "junda_games", folder_name)
             
             os.makedirs(target_dir, exist_ok=True)
-            with open(os.path.join(target_dir, "report.md"), "w", encoding="utf-8") as f:
+            # Save markdown file as fixed 'report.md'
+            file_path = os.path.join(target_dir, "report.md")
+            with open(file_path, "w", encoding="utf-8") as f:
                 f.write(report)
             
-            # Create a placeholder index.html so it shows up in Library
-            with open(os.path.join(target_dir, "index.html"), "w", encoding="utf-8") as f:
-                f.write(f"<html><body style='background:#111;color:#eee;font-family:sans-serif;padding:20px;'><h1>Intel Report: {query}</h1><pre style='white-space:pre-wrap;'>{report}</pre></body></html>")
-                
-            print(f"[Storage] Saved news report to: {target_dir}")
+            print(f"[Storage] Saved news report to: {file_path}")
         except Exception as storage_err:
             print(f"[Storage] Error saving report: {str(storage_err)}")
         # ---------------------------------------

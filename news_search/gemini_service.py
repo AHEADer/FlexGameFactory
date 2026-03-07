@@ -166,7 +166,7 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
     
     try:
         response = client.models.generate_content(
-            model='gemini-2.0-flash', # Using stable 2.0 flash
+            model='gemini-2.5-flash', # confirmed working model for this project
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
@@ -188,10 +188,10 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
         import traceback
         traceback.print_exc()
         error_msg = str(e).replace('"', "'")
-        print(f"Error summarizing {url} with Gemini: {error_msg}. Using NLP Fallback.")
+        print(f"Error summarizing {url} with Gemini: {error_msg}. Using [NLP Fallback].")
         return {
             "title": original_title,
-            "summary": f"[NLP Fallback] {nlp_summary}",
+            "summary": f"[NLP Fallback] (Error: {error_msg[:100]}...) {nlp_summary}",
             "url": url,
             "published": article_data["published"],
             "source": article_data["source"]
@@ -217,15 +217,19 @@ def fetch_and_summarize_news(category: str, limit: int = 10) -> str:
     if not raw_articles:
         return f"# News Report: {category}\n\nNo relevant news found for the specified criteria."
     
-    # 2. Summarize in parallel
+    # 2. Sequential/Low-concurrency Summarization to respect Free Tier RPM limits
     final_articles = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        future_to_article = {
-            executor.submit(summarize_with_gemini, a, client): a 
-            for a in raw_articles
-        }
-        
-        for future in concurrent.futures.as_completed(future_to_article):
+    import time
+    
+    # Using 2 workers to keep it fast but less likely to hit 429 immediately
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        futures = []
+        for a in raw_articles:
+            futures.append(executor.submit(summarize_with_gemini, a, client))
+            # Small delay to stagger requests
+            time.sleep(1.2) 
+            
+        for future in concurrent.futures.as_completed(futures):
             try:
                 final_articles.append(future.result())
             except Exception as exc:
@@ -272,14 +276,17 @@ def generate_markdown_report(articles: List[Dict[str, str]], query: str, client:
 
     try:
         response = client.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-2.5-flash',
             contents=prompt
         )
         return response.text.strip()
     except Exception as e:
-        print(f"Error generating Markdown report with Gemini: {e}")
+        error_msg = str(e).replace('"', "'")
+        print(f"Error generating Markdown report with Gemini: {error_msg}")
         # Manual Fallback
-        report = f"# News Analysis Report: {query.title()}\n\n"
+        report = f"# [SYSTEM ERROR] news_search_gemini_failure\n\n"
+        report += f"**CRITICAL ERROR:** {error_msg}\n\n"
+        report += f"# News Analysis Report: {query.title()} (Fallback Mode)\n\n"
         report += f"**Subject:** Comprehensive synthesis of recent news regarding '{query}'.\n"
         report += "**Time Duration:** Last 3 weeks\n\n"
         report += "## Executive Summary\n"
