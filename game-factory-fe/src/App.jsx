@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import Store from './pages/Store';
 import Factory from './pages/Factory';
 import Library from './pages/Library';
 
@@ -13,8 +12,7 @@ function App() {
         <main className="main-content">
           <TopNav />
           <Routes>
-            <Route path="/" element={<Store />} />
-            <Route path="/factory" element={<Factory />} />
+            <Route path="/" element={<Factory />} />
             {/* Library placeholder */}
             <Route path="/library" element={<Library />} />
           </Routes>

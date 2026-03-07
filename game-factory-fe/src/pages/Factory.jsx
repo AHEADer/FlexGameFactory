@@ -105,10 +105,12 @@ export default function Factory() {
         }
     };
 
-    const handleGenerate = (e) => {
-        e.preventDefault();
-        if (!news.trim()) return;
+    const handleGenerate = (e, incomingNews = null) => {
+        if (e) e.preventDefault();
+        const newsToUse = incomingNews || news;
+        if (!newsToUse.trim()) return;
 
+        if (incomingNews) setNews(incomingNews);
         setStatus('building');
         setProgress(0);
 
@@ -281,20 +283,23 @@ export default function Factory() {
                             </button>
                             <button
                                 onClick={() => {
-                                    setNews(searchResult);
+                                    handleGenerate(null, searchResult);
                                     setSearchResult('');
-                                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                                 }}
                                 style={{
-                                    background: 'var(--accent-success)',
+                                    background: 'var(--accent-primary)',
                                     color: '#fff',
-                                    padding: '6px 16px',
-                                    borderRadius: '6px',
-                                    fontSize: '0.85rem',
-                                    fontWeight: 600
+                                    padding: '10px 24px',
+                                    borderRadius: '8px',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 600,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    boxShadow: '0 4px 15px rgba(88, 166, 255, 0.3)'
                                 }}
                             >
-                                Use This Intel
+                                <Cpu size={18} /> INITIALIZE GENERATION
                             </button>
                         </div>
                     </div>
@@ -316,141 +321,86 @@ export default function Factory() {
                 </div>
             )}
 
-            <div className="glass-panel" style={{ padding: '32px', position: 'relative', overflow: 'hidden' }}>
+            {status !== 'idle' && (
+                <div className="glass-panel" style={{ padding: '32px', position: 'relative', overflow: 'hidden' }}>
+                    {/* Glow Effects */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '-50px',
+                        right: '-50px',
+                        width: '200px',
+                        height: '200px',
+                        background: 'var(--accent-primary)',
+                        filter: 'blur(100px)',
+                        opacity: 0.15,
+                        borderRadius: '50%'
+                    }} />
 
-                {/* Glow Effects */}
-                <div style={{
-                    position: 'absolute',
-                    top: '-50px',
-                    right: '-50px',
-                    width: '200px',
-                    height: '200px',
-                    background: 'var(--accent-primary)',
-                    filter: 'blur(100px)',
-                    opacity: 0.15,
-                    borderRadius: '50%'
-                }} />
+                    {status === 'building' && (
+                        <div style={{ textAlign: 'center', padding: '48px 0', animation: 'pulse 2s infinite' }}>
+                            <Cpu size={64} color="var(--accent-primary)" style={{ marginBottom: '24px', animation: 'spin 4s linear infinite' }} />
+                            <h2 style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Synthesizing Reality...</h2>
+                            <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Analyzing semantics, compiling ruleset, rendering engine...</p>
 
-                {status === 'idle' && (
-                    <form onSubmit={handleGenerate} style={{ position: 'relative', zIndex: 10 }}>
-                        <label style={{ marginBottom: '12px', fontWeight: 500, color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Terminal size={18} /> Direct Input Stream
-                        </label>
-                        <textarea
-                            value={news}
-                            onChange={(e) => setNews(e.target.value)}
-                            placeholder="E.g., NASA discovers a new exoplanet with signs of biological life, sparking a new space race..."
-                            style={{
+                            {/* Progress Bar Container */}
+                            <div style={{
                                 width: '100%',
-                                height: '180px',
-                                background: 'rgba(13, 17, 23, 0.5)',
-                                border: '1px solid var(--border-subtle)',
-                                borderRadius: '12px',
-                                padding: '20px',
-                                color: 'var(--text-bright)',
-                                fontFamily: 'var(--font-sans)',
-                                fontSize: '1.05rem',
-                                resize: 'none',
-                                outline: 'none',
-                                transition: 'border-color var(--transition-fast)',
-                                boxShadow: 'inset 0 4px 10px rgba(0,0,0,0.2)'
-                            }}
-                            onFocus={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
-                            onBlur={(e) => e.target.style.borderColor = 'var(--border-subtle)'}
-                        />
+                                height: '8px',
+                                background: 'rgba(255,255,255,0.1)',
+                                borderRadius: '999px',
+                                overflow: 'hidden'
+                            }}>
+                                <div style={{
+                                    width: `${progress}%`,
+                                    height: '100%',
+                                    background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-success))',
+                                    transition: 'width 0.4s ease-out',
+                                    boxShadow: '0 0 10px var(--accent-primary)'
+                                }} />
+                            </div>
+                            <div style={{ marginTop: '12px', fontFamily: 'monospace', color: 'var(--accent-primary)' }}>
+                                {Math.min(progress, 100)}% COMPLETE
+                            </div>
+                        </div>
+                    )}
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
-                            <button
-                                type="submit"
-                                disabled={!news.trim()}
-                                style={{
-                                    background: 'linear-gradient(135deg, var(--accent-primary), #3b82f6)',
-                                    color: '#fff',
-                                    padding: '16px 32px',
-                                    borderRadius: '12px',
+                    {status === 'complete' && (
+                        <div style={{ textAlign: 'center', padding: '48px 0' }}>
+                            <CheckCircle2 size={64} color="var(--accent-success)" style={{ marginBottom: '24px' }} />
+                            <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>Game Compiled Successfully</h2>
+
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '32px' }}>
+                                <button style={{
+                                    background: 'var(--text-bright)',
+                                    color: 'var(--bg-darker)',
+                                    padding: '12px 24px',
+                                    borderRadius: '8px',
                                     fontWeight: 600,
-                                    fontSize: '1.1rem',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '12px',
-                                    opacity: news.trim() ? 1 : 0.5,
-                                    cursor: news.trim() ? 'pointer' : 'not-allowed',
-                                    transition: 'transform var(--transition-bounce), box-shadow var(--transition-fast)',
-                                    boxShadow: news.trim() ? '0 8px 20px rgba(88, 166, 255, 0.4)' : 'none'
-                                }}
-                                onMouseEnter={(e) => news.trim() && (e.currentTarget.style.transform = 'translateY(-2px)')}
-                                onMouseLeave={(e) => news.trim() && (e.currentTarget.style.transform = 'translateY(0)')}
-                            >
-                                <Cpu size={24} /> INITIALIZE GENERATION
-                            </button>
+                                    gap: '8px'
+                                }}>
+                                    <Gamepad2 size={20} /> Play Now
+                                </button>
+
+                                <button onClick={resetForm} style={{
+                                    background: 'rgba(255, 255, 255, 0.1)',
+                                    color: 'var(--text-bright)',
+                                    border: '1px solid var(--border-subtle)',
+                                    padding: '12px 24px',
+                                    borderRadius: '8px',
+                                    fontWeight: 600,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}>
+                                    Forge Another
+                                </button>
+                            </div>
                         </div>
-                    </form>
-                )}
-
-                {status === 'building' && (
-                    <div style={{ textAlign: 'center', padding: '48px 0', animation: 'pulse 2s infinite' }}>
-                        <Cpu size={64} color="var(--accent-primary)" style={{ marginBottom: '24px', animation: 'spin 4s linear infinite' }} />
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Synthesizing Reality...</h2>
-                        <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Analyzing semantics, compiling ruleset, rendering engine...</p>
-
-                        {/* Progress Bar Container */}
-                        <div style={{
-                            width: '100%',
-                            height: '8px',
-                            background: 'rgba(255,255,255,0.1)',
-                            borderRadius: '999px',
-                            overflow: 'hidden'
-                        }}>
-                            <div style={{
-                                width: `${progress}%`,
-                                height: '100%',
-                                background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-success))',
-                                transition: 'width 0.4s ease-out',
-                                boxShadow: '0 0 10px var(--accent-primary)'
-                            }} />
-                        </div>
-                        <div style={{ marginTop: '12px', fontFamily: 'monospace', color: 'var(--accent-primary)' }}>
-                            {Math.min(progress, 100)}% COMPLETE
-                        </div>
-                    </div>
-                )}
-
-                {status === 'complete' && (
-                    <div style={{ textAlign: 'center', padding: '48px 0' }}>
-                        <CheckCircle2 size={64} color="var(--accent-success)" style={{ marginBottom: '24px' }} />
-                        <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>Game Compiled Successfully</h2>
-
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '32px' }}>
-                            <button style={{
-                                background: 'var(--text-bright)',
-                                color: 'var(--bg-darker)',
-                                padding: '12px 24px',
-                                borderRadius: '8px',
-                                fontWeight: 600,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                            }}>
-                                <Gamepad2 size={20} /> Play Now
-                            </button>
-
-                            <button onClick={resetForm} style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                color: 'var(--text-bright)',
-                                border: '1px solid var(--border-subtle)',
-                                padding: '12px 24px',
-                                borderRadius: '8px',
-                                fontWeight: 600,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                            }}>
-                                Forge Another
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            )}
 
             <style>{`
         @keyframes spin {

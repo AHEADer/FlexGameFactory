@@ -5,8 +5,7 @@ export default function Sidebar() {
     const location = useLocation();
 
     const navItems = [
-        { name: 'Store', path: '/', icon: Home },
-        { name: 'Game Factory', path: '/factory', icon: Cpu },
+        { name: 'Game Factory', path: '/', icon: Cpu },
         { name: 'Library', path: '/library', icon: Library },
     ];
 
