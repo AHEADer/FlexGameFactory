@@ -62,7 +62,7 @@ def process_game_dir(game_dir_name):
     prompt = f"Use @[junda/generate_news_based_game/SKILL.md] to generate a game, theme can be found in news @[{report_path}]. Game files should be saved in the junda_games/{game_dir_name} dir."
     
     cmd = [
-        "gemini", "-p", prompt, "-y", "-m", "gemini-3.1-flash-lite-preview"
+        "gemini", "-p", prompt, "-y", "-m", "gemini-3-flash-preview"
     ]
     
     try:

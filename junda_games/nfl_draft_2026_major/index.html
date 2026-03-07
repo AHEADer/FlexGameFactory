@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Draft 2026: The Mendoza Line</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>NFL Draft 2026: The Mendoza Line</h1>
+            <div id="stats">
+                <div class="stat-item">Draft Capital: <span id="draft-capital">3.0</span> (1st Round Picks)</div>
+                <div class="stat-item">Team Power: <span id="team-power">0</span></div>
+                <div class="stat-item">Round: <span id="current-round">1</span>/3</div>
+            </div>
+        </header>
+
+        <main id="game-board">
+            <section id="phase-container">
+                <!-- Phases will be injected here: Auction, Draft, Scout -->
+                <div id="phase-content">
+                    <h2>Loading Game...</h2>
+                </div>
+            </section>
+
+            <section id="roster-container">
+                <h3>Drafted Prospects</h3>
+                <div id="roster-list">
+                    <!-- Drafted players will appear here -->
+                </div>
+            </section>
+        </main>
+
+        <footer id="action-bar">
+            <!-- Buttons injected based on phase -->
+        </footer>
+
+        <!-- Game Introduction Modal -->
+        <dialog id="game-intro-modal" open>
+            <div class="modal-content">
+                <img src="cover.png" alt="NFL Draft 2026 Cover" id="modal-cover">
+                <h2>Welcome, General Manager!</h2>
+                <div class="lore">
+                    <p><strong>The Year:</strong> 2026. <strong>The Mission:</strong> All-In for a Super Bowl run.</p>
+                    <p>The "Mendoza Era" is upon us, but every pick is a gamble. Maxx Crosby was traded for two first-rounders, and the draft board is full of high-risk, high-reward prospects like <strong>Fernando Mendoza</strong> and <strong>Ty Simpson</strong>.</p>
+                </div>
+                <div class="rules">
+                    <h3>Core Loop:</h3>
+                    <ul>
+                        <li><strong>1. Bid for Priority:</strong> Sacrifice Draft Capital to choose your draft slot early.</li>
+                        <li><strong>2. Draft Prospects:</strong> Pick from S, A, B, C, D tiers. Higher tiers offer more Power but hidden "Bust" risks.</li>
+                        <li><strong>3. Push-Your-Luck:</strong> Spend time scouting to reveal "Bust Potential" or trade up for a better tier, risking your current position.</li>
+                    </ul>
+                    <p><strong>Win Condition:</strong> Achieve 200+ Team Power after 3 rounds.</p>
+                    <p><strong>Loss Condition:</strong> If Team Power falls below -50 due to "Busts", or if you run out of Draft Capital early.</p>
+                </div>
+                <div class="controls">
+                    <p><strong>Controls:</strong> Click to bid, select, and scout. All interactive zones are pointer-friendly.</p>
+                </div>
+                <button id="start-game-btn" class="primary-btn">Start Draft Day</button>
+            </div>
+        </dialog>
+
+        <!-- Game Over Modal -->
+        <dialog id="game-over-modal">
+            <div class="modal-content">
+                <h2 id="game-over-title">Game Over</h2>
+                <p id="game-over-message"></p>
+                <div id="final-stats"></div>
+                <button onclick="location.reload()" class="primary-btn">Try Again</button>
+            </div>
+        </dialog>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
