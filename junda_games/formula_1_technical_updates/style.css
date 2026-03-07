@@ -21,7 +21,7 @@ body {
 }
 
 /* Modal Styling */
-dialog {
+dialog[open] {
     background: transparent;
     border: none;
     padding: 0;
