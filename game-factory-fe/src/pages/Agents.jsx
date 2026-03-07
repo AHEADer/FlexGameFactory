@@ -121,9 +121,9 @@ export default function Agents() {
                         Agent <span className="text-gradient">Judges</span>
                     </h1>
                     <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
-                        你是游戏爱好者，但是世界上的游戏无穷无尽，这个 Agent 可以作为你的化身，按照你的品味（你的 Prompt）去试玩体验各种生成的游戏副本。
+                        As a gaming enthusiast, you know there are endless titles in the world. This Agent acts as your avatar, playtesting generated realities based on your unique taste (your Prompt).
                         <br /><br />
-                        判断游戏是否符合品味之后，它也会按照你的规则，为喜欢的游戏投资/打赏以此来支持该作品。每一个生成的游戏初生时都自带一个众筹进度池，Agent 的投资越多，代表这款游戏越受青睐、越容易获得大力推广！
+                        If a game matches your criteria, the Agent will automatically tip and invest in the game to show support based on your rules. Every generated game begins with a crowdfunding goal. The more an Agent invests, the more popular the game becomes, ultimately earning massive global promotion!
                     </p>
                 </div>
                 <button
