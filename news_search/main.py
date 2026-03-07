@@ -18,9 +18,9 @@ class NewsArticle(BaseModel):
     published: str
     source: str
 
-@app.get("/news", response_model=List[NewsArticle])
+@app.get("/news")
 async def get_news(query: Optional[str] = Query(None, description="The query of news to search for")):
-    # If user doesn't specify a category, randomly choose one.
+    # If user doesn't specify a query, randomly choose one.
     if not query:
         query = get_random_category()
     
@@ -29,31 +29,18 @@ async def get_news(query: Optional[str] = Query(None, description="The query of 
     if " " not in query.strip():
         query = query.capitalize()
         
-    print(f"Fetching news for query: {query} using Gemini")
+    print(f"Fetching news for query: {query} using Gemini synthesis")
     
     if not os.environ.get("GEMINI_API_KEY"):
         raise HTTPException(status_code=500, detail="Server is missing GEMINI_API_KEY environment variable.")
     
     try:
-        articles = fetch_and_summarize_news(query, limit=10)
+        # This now returns the full Markdown report string
+        report = fetch_and_summarize_news(query, limit=10)
+        from fastapi import Response
+        return Response(content=report, media_type="text/markdown")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Gemini API Error: {str(e)}")
-    
-    if not articles:
-        raise HTTPException(status_code=404, detail=f"No news found for query '{query}'")
-    
-    result_articles = []
-    
-    for a in articles:
-        result_articles.append(NewsArticle(
-            title=a.get("title", "Untitled"),
-            summary=a.get("summary", "Summary unavailable")[:2000], # Keep a reasonable cap
-            url=a.get("url", ""),
-            published=a.get("published", ""),
-            source=a.get("source", "Unknown Source")
-        ))
-
-    return result_articles
+        raise HTTPException(status_code=500, detail=f"Error generating report: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

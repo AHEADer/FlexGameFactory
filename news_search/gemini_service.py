@@ -194,7 +194,9 @@ def summarize_with_gemini(article_data: Dict[str, str], client: genai.Client) ->
             "source": article_data["source"]
         }
 
-def fetch_and_summarize_news(category: str, limit: int = 10) -> List[Dict[str, str]]:
+from typing import List, Dict, Any, Union
+
+def fetch_and_summarize_news(category: str, limit: int = 10) -> str:
     """
     Orchestrates the hybrid approach:
     1. Fetches top 10 links via DDGS.
@@ -210,7 +212,7 @@ def fetch_and_summarize_news(category: str, limit: int = 10) -> List[Dict[str, s
     raw_articles = fetch_top_links(category, limit)
     
     if not raw_articles:
-        return []
+        return f"# News Report: {category}\n\nNo relevant news found for the specified criteria."
     
     # 2. Summarize in parallel
     final_articles = []
@@ -226,4 +228,69 @@ def fetch_and_summarize_news(category: str, limit: int = 10) -> List[Dict[str, s
             except Exception as exc:
                 print(f"Article processing generated an exception: {exc}")
                 
-    return final_articles
+    # 3. Generate Synthesis Report
+    print(f"Synthesizing {len(final_articles)} articles into Markdown report...")
+    report = generate_markdown_report(final_articles, category, client)
+    return report
+
+def generate_markdown_report(articles: List[Dict[str, str]], query: str, client: genai.Client) -> str:
+    """
+    Synthesizes the gathered articles into a professionally formatted Markdown report.
+    """
+    if not articles:
+        return f"# News Report: {query}\n\nNo relevant news found for the specified criteria."
+
+    # Prepare context for Gemini synthesis
+    context = "\n\n".join([
+        f"Title: {a['title']}\nSource: {a['source']}\nDate: {a['published']}\nSummary: {a['summary']}"
+        for a in articles
+    ])
+
+    prompt = f"""
+    You are a professional news analyst. Create a high-quality, comprehensive Markdown report based on the following news articles.
+    
+    Query: {query}
+    Time Duration: Last 3 weeks
+    
+    Articles:
+    {context[:10000]}
+    
+    Instructions:
+    1. Title: Create a compelling title for the report.
+    2. Subject: A brief introduction explaining what this markdown content is all about.
+    3. Time Duration: Explicitly state the period (last 3 weeks).
+    4. Executive Summary: A concise synthesis of the overall news landscape for this query.
+    5. News Details: For every article, provide a structured breakdown (Title, Source, Key Insights).
+    6. Summarize Metrics: Create a "News Matrix" section summarizing the volume, sentiment (briefly), and key recurring themes across the articles.
+    
+    Formatting: Use professional Markdown headers (# ## ###), bullet points, and bold text. 
+    Do not use JSON; return ONLY raw Markdown.
+    """
+
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=prompt
+        )
+        return response.text.strip()
+    except Exception as e:
+        print(f"Error generating Markdown report with Gemini: {e}")
+        # Manual Fallback
+        report = f"# News Analysis Report: {query.title()}\n\n"
+        report += f"**Subject:** Comprehensive synthesis of recent news regarding '{query}'.\n"
+        report += "**Time Duration:** Last 3 weeks\n\n"
+        report += "## Executive Summary\n"
+        report += f"This report aggregates {len(articles)} key news developments. [Note: Synthesis failed; providing raw aggregation.]\n\n"
+        report += "## News Details\n"
+        for a in articles:
+            report += f"### {a['title']}\n"
+            report += f"- **Source:** {a['source']}\n"
+            report += f"- **Published:** {a['published']}\n"
+            report += f"- **Summary:** {a['summary']}\n"
+            report += f"- [Link to Article]({a['url']})\n\n"
+        
+        report += "## News Matrix\n"
+        report += f"- **Volume:** {len(articles)} articles identified.\n"
+        report += "- **Key Themes:** Data synthesis was unavailable; refer to individual details above.\n"
+        
+        return report
