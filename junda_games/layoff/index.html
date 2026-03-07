@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Layoff Survivor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="logo">
+                <h1>AI Layoff Survivor</h1>
+                <p>2026 Tech Industry Simulation</p>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-label">AI Synergy Points</span>
+                    <span class="stat-value text-green" id="score">0 / 100</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Turn</span>
+                    <span class="stat-value" id="turn">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Conveyor Speed</span>
+                    <span class="stat-value text-red" id="speed">1 step/turn</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-board">
+            <!-- The Conveyor Belt (Bias Mechanic) -->
+            <section class="conveyor-section glass-panel">
+                <h2>Career Trajectory (Conveyor Belt)</h2>
+                <div class="track-container">
+                    <div class="track">
+                        <!-- Generates 20 slots via JS usually, but we'll do visual percentage -->
+                        <div class="safe-zone">Safe</div>
+                        <div class="danger-zone">Layoff Zone</div>
+                        <div class="player-avatar" id="avatar">👶</div>
+                    </div>
+                </div>
+                <p class="track-status">Distance to Layoff: <span id="distance" class="text-red">0</span> / 20</p>
+            </section>
+
+            <!-- Worker Placement -->
+            <section class="actions-section glass-panel">
+                <h2>Worker Placement (Choose Action)</h2>
+                <div class="action-buttons">
+                    <button class="action-btn safe" id="btn-upskill">
+                        <h3>Upskill (Safe Work)</h3>
+                        <p>+10 AI Points</p>
+                        <p>Slow steady progress.</p>
+                    </button>
+                    <button class="action-btn safe" id="btn-network">
+                        <h3>Office Politics</h3>
+                        <p>Move -3 Steps back</p>
+                        <p>Delay the inevitable.</p>
+                    </button>
+                    <button class="action-btn risk" id="btn-crunch">
+                        <h3>Crunch Time (Push Luck)</h3>
+                        <p>Potentially huge points!</p>
+                        <p>Risk burnout (+3 steps).</p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Push Your Luck Modal -->
+            <div class="modal-overlay hidden" id="crunch-modal">
+                <div class="modal glass-panel">
+                    <h2>Crunch Time!</h2>
+                    <p>Code fast to earn AI Points. But beware, the risk of burnout increases with every line of code!</p>
+                    <div class="crunch-stats">
+                        <div class="stat">Potential Points: <span id="potential-points" class="text-green">0</span></div>
+                        <div class="stat">Burnout Risk: <span id="burnout-risk" class="text-red">10%</span></div>
+                    </div>
+                    <div class="crunch-actions">
+                        <button class="action-btn risk" id="btn-code">Code! (Risk it)</button>
+                        <button class="action-btn safe" id="btn-deploy">Deploy (Lock in & End Turn)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Modal -->
+            <div class="modal-overlay hidden" id="game-over-modal">
+                <div class="modal glass-panel">
+                    <h2 id="game-over-title">Game Over</h2>
+                    <p id="game-over-message">You have been replaced by an AI.</p>
+                    <button class="action-btn" id="btn-restart">Play Again</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
