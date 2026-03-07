@@ -18,7 +18,10 @@ except LookupError:
     nltk.download('punkt_tab')
 
 # Load environment variables from .env file
+# Try current directory first, then parent directory (project root)
 load_dotenv()
+if not os.environ.get("GEMINI_API_KEY"):
+    load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 TOP_20_DOMAINS = [
     "cnn.com", "bbc.co.uk", "reuters.com", "nytimes.com", "theguardian.com",
