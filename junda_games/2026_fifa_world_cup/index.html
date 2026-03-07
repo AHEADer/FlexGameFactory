@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Stadium Scramble</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header / Stats -->
+        <header>
+            <div class="stat-card">
+                <span class="label">Days Left</span>
+                <span id="days-left" class="value">100</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Action Points</span>
+                <span id="ap" class="value">5/5</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Total Prep</span>
+                <span id="total-progress" class="value">0%</span>
+            </div>
+            <h1>2026 STADIUM SCRAMBLE</h1>
+            <div id="news-ticker">
+                <div class="ticker-content">Welcome to the 2026 FIFA World Cup Construction Headquarters. Get those stadiums ready!</div>
+            </div>
+        </header>
+
+        <!-- Main Board -->
+        <main id="board">
+            <div id="cities-grid">
+                <!-- Cities will be injected by JS -->
+            </div>
+        </main>
+
+        <!-- Action Panel -->
+        <aside id="controls">
+            <h2>Actions</h2>
+            <button id="btn-standard" class="action-btn" title="Cost: 1 AP. +5% Progress">Standard Build (1 AP)</button>
+            <button id="btn-overtime" class="action-btn" title="Cost: 2 AP. +12% Progress">Overtime (2 AP)</button>
+            <button id="btn-bribe" class="action-btn" title="Cost: 3 AP. Immunity to Red Tape for 1 Turn">Bribe Inspector (3 AP)</button>
+            <button id="btn-signoff" class="action-btn" title="Cost: 1 AP. Saves current progress as a checkpoint.">Sign Off (1 AP)</button>
+            <hr>
+            <div id="rush-zone">
+                <button id="btn-rush" class="rush-btn">RUSH JOB (0 AP)</button>
+                <div id="risk-meter-container">
+                    <div id="risk-meter-fill"></div>
+                    <span id="risk-label">SAFETY RISK: 0%</span>
+                </div>
+                <p class="hint">Risk increases with each rush. Bust = Reset to last Sign-Off!</p>
+            </div>
+            <button id="btn-next-day" class="next-turn-btn">END DAY</button>
+        </aside>
+
+        <!-- Intro Modal -->
+        <dialog id="game-intro-modal">
+            <div class="modal-content">
+                <img src="cover.png" alt="Game Cover" class="intro-img">
+                <h2>Welcome, Project Manager!</h2>
+                <p>The 2026 FIFA World Cup is coming, and 16 stadiums across North America are a mess. <strong>Estadio Azteca</strong> needs a facelift, <strong>MetLife</strong> is over budget, and <strong>Maple the Moose</strong> is causing chaos in Toronto.</p>
+                
+                <div class="instructions">
+                    <h3>Your Mission:</h3>
+                    <ul>
+                        <li>Reach <strong>100% Progress</strong> on all 16 stadiums.</li>
+                        <li>You have <strong>100 Days</strong> before the opening whistle.</li>
+                        <li>Use <strong>Action Points (AP)</strong> to build steadily or <strong>Sign Off</strong> to save your progress.</li>
+                        <li><strong>Push Your Luck:</strong> Use "Rush Job" (0 AP) to gain massive progress, but beware the <strong>Safety Risk</strong>. If you bust, you lose all unsaved progress on that stadium!</li>
+                        <li><strong>Red Tape (Bias):</strong> Every day, all stadiums lose progress automatically. Keep building!</li>
+                    </ul>
+                </div>
+                
+                <div class="controls-guide">
+                    <h3>Controls:</h3>
+                    <p>Click a <strong>City</strong> to select it, then click an <strong>Action</strong> on the right. <strong>End Day</strong> to replenish AP and face the Red Tape.</p>
+                </div>
+
+                <button id="start-game-btn">START THE SCRAMBLE</button>
+            </div>
+        </dialog>
+
+        <!-- Game Over Modal -->
+        <dialog id="game-over-modal">
+            <div class="modal-content">
+                <h2 id="game-over-title">Game Over</h2>
+                <p id="game-over-msg"></p>
+                <button onclick="location.reload()">TRY AGAIN</button>
+            </div>
+        </dialog>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
