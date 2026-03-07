@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Shift - Q1 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Game Introduction Modal -->
+    <dialog id="game-intro-modal">
+        <div class="modal-content">
+            <h1>The AI Shift</h1>
+            <div class="lore-box">
+                <p>Welcome, CEO. It is Q1 2026.</p>
+                <p>The board demands "AI efficiency" to boost stock prices. Over 70% of human staff have been laid off.</p>
+                <p>Tasks are piling up rapidly. Automate the workforce, boost the stock, and don't let productivity collapse!</p>
+            </div>
+            
+            <div class="rules-box">
+                <h3>Core Directives</h3>
+                <ul>
+                    <li><span class="highlight-blue">Humans:</span> Reliable and safe. Takes 2 seconds to complete a task. You only have a few.</li>
+                    <li><span class="highlight-green">AI Tokens:</span> Instant completion and high revenue, but carries a massive risk of <b>Hallucination</b>.</li>
+                    <li><span class="highlight-red">Hallucinations:</span> RNG failure spawns burning "Fire Tasks" that clog your workflow.</li>
+                    <li><span class="highlight-orange">The Conveyor Belt:</span> Tasks move right towards the deadline. If they fall off, Stock plummets. It accelerates over time.</li>
+                </ul>
+            </div>
+
+            <div class="win-loss-box">
+                <p><b>Win:</b> Hit $50,000 Revenue to trigger your Golden Parachute.</p>
+                <p><b>Loss:</b> Stock Price hits $0. You are fired.</p>
+            </div>
+
+            <button id="start-btn" class="glow-button">START SHIFT</button>
+        </div>
+    </dialog>
+
+    <div id="game-container">
+        <!-- Header: Stats -->
+        <header id="stats-board">
+            <div class="stat-card">
+                <span class="label">REVENUE</span>
+                <span class="value text-green" id="revenue-display">$0</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">STOCK PRICE</span>
+                <span class="value text-blue" id="stock-display">$100.00</span>
+            </div>
+            <div class="stat-card risk-card">
+                <span class="label">AI RISK LEVEL</span>
+                <span class="value text-red" id="risk-display">15%</span>
+                <div class="progress-bar"><div id="risk-bar" style="width: 15%"></div></div>
+            </div>
+        </header>
+
+        <!-- Main Board: Task Conveyor Belt -->
+        <main id="conveyor-area">
+            <div class="deadline-zone">
+                <div class="laser-line"></div>
+                <span>DEADLINE</span>
+            </div>
+            <div id="belt-container">
+                <!-- Tasks will be spawned here via JS -->
+            </div>
+        </main>
+
+        <!-- Footer: Worker Placement Pool -->
+        <footer id="worker-pool">
+            <div class="worker-zone" id="human-zone">
+                <div class="zone-header">HUMAN RESOURCES (Safe)</div>
+                <div class="pool" id="human-pool">
+                    <div class="worker human" draggable="true" data-type="human" id="h1">👨‍💻</div>
+                    <div class="worker human" draggable="true" data-type="human" id="h2">👩‍💻</div>
+                    <div class="worker human" draggable="true" data-type="human" id="h3">👨‍💼</div>
+                </div>
+            </div>
+            
+            <div class="worker-zone" id="ai-zone">
+                <div class="zone-header">AI CLUSTERS (Instant/Risky)</div>
+                <div class="pool" id="ai-pool">
+                    <div class="worker ai-token" draggable="true" data-type="ai" id="a1">🤖</div>
+                    <div class="worker ai-token" draggable="true" data-type="ai" id="a2">🤖</div>
+                    <div class="worker ai-token" draggable="true" data-type="ai" id="a3">🤖</div>
+                    <div class="worker ai-token" draggable="true" data-type="ai" id="a4">🤖</div>
+                    <div class="worker ai-token" draggable="true" data-type="ai" id="a5">🤖</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Overlay for Win/Loss End Screens -->
+    <div id="end-screen" class="hidden">
+        <h1 id="end-title"></h1>
+        <p id="end-message"></p>
+        <button id="restart-btn" class="glow-button">RESTART SIMULATION</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
