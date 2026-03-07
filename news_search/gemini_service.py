@@ -1,4 +1,5 @@
 import os
+import json
 import random
 import concurrent.futures
 from datetime import datetime, timedelta
@@ -304,3 +305,51 @@ def generate_markdown_report(articles: List[Dict[str, str]], query: str, client:
         report += "- **Key Themes:** Data synthesis was unavailable; refer to individual details above.\n"
         
         return report
+def review_game_with_gemini(game_code: str, agent_prompt: str) -> Dict[str, Any]:
+    """
+    Uses Gemini to simulate an AI agent 'playing' and reviewing a game.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return {"score": 0, "feedback": "API Key missing", "success": False}
+
+    client = genai.Client(api_key=api_key)
+    
+    # Aggressive search for a working model with quota
+    models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-flash-latest"]
+    
+    system_prompt = f"""
+    You are an AI Game Review Agent with the following personality and criteria:
+    {agent_prompt}
+    
+    You will be provided with the source code of an HTML5 game. 
+    Analyze the 'intel' (the news it was based on, if identifiable) and the mechanics in the code.
+    Provide:
+    1. A Score from 0 to 100.
+    2. A Qualitative Review (定性评价) in English or Chinese as requested by the persona.
+    
+    Format your response as valid JSON:
+    {{
+      "score": number,
+      "feedback": "string"
+    }}
+    """
+    
+    prompt = f"HTML5 Game source to review:\n\n{game_code[:30000]}" # Limit size
+    
+    for model in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_prompt,
+                    response_mime_type="application/json"
+                )
+            )
+            return json.loads(response.text)
+        except Exception as e:
+            print(f"[Review] Model {model} failed: {e}")
+            continue
+            
+    return {"score": 50, "feedback": "Evaluation engine timed out or experienced quota limits.", "success": False}

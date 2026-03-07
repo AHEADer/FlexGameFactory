@@ -93,6 +93,21 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/sync/, '/sync')
+      },
+      '/api/agents': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/agents/, '/agents')
+      },
+      '/api/reviews': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/reviews/, '/reviews')
+      },
+      '/api/evaluate': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/evaluate/, '/evaluate')
       }
     }
   }

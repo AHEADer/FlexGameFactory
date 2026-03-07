@@ -2,6 +2,9 @@ from fastapi import FastAPI, Query, HTTPException
 from typing import Optional, List
 from pydantic import BaseModel
 import os
+import json
+import re
+from datetime import datetime
 
 from gemini_service import fetch_and_summarize_news, get_random_category
 
@@ -17,6 +20,15 @@ class NewsArticle(BaseModel):
     url: str
     published: str
     source: str
+
+class AgentConfig(BaseModel):
+    name: str
+    prompt: str
+    id: Optional[str] = None
+
+class ReviewRequest(BaseModel):
+    agent_id: str
+    game_id: str
 
 @app.get("/news")
 async def get_news(query: Optional[str] = Query(None, description="The query of news to search for")):
@@ -101,6 +113,115 @@ async def sync_repository():
     except Exception as e:
         print(f"[Sync] Critical Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# --- Agent & Review Endpoints ---
+
+AGENTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "GameFactoryAgent"))
+REVIEWS_DIR = os.path.join(AGENTS_DIR, "reviews")
+REPORTS_DIR = os.path.join(AGENTS_DIR, "reports")
+
+os.makedirs(AGENTS_DIR, exist_ok=True)
+os.makedirs(REVIEWS_DIR, exist_ok=True)
+os.makedirs(REPORTS_DIR, exist_ok=True)
+
+@app.get("/agents")
+async def list_agents():
+    agents = []
+    if os.path.exists(AGENTS_DIR):
+        for f in os.listdir(AGENTS_DIR):
+            if f.endswith(".json"):
+                try:
+                    with open(os.path.join(AGENTS_DIR, f), "r") as j:
+                        agents.append(json.load(j))
+                except:
+                    pass
+    return {"success": True, "agents": agents}
+
+@app.post("/agents")
+async def create_agent(config: AgentConfig):
+    if not config.id:
+        config.id = re.sub(r'[^a-zA-Z0-9]', '_', config.name).lower()
+    
+    file_path = os.path.join(AGENTS_DIR, f"{config.id}.json")
+    with open(file_path, "w") as f:
+        json.dump(config.dict(), f)
+    
+    return {"success": True, "agent": config}
+
+@app.get("/reviews")
+async def list_reviews(game_id: Optional[str] = None):
+    reviews = []
+    if os.path.exists(REVIEWS_DIR):
+        for f in os.listdir(REVIEWS_DIR):
+            if f.endswith(".json"):
+                try:
+                    with open(os.path.join(REVIEWS_DIR, f), "r") as j:
+                        data = json.load(j)
+                        if not game_id or data.get("game_id") == game_id:
+                            reviews.append(data)
+                except:
+                    pass
+    return {"success": True, "reviews": reviews}
+
+@app.post("/evaluate")
+async def evaluate_game(req: ReviewRequest):
+    print(f"[AgentReview] Agent {req.agent_id} evaluating game {req.game_id}")
+    
+    try:
+        agent_path = os.path.join(AGENTS_DIR, f"{req.agent_id}.json")
+        with open(agent_path, "r") as f:
+            agent = json.load(f)
+        
+        # Load game code
+        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        game_index_path = os.path.join(root_dir, "junda_games", req.game_id, "index.html")
+        
+        game_code = "No source found."
+        if os.path.exists(game_index_path):
+            with open(game_index_path, "r") as f:
+                game_code = f.read()
+        
+        # Import the helper
+        from gemini_service import review_game_with_gemini
+        
+        # Run AI review
+        ai_res = review_game_with_gemini(game_code, agent["prompt"])
+        
+        review = {
+            "id": f"rev_{int(datetime.now().timestamp())}",
+            "agent_id": req.agent_id,
+            "agent_name": agent["name"],
+            "game_id": req.game_id,
+            "score": ai_res.get("score", 0),
+            "feedback": ai_res.get("feedback", "AI evaluation failed to generate feedback."),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        review_path = os.path.join(REVIEWS_DIR, f"{review['id']}.json")
+        with open(review_path, "w") as f:
+            json.dump(review, f)
+        
+        # Also create a human readable report file in GameFactoryAgent/reports
+        try:
+            report_filename = f"{req.game_id}_{req.agent_id}_{int(datetime.now().timestamp())}.md"
+            report_path = os.path.join(REPORTS_DIR, report_filename)
+            with open(report_path, "w", encoding="utf-8") as f:
+                f.write(f"# Agent Review Report\n\n")
+                f.write(f"- **Game:** {req.game_id}\n")
+                f.write(f"- **Agent:** {agent['name']}\n")
+                f.write(f"- **Score:** {review['score']}/100\n")
+                f.write(f"- **Date:** {review['timestamp']}\n\n")
+                f.write(f"## Qualitative Assessment\n\n")
+                f.write(f"{review['feedback']}\n")
+            print(f"[AgentReview] Generated markdown report at: {report_path}")
+        except Exception as report_err:
+            print(f"[AgentReview] Failed to generate markdown report: {report_err}")
+            
+        return {"success": True, "review": review}
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"success": False, "error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn

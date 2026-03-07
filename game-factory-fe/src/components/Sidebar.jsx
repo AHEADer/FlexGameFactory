@@ -1,12 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Library, Cpu, Settings } from 'lucide-react';
+import { Home, Library, Cpu, Settings, Users } from 'lucide-react';
 
 export default function Sidebar() {
     const location = useLocation();
 
     const navItems = [
-        { name: 'Game Factory', path: '/', icon: Cpu },
+        { name: 'Play News', path: '/', icon: Cpu },
         { name: 'Library', path: '/library', icon: Library },
+        { name: 'Agents', path: '/agents', icon: Users },
     ];
 
     return (
@@ -15,7 +16,7 @@ export default function Sidebar() {
                 <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--accent-primary)', display: 'grid', placeItems: 'center' }}>
                     <Cpu size={20} color="var(--bg-darker)" />
                 </div>
-                <h2 style={{ fontSize: '1.25rem', margin: 0 }}>G-Factory</h2>
+                <h2 style={{ fontSize: '1.2rem', margin: 0, letterSpacing: '-0.5px' }}>HowToPlayNews</h2>
             </div>
 
             <nav style={{ flex: 1, padding: '0 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>

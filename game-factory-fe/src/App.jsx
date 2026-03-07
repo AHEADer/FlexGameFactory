@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import Factory from './pages/Factory';
 import Library from './pages/Library';
+import Agents from './pages/Agents';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
           <TopNav />
           <Routes>
             <Route path="/" element={<Factory />} />
-            {/* Library placeholder */}
             <Route path="/library" element={<Library />} />
+            <Route path="/agents" element={<Agents />} />
           </Routes>
         </main>
       </div>

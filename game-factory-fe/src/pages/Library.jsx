@@ -108,7 +108,7 @@ export default function Library() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px' }}>
                 <div>
                     <h1 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>My Library</h1>
-                    <p style={{ color: 'var(--text-muted)' }}>Found {games.length} generated games in the factory vault.</p>
+                    <p style={{ color: 'var(--text-muted)' }}>Found {games.length} generated games in the HowToPlayNews vault.</p>
                 </div>
 
                 <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -234,7 +234,7 @@ export default function Library() {
             {loading ? (
                 <div style={{ textAlign: 'center', padding: '100px 0' }}>
                     <RefreshCw size={48} color="var(--accent-primary)" className="spin" style={{ marginBottom: '16px' }} />
-                    <p>Scanning Factory Vault...</p>
+                    <p>Scanning HowToPlayNews Vault...</p>
                 </div>
             ) : error ? (
                 <div className="glass-panel" style={{ padding: '48px', textAlign: 'center', color: '#ff7b72' }}>
@@ -245,9 +245,9 @@ export default function Library() {
                 <div className="glass-panel" style={{ padding: '80px', textAlign: 'center' }}>
                     <Gamepad2 size={64} style={{ opacity: 0.2, marginBottom: '24px' }} />
                     <h2 style={{ marginBottom: '8px' }}>Vault Empty</h2>
-                    <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Go to the Factory to Forge your first game from the news.</p>
+                    <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Play some news now and Forge your first game.</p>
                     <button
-                        onClick={() => window.location.href = '/factory'}
+                        onClick={() => window.location.href = '/'}
                         style={{
                             background: 'var(--accent-primary)',
                             color: '#fff',
@@ -256,7 +256,7 @@ export default function Library() {
                             fontWeight: 600
                         }}
                     >
-                        Go to Factory
+                        Go Play News
                     </button>
                 </div>
             ) : (
@@ -303,7 +303,7 @@ export default function Library() {
                             <div style={{ padding: '20px' }}>
                                 <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>{game.name}</h3>
                                 <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '24px' }}>
-                                    A custom forged game from the factory. Run it in the local experimental sandbox.
+                                    A custom forged game from the news. Run it in the local experimental sandbox.
                                 </p>
 
                                 <div style={{ display: 'flex', gap: '12px' }}>

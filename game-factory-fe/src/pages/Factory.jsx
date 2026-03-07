@@ -137,8 +137,8 @@ export default function Factory() {
         <div style={{ padding: '48px', width: '100%', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '32px' }}>
 
             <div>
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '12px' }}><span className="text-gradient">Forge</span> a New Reality</h1>
-                <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Search for real-world news or input your own concept. Our quantum engine will generate a fully playable desktop game based on it.</p>
+                <h1 style={{ fontSize: '2.5rem', marginBottom: '12px' }}><span className="text-gradient">Play</span> the World's News</h1>
+                <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)' }}>Search for any global event. Our AI will synthesize the intel and generate a fully playable desktop game that lets you experience the news firsthand.</p>
             </div>
 
             {status === 'idle' && (
@@ -339,7 +339,7 @@ export default function Factory() {
                     {status === 'building' && (
                         <div style={{ textAlign: 'center', padding: '48px 0', animation: 'pulse 2s infinite' }}>
                             <Cpu size={64} color="var(--accent-primary)" style={{ marginBottom: '24px', animation: 'spin 4s linear infinite' }} />
-                            <h2 style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Synthesizing Reality...</h2>
+                            <h2 style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Synthesizing News Intel...</h2>
                             <p style={{ color: 'var(--text-muted)', marginBottom: '32px' }}>Analyzing semantics, compiling ruleset, rendering engine...</p>
 
                             {/* Progress Bar Container */}
