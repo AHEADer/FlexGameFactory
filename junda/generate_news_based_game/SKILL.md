@@ -34,6 +34,11 @@ This skill guides the AI to create a satirical or thematic web game based on a p
 - **Apply Vanilla CSS Styling:** Create `style.css` using modern techniques like CSS variables, glassmorphism, flexbox, and smooth CSS animations. Ensure it looks rich, dynamic, and premium.
   - Style the Game Introduction Modal to look premium (centered, blurred background backdrop).
   - Add visual juice: smooth transitions for resource changes, hover effects for action buttons, and visual cues for disabled actions.
+  - **Generate Game Elements:** Use the `generate_nano_banana_image` skill to create any necessary visual game elements (e.g., player avatars, resources, obstacles). Load `GEMINI_API_KEY` from the project's `.env` file, then run the tool for each asset:
+    ```bash
+    export $(grep -v '^#' .env | xargs) && python3 tools/nano_banana_gen.py "<PROMPT>" --aspect_ratio <ASPECT_RATIO> --image_size <SIZE> --output <OUTPUT_PATH>
+    ```
+    - For example, you can use `--aspect_ratio 1:1` and `--image_size 1K` for avatars/icons, saving them to the game directory.
 - **Develop JavaScript Logic:** 
   - Write `game.js` containing game state, initialization, and core loops.
   - **Intro Logic:** On page load, show the Game Introduction modal. Pause all game timers until the user clicks "Start Game".
@@ -42,6 +47,10 @@ This skill guides the AI to create a satirical or thematic web game based on a p
   - Implement **Difficulty Scaling** (e.g., accelerating belts over time) to guarantee the game ends eventually.
 
 ### 4. Verification & Refinement
+- **Local Playtesting:** You MUST start a local python HTTP server (`python3 -m http.server`) and use your browser tools to manually playtest the game.
+  - Verify that the game initializes correctly.
+  - Verify that all modals (like the intro modal or game over modal) appear and disappear correctly when interacted with (check for CSS `display` overrides breaking default `<dialog>` behavior).
+  - Verify that the Win/Loss conditions trigger appropriately.
 - **Test Game Logic:** Create a comprehensive test script (e.g. using `node` and a mock DOM) or perform manual tests to verify that game states update correctly and difficulty scaling forces a Game Over trigger.
 - **Tidy Up:** Create a specific directory for the final game output and move all game files (`index.html`, `style.css`, `game.js`) into it securely. Clean up temporary verify scripts.
 - **Document Output:** Complete a walkthrough explaining the rules, logic refinements, and verification tests.
