@@ -1,3 +1,3 @@
-# News Report: NBA 2026 regular season
+# News Report: lays off
 
 No relevant news found for the specified criteria.
